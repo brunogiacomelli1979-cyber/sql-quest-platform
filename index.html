@@ -9,9 +9,18 @@
 <body>
   <header class="app-header">
     <div>
-      <p class="eyebrow">Jogo educacional de SQL</p>
+      <p class="eyebrow">Dossie interativo de SQL</p>
       <h1>SQL Quest</h1>
     </div>
+
+    <nav class="top-nav" aria-label="Navegacao principal">
+      <button class="nav-button active" type="button" data-screen="home">Inicio</button>
+      <button class="nav-button" type="button" data-screen="investigation">Investigacao</button>
+      <button class="nav-button" type="button" data-screen="freeplay">Treino livre</button>
+      <button class="nav-button" type="button" data-screen="glossary">Glossario</button>
+      <button class="nav-button" type="button" data-screen="about">Sobre</button>
+    </nav>
+
     <div class="player-panel" aria-label="Progresso do jogador">
       <span id="xpLabel">0 XP</span>
       <span id="completedLabel">0/14 fases</span>
@@ -19,53 +28,155 @@
     </div>
   </header>
 
-  <main class="app-shell">
-    <aside class="sidebar" aria-label="Lista de fases">
-      <div class="sidebar-header">
-        <h2>Fases</h2>
-        <span id="levelCount">14 missões</span>
-      </div>
-      <nav id="levelList" class="level-list"></nav>
-    </aside>
-
-    <section class="lesson-area" aria-live="polite">
-      <div class="lesson-header">
-        <div>
-          <p id="levelTag" class="eyebrow"></p>
-          <h2 id="levelTitle"></h2>
+  <main>
+    <section id="homeScreen" class="screen home-screen active-screen" aria-labelledby="homeTitle">
+      <div class="hero-copy">
+        <p class="eyebrow">Portfolio SQL / BI / Automacao</p>
+        <h2 id="homeTitle">SQL Quest</h2>
+        <p class="subtitle">Aprenda SQL resolvendo investigacoes com dados</p>
+        <p>
+          SQL Quest ensina SQL por meio de missoes progressivas, narrativa investigativa,
+          banco SQLite no navegador e validacao automatica das consultas. Cada caso aproxima
+          conceitos de SQL de situacoes reais de analise de dados.
+        </p>
+        <div class="hero-actions">
+          <button class="primary-button" type="button" data-screen="investigation">Comecar investigacao</button>
+          <button type="button" data-screen="freeplay">Modo treino livre</button>
+          <button type="button" data-screen="glossary">Glossario SQL</button>
+          <button type="button" data-screen="about">Sobre o projeto</button>
         </div>
-        <span id="levelStatus" class="status-pill"></span>
       </div>
 
-      <p id="levelStory" class="story"></p>
-
-      <div class="tabs" role="tablist" aria-label="Material da fase">
-        <button class="tab-button active" type="button" data-tab="guide">Guia da lição</button>
-        <button class="tab-button" type="button" data-tab="schema">Esquema do banco</button>
-        <button class="tab-button" type="button" data-tab="hints">Dicas</button>
+      <div class="home-grid">
+        <article class="info-card">
+          <span>01</span>
+          <h3>Missoes guiadas</h3>
+          <p>Resolva 14 casos com dicas, guia da licao e retorno automatico.</p>
+        </article>
+        <article class="info-card">
+          <span>02</span>
+          <h3>Banco no navegador</h3>
+          <p>O sql.js cria um banco SQLite em memoria, sem backend ou instalacao.</p>
+        </article>
+        <article class="info-card">
+          <span>03</span>
+          <h3>Fluxo de aprendizagem</h3>
+          <p>Depois de resolver um caso, veja a explicacao e o uso em analise real.</p>
+        </article>
       </div>
+    </section>
 
-      <div id="guidePanel" class="tab-panel active"></div>
-      <div id="schemaPanel" class="tab-panel"></div>
-      <div id="hintsPanel" class="tab-panel"></div>
-
-      <label class="editor-label" for="queryInput">Sua consulta SQL</label>
-      <textarea id="queryInput" spellcheck="false"></textarea>
-
-      <div class="actions">
-        <button id="runQueryBtn" type="button">Executar consulta</button>
-        <button id="checkSolutionBtn" type="button" class="primary-button">Verificar solução</button>
-      </div>
-
-      <div id="feedback" class="feedback" role="status"></div>
-
-      <section class="results-section">
-        <div class="section-heading">
-          <h3>Resultado</h3>
-          <span id="rowCount"></span>
+    <section id="investigationScreen" class="screen app-shell" aria-label="Tela de investigacao">
+      <aside class="sidebar" aria-label="Lista de fases">
+        <div class="sidebar-header">
+          <h2>Fases</h2>
+          <span id="levelCount">14 missoes</span>
         </div>
-        <div id="resultTable" class="table-wrap"></div>
+        <nav id="levelList" class="level-list"></nav>
+
+        <section class="badge-section" aria-label="Conquistas">
+          <div class="sidebar-header">
+            <h2>Badges</h2>
+            <span id="badgeCount">0/5</span>
+          </div>
+          <div id="badgeList" class="badge-list"></div>
+        </section>
+      </aside>
+
+      <section class="lesson-area" aria-live="polite">
+        <div class="lesson-header">
+          <div>
+            <p id="levelTag" class="eyebrow"></p>
+            <h2 id="levelTitle"></h2>
+          </div>
+          <span id="levelStatus" class="status-pill"></span>
+        </div>
+
+        <p id="levelStory" class="story"></p>
+
+        <div class="tabs" role="tablist" aria-label="Material da fase">
+          <button class="tab-button active" type="button" data-tab="guide">Guia da licao</button>
+          <button class="tab-button" type="button" data-tab="schema">Esquema do banco</button>
+          <button class="tab-button" type="button" data-tab="hints">Dicas</button>
+        </div>
+
+        <div id="guidePanel" class="tab-panel active"></div>
+        <div id="schemaPanel" class="tab-panel"></div>
+        <div id="hintsPanel" class="tab-panel"></div>
+
+        <label class="editor-label" for="queryInput">Sua consulta SQL</label>
+        <textarea id="queryInput" spellcheck="false"></textarea>
+
+        <div class="actions">
+          <button id="runQueryBtn" type="button">Executar consulta</button>
+          <button id="checkSolutionBtn" type="button" class="primary-button">Verificar solucao</button>
+          <button id="showSolutionBtn" type="button" class="ghost-button" hidden>Mostrar solucao</button>
+        </div>
+
+        <div id="feedback" class="feedback" role="status"></div>
+        <div id="explanationBox" class="explanation-box" hidden></div>
+
+        <section class="results-section">
+          <div class="section-heading">
+            <h3>Resultado</h3>
+            <span id="rowCount"></span>
+          </div>
+          <div id="resultTable" class="table-wrap"></div>
+        </section>
       </section>
+    </section>
+
+    <section id="freeplayScreen" class="screen content-screen" aria-labelledby="freeplayTitle">
+      <div class="content-header">
+        <p class="eyebrow">Laboratorio SQL</p>
+        <h2 id="freeplayTitle">Modo treino livre</h2>
+        <p>Execute consultas no mesmo banco do jogo. Este modo nao altera XP, progresso ou badges das missoes.</p>
+      </div>
+
+      <div class="freeplay-layout">
+        <section>
+          <label class="editor-label" for="freeplayQueryInput">Consulta SQL livre</label>
+          <textarea id="freeplayQueryInput" spellcheck="false">SELECT nome, cidade, trilha
+FROM alunos
+ORDER BY nome;</textarea>
+          <div class="actions">
+            <button id="runFreeplayBtn" type="button" class="primary-button">Executar treino</button>
+          </div>
+          <div id="freeplayFeedback" class="feedback" role="status"></div>
+          <section class="results-section">
+            <div class="section-heading">
+              <h3>Resultado do treino</h3>
+              <span id="freeplayRowCount"></span>
+            </div>
+            <div id="freeplayResultTable" class="table-wrap"></div>
+          </section>
+        </section>
+        <aside>
+          <h3>Esquema disponivel</h3>
+          <div id="freeplaySchemaPanel"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="glossaryScreen" class="screen content-screen" aria-labelledby="glossaryTitle">
+      <div class="content-header">
+        <p class="eyebrow">Referencia rapida</p>
+        <h2 id="glossaryTitle">Glossario SQL</h2>
+        <p>Conceitos essenciais explicados de forma curta, com exemplos genericos para consulta durante o jogo.</p>
+      </div>
+      <div id="glossaryList" class="glossary-grid"></div>
+    </section>
+
+    <section id="aboutScreen" class="screen content-screen" aria-labelledby="aboutTitle">
+      <div class="content-header">
+        <p class="eyebrow">Sobre o projeto</p>
+        <h2 id="aboutTitle">SQL Quest como portfolio</h2>
+        <p>
+          SQL Quest e um jogo educacional interativo criado para praticar SQL de forma progressiva,
+          combinando narrativa, desafios, banco SQLite no navegador e validacao automatica de consultas.
+        </p>
+      </div>
+      <div id="aboutContent" class="about-grid"></div>
     </section>
   </main>
 
