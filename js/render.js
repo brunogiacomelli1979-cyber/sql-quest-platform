@@ -65,10 +65,13 @@
     elements.levelList.innerHTML = window.SQLQuestData.levels.map(function (level) {
       var active = level.id === state.currentLevelId ? " active" : "";
       var completed = window.SQLQuestState.isCompleted(level.id);
-      return '<button class="level-button' + active + '" type="button" data-level-id="' + level.id + '">' +
+      var unlocked = window.SQLQuestState.isLevelUnlocked(level.id);
+      var locked = unlocked ? "" : " locked";
+      var disabled = unlocked ? "" : " disabled aria-disabled=\"true\"";
+      return '<button class="level-button' + active + locked + '" type="button" data-level-id="' + level.id + '"' + disabled + ">" +
         '<span class="level-number">' + level.id + "</span>" +
         '<span class="level-name">' + escapeHtml(level.title) + "</span>" +
-        '<span class="level-check">' + (completed ? "OK" : "") + "</span>" +
+        '<span class="level-check">' + (completed ? "OK" : (unlocked ? "" : "Bloqueada")) + "</span>" +
         "</button>";
     }).join("");
 
@@ -102,7 +105,8 @@
     elements.hintsPanel.innerHTML = level.hints.map(function (hint, index) {
       return '<p class="hint-card"><strong>Dica ' + (index + 1) + ":</strong> " + escapeHtml(hint) + "</p>";
     }).join("");
-    elements.queryInput.value = level.starterSql;
+    elements.queryInput.value = "";
+    elements.queryInput.placeholder = "SELECT ...";
     elements.feedback.className = "feedback";
     elements.feedback.textContent = completed ? "Caso resolvido. A explicacao didatica esta disponivel abaixo." : "Execute a consulta para ver o resultado ou verifique quando estiver pronto.";
     elements.rowCount.textContent = "";

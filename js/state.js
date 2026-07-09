@@ -78,7 +78,48 @@
     });
   }
 
+  function levels() {
+    return window.SQLQuestData.levels;
+  }
+
+  function levelIndex(levelId) {
+    return levels().findIndex(function (level) {
+      return level.id === levelId;
+    });
+  }
+
+  function isUnlocked(state, levelId) {
+    var index = levelIndex(levelId);
+    if (index <= 0) {
+      return index === 0;
+    }
+    return hasCompleted(state, levels()[index - 1].id);
+  }
+
+  function firstLockedLevelId(state) {
+    var locked = levels().find(function (level) {
+      return !isUnlocked(state, level.id);
+    });
+    return locked ? locked.id : null;
+  }
+
+  function sanitizeCurrentLevel(state) {
+    if (isUnlocked(state, state.currentLevelId)) {
+      return;
+    }
+
+    var nextLocked = firstLockedLevelId(state);
+    if (!nextLocked) {
+      state.currentLevelId = levels()[levels().length - 1].id;
+      return;
+    }
+
+    var targetIndex = Math.max(0, levelIndex(nextLocked) - 1);
+    state.currentLevelId = levels()[targetIndex].id;
+  }
+
   var state = load();
+  sanitizeCurrentLevel(state);
   refreshBadges(state);
   save(state);
 
@@ -94,11 +135,24 @@
       };
     },
     setCurrentLevel: function (levelId) {
+      if (!isUnlocked(state, levelId)) {
+        sanitizeCurrentLevel(state);
+        save(state);
+        return false;
+      }
       state.currentLevelId = levelId;
       save(state);
+      return true;
     },
     isCompleted: function (levelId) {
       return hasCompleted(state, levelId);
+    },
+    isLevelUnlocked: function (levelId) {
+      return isUnlocked(state, levelId);
+    },
+    sanitizeCurrentLevel: function () {
+      sanitizeCurrentLevel(state);
+      save(state);
     },
     getAttempts: function (levelId) {
       return Number(state.attemptsByLevel[levelId]) || 0;
@@ -109,7 +163,7 @@
       return state.attemptsByLevel[levelId];
     },
     canShowSolution: function (levelId) {
-      return this.getAttempts(levelId) >= 3 || this.isCompleted(levelId);
+      return !this.isCompleted(levelId) && this.getAttempts(levelId) >= 3;
     },
     completeLevel: function (level) {
       var firstCompletion = false;

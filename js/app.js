@@ -19,9 +19,7 @@
       executeQuery(document.getElementById("queryInput").value);
       window.SQLQuestRender.setFeedback("Consulta executada com sucesso.", "success");
     } catch (error) {
-      var failedAttempts = window.SQLQuestState.recordAttempt(level.id);
-      window.SQLQuestRender.updateSolutionButton(level);
-      window.SQLQuestRender.setFeedback(error.message + " Tentativa " + failedAttempts + "/3.", "error");
+      window.SQLQuestRender.setFeedback(error.message, "error");
     }
   }
 
@@ -51,7 +49,9 @@
         "success"
       );
     } catch (error) {
-      window.SQLQuestRender.setFeedback(error.message, "error");
+      var failedAttempts = window.SQLQuestState.recordAttempt(level.id);
+      window.SQLQuestRender.updateSolutionButton(level);
+      window.SQLQuestRender.setFeedback(error.message + " Tentativa " + failedAttempts + "/3.", "error");
     }
   }
 
@@ -115,7 +115,12 @@
       if (!button) {
         return;
       }
-      window.SQLQuestState.setCurrentLevel(Number(button.dataset.levelId));
+      var levelId = Number(button.dataset.levelId);
+      if (!window.SQLQuestState.isLevelUnlocked(levelId)) {
+        window.SQLQuestRender.setFeedback("Esta fase ainda esta bloqueada. Conclua a fase anterior para liberar o proximo caso.", "error");
+        return;
+      }
+      window.SQLQuestState.setCurrentLevel(levelId);
       lastResult = null;
       window.SQLQuestRender.renderLevel(currentLevel());
     });
@@ -133,6 +138,7 @@
     window.SQLQuestDatabase.init()
       .then(function () {
         bindEvents();
+        window.SQLQuestState.sanitizeCurrentLevel();
         window.SQLQuestRender.renderLevel(currentLevel());
       })
       .catch(function (error) {

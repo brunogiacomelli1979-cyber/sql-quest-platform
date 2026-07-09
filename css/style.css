@@ -326,6 +326,22 @@ button:disabled {
   box-shadow: inset 3px 0 0 var(--accent);
 }
 
+.level-button.locked {
+  color: #7b8793;
+  background: #f1f2ee;
+  border-style: dashed;
+  box-shadow: none;
+}
+
+.level-button.locked .level-number {
+  background: #8a969c;
+}
+
+.level-button.locked .level-check {
+  color: #7b8793;
+  font-size: 0.78rem;
+}
+
 .level-number {
   display: grid;
   place-items: center;
