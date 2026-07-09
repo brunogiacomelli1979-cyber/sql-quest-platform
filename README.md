@@ -28,8 +28,6 @@
 
 ## 📸 Screenshots
 
-> **Observação:** salve as imagens abaixo em uma pasta `images/` na raiz do projeto para que elas apareçam corretamente no GitHub.
-
 ### 🏠 Tela inicial
 ![Tela inicial do SQL Quest](./images/sql-quest-home.png)
 
@@ -350,7 +348,6 @@ Projeto desenvolvido como parte da transição para a área de **Dados, BI e Aut
 
 Este projeto é de caráter educacional e de portfólio.
 
-Se desejar, você pode adaptar a licença futuramente para algo mais formal, como **MIT License**.
 
 ---
 
