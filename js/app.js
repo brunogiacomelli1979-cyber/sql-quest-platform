@@ -34,24 +34,74 @@
       });
 
       if (!validation.ok) {
-        window.SQLQuestRender.setFeedback(validation.message, "error");
+        var attempts = window.SQLQuestState.recordAttempt(level.id);
+        window.SQLQuestRender.updateSolutionButton(level);
+        window.SQLQuestRender.setFeedback(validation.message + " Tentativa " + attempts + "/3.", "error");
         return;
       }
 
       var firstCompletion = window.SQLQuestState.completeLevel(level);
       window.SQLQuestRender.renderLevels();
+      window.SQLQuestRender.renderExplanation(level);
+      window.SQLQuestRender.updateSolutionButton(level);
       window.SQLQuestRender.setFeedback(
         firstCompletion ? validation.message + " +" + level.xp + " XP" : "Solucao correta. Esta fase ja estava concluida.",
         "success"
       );
     } catch (error) {
-      window.SQLQuestRender.setFeedback(error.message, "error");
+      var failedAttempts = window.SQLQuestState.recordAttempt(level.id);
+      window.SQLQuestRender.updateSolutionButton(level);
+      window.SQLQuestRender.setFeedback(error.message + " Tentativa " + failedAttempts + "/3.", "error");
     }
   }
 
+  function handleShowSolution() {
+    var level = currentLevel();
+    document.getElementById("queryInput").value = level.expectedSql;
+    lastResult = null;
+    window.SQLQuestRender.setFeedback("Solucao carregada no editor. Execute e verifique para concluir o caso.", "success");
+  }
+
+  function handleFreeplayRun() {
+    try {
+      var result = window.SQLQuestDatabase.execute(document.getElementById("freeplayQueryInput").value);
+      window.SQLQuestRender.renderFreeplayTable(result);
+      window.SQLQuestRender.setFeedback("Consulta de treino executada. O progresso das missoes nao foi alterado.", "success", "freeplay");
+    } catch (error) {
+      window.SQLQuestRender.setFeedback(error.message, "error", "freeplay");
+    }
+  }
+
+  function bindNavigation() {
+    document.querySelectorAll("[data-screen]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        window.SQLQuestRender.showScreen(button.dataset.screen);
+      });
+    });
+  }
+
+  function bindTabs() {
+    document.querySelectorAll(".tab-button").forEach(function (button) {
+      button.addEventListener("click", function () {
+        document.querySelectorAll(".tab-button").forEach(function (tab) {
+          tab.classList.toggle("active", tab === button);
+        });
+        document.querySelectorAll(".tab-panel").forEach(function (panel) {
+          panel.classList.toggle("active", panel.id === button.dataset.tab + "Panel");
+        });
+      });
+    });
+  }
+
   function bindEvents() {
+    bindNavigation();
+    bindTabs();
+
     document.getElementById("runQueryBtn").addEventListener("click", handleRunQuery);
     document.getElementById("checkSolutionBtn").addEventListener("click", handleCheckSolution);
+    document.getElementById("showSolutionBtn").addEventListener("click", handleShowSolution);
+    document.getElementById("runFreeplayBtn").addEventListener("click", handleFreeplayRun);
+
     document.getElementById("resetProgressBtn").addEventListener("click", function () {
       if (confirm("Reiniciar todo o progresso salvo neste navegador?")) {
         window.SQLQuestState.reset();
@@ -65,20 +115,14 @@
       if (!button) {
         return;
       }
-      window.SQLQuestState.setCurrentLevel(Number(button.dataset.levelId));
+      var levelId = Number(button.dataset.levelId);
+      if (!window.SQLQuestState.isLevelUnlocked(levelId)) {
+        window.SQLQuestRender.setFeedback("Esta fase ainda esta bloqueada. Conclua a fase anterior para liberar o proximo caso.", "error");
+        return;
+      }
+      window.SQLQuestState.setCurrentLevel(levelId);
       lastResult = null;
       window.SQLQuestRender.renderLevel(currentLevel());
-    });
-
-    document.querySelectorAll(".tab-button").forEach(function (button) {
-      button.addEventListener("click", function () {
-        document.querySelectorAll(".tab-button").forEach(function (tab) {
-          tab.classList.toggle("active", tab === button);
-        });
-        document.querySelectorAll(".tab-panel").forEach(function (panel) {
-          panel.classList.toggle("active", panel.id === button.dataset.tab + "Panel");
-        });
-      });
     });
 
     document.getElementById("queryInput").addEventListener("input", function () {
@@ -89,14 +133,17 @@
   function start() {
     window.SQLQuestRender.bind();
     window.SQLQuestRender.setFeedback("Carregando banco sql.js...");
+    window.SQLQuestRender.setFeedback("Treino livre pronto para usar quando o banco carregar.", "", "freeplay");
 
     window.SQLQuestDatabase.init()
       .then(function () {
         bindEvents();
+        window.SQLQuestState.sanitizeCurrentLevel();
         window.SQLQuestRender.renderLevel(currentLevel());
       })
       .catch(function (error) {
         window.SQLQuestRender.setFeedback("Nao foi possivel iniciar o sql.js: " + error.message, "error");
+        window.SQLQuestRender.setFeedback("Nao foi possivel iniciar o sql.js: " + error.message, "error", "freeplay");
       });
   }
 
