@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL Quest</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">Jogo educacional de SQL</p>
+      <h1>SQL Quest</h1>
+    </div>
+    <div class="player-panel" aria-label="Progresso do jogador">
+      <span id="xpLabel">0 XP</span>
+      <span id="completedLabel">0/14 fases</span>
+      <button id="resetProgressBtn" class="ghost-button" type="button">Reiniciar progresso</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="sidebar" aria-label="Lista de fases">
+      <div class="sidebar-header">
+        <h2>Fases</h2>
+        <span id="levelCount">14 missões</span>
+      </div>
+      <nav id="levelList" class="level-list"></nav>
+    </aside>
+
+    <section class="lesson-area" aria-live="polite">
+      <div class="lesson-header">
+        <div>
+          <p id="levelTag" class="eyebrow"></p>
+          <h2 id="levelTitle"></h2>
+        </div>
+        <span id="levelStatus" class="status-pill"></span>
+      </div>
+
+      <p id="levelStory" class="story"></p>
+
+      <div class="tabs" role="tablist" aria-label="Material da fase">
+        <button class="tab-button active" type="button" data-tab="guide">Guia da lição</button>
+        <button class="tab-button" type="button" data-tab="schema">Esquema do banco</button>
+        <button class="tab-button" type="button" data-tab="hints">Dicas</button>
+      </div>
+
+      <div id="guidePanel" class="tab-panel active"></div>
+      <div id="schemaPanel" class="tab-panel"></div>
+      <div id="hintsPanel" class="tab-panel"></div>
+
+      <label class="editor-label" for="queryInput">Sua consulta SQL</label>
+      <textarea id="queryInput" spellcheck="false"></textarea>
+
+      <div class="actions">
+        <button id="runQueryBtn" type="button">Executar consulta</button>
+        <button id="checkSolutionBtn" type="button" class="primary-button">Verificar solução</button>
+      </div>
+
+      <div id="feedback" class="feedback" role="status"></div>
+
+      <section class="results-section">
+        <div class="section-heading">
+          <h3>Resultado</h3>
+          <span id="rowCount"></span>
+        </div>
+        <div id="resultTable" class="table-wrap"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/database.js"></script>
+  <script src="js/validator.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
