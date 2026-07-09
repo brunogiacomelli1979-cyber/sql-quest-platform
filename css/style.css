@@ -1,25 +1,27 @@
 :root {
-  --bg: #0b1110;
-  --bg-soft: #101917;
-  --panel: #14201e;
-  --panel-2: #182923;
+  --bg: #15110e;
+  --bg-soft: #211812;
+  --panel: #2b2118;
+  --panel-2: #3a2a1d;
   --terminal: #050908;
-  --terminal-line: rgba(159, 245, 182, 0.08);
-  --crt-green: #9ff5b6;
-  --crt-green-soft: #6fcf8f;
-  --amber: #d9a441;
-  --amber-soft: #f0c66a;
-  --wood: #6f4528;
-  --cream: #f1e4c5;
-  --cream-muted: #cdbf9f;
-  --salmon: #c97969;
+  --terminal-line: rgba(183, 243, 192, 0.07);
+  --crt-green: #b7f3c0;
+  --crt-green-soft: #79c98b;
+  --amber: #d89a42;
+  --amber-soft: #efbf72;
+  --wood: #5a3925;
+  --cream: #f3dfb7;
+  --cream-muted: #c9b58f;
+  --salmon: #b96b5f;
   --burnt-red: #8f3d32;
-  --border: rgba(217, 164, 65, 0.28);
-  --text: #f1e9d2;
-  --text-muted: #b8ad95;
-  --wood-dark: #342114;
-  --wood-deep: #1d120c;
-  --case-green: #20362f;
+  --border: rgba(216, 154, 66, 0.35);
+  --text: #f0e2c2;
+  --text-muted: #bda98a;
+  --wood-dark: #2a1a12;
+  --wood-deep: #140d09;
+  --crt-dark: #0b1710;
+  --sage: #6f8f72;
+  --case-green: #2f3d2e;
   --shadow: rgba(0, 0, 0, 0.48);
 }
 
@@ -38,10 +40,11 @@ body {
   overflow-x: hidden;
   color: var(--text);
   background:
-    radial-gradient(circle at 52% 24%, rgba(159, 245, 182, 0.14), transparent 22rem),
-    radial-gradient(circle at 12% 8%, rgba(217, 164, 65, 0.18), transparent 20rem),
-    radial-gradient(circle at 90% 12%, rgba(143, 61, 50, 0.12), transparent 18rem),
-    linear-gradient(180deg, #08100f 0%, var(--bg) 48%, #060908 100%);
+    radial-gradient(circle at 50% 24%, rgba(183, 243, 192, 0.055), transparent 21rem),
+    radial-gradient(circle at 14% 8%, rgba(216, 154, 66, 0.2), transparent 22rem),
+    radial-gradient(circle at 90% 12%, rgba(185, 107, 95, 0.11), transparent 18rem),
+    radial-gradient(circle at 72% 72%, rgba(90, 57, 37, 0.3), transparent 24rem),
+    linear-gradient(180deg, #1b130f 0%, var(--bg) 48%, #0b0806 100%);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
@@ -57,7 +60,7 @@ body::before {
   z-index: -2;
   background:
     radial-gradient(ellipse at center, transparent 38%, rgba(0, 0, 0, 0.48) 100%),
-    linear-gradient(rgba(241, 228, 197, 0.018) 1px, transparent 1px);
+    linear-gradient(rgba(243, 223, 183, 0.014) 1px, transparent 1px);
   background-size: auto, 100% 4px;
   opacity: 0.88;
 }
@@ -68,11 +71,11 @@ body::after {
   height: 28vh;
   background:
     linear-gradient(90deg, rgba(0, 0, 0, 0.22), transparent 18%, rgba(0, 0, 0, 0.3)),
-    repeating-linear-gradient(92deg, rgba(240, 198, 106, 0.08) 0 2px, transparent 2px 88px),
-    linear-gradient(180deg, rgba(52, 33, 20, 0.2), rgba(29, 18, 12, 0.95)),
-    linear-gradient(90deg, #2a1a10, var(--wood), #24150d);
-  border-top: 1px solid rgba(217, 164, 65, 0.18);
-  box-shadow: 0 -34px 70px rgba(217, 164, 65, 0.08);
+    repeating-linear-gradient(92deg, rgba(239, 191, 114, 0.075) 0 2px, transparent 2px 88px),
+    linear-gradient(180deg, rgba(42, 26, 18, 0.2), rgba(20, 13, 9, 0.96)),
+    linear-gradient(90deg, #21140d, var(--wood), #1b100b);
+  border-top: 1px solid rgba(216, 154, 66, 0.2);
+  box-shadow: 0 -34px 70px rgba(216, 154, 66, 0.09);
 }
 
 button,
@@ -120,9 +123,9 @@ button:disabled {
   padding: 18px clamp(16px, 4vw, 48px);
   color: var(--cream);
   background:
-    linear-gradient(90deg, rgba(111, 69, 40, 0.3), transparent 30%, rgba(159, 245, 182, 0.055)),
-    linear-gradient(180deg, rgba(18, 27, 24, 0.98), rgba(7, 12, 11, 0.96));
-  border-bottom: 1px solid rgba(217, 164, 65, 0.22);
+    linear-gradient(90deg, rgba(90, 57, 37, 0.34), transparent 32%, rgba(216, 154, 66, 0.06)),
+    linear-gradient(180deg, rgba(35, 25, 18, 0.98), rgba(18, 13, 10, 0.96));
+  border-bottom: 1px solid rgba(216, 154, 66, 0.25);
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.36);
 }
 
@@ -137,7 +140,7 @@ button:disabled {
   color: var(--cream);
   font-size: clamp(2rem, 4vw, 3.1rem);
   line-height: 0.95;
-  text-shadow: 0 0 18px rgba(217, 164, 65, 0.22);
+  text-shadow: 0 0 18px rgba(216, 154, 66, 0.2);
 }
 
 .app-header h1::after {
@@ -146,7 +149,7 @@ button:disabled {
   width: 92px;
   height: 3px;
   margin-top: 8px;
-  background: linear-gradient(90deg, var(--amber), var(--crt-green-soft), transparent);
+  background: linear-gradient(90deg, var(--amber), rgba(239, 191, 114, 0.45), transparent);
   border-radius: 999px;
 }
 
@@ -172,12 +175,12 @@ button:disabled {
 .actions button {
   color: var(--cream-muted);
   background:
-    linear-gradient(180deg, rgba(241, 228, 197, 0.045), transparent),
-    linear-gradient(180deg, #20352f, #0b1412);
-  border: 1px solid rgba(217, 164, 65, 0.22);
+    linear-gradient(180deg, rgba(243, 223, 183, 0.055), transparent),
+    linear-gradient(180deg, #3a2a1d, #1a120d);
+  border: 1px solid rgba(216, 154, 66, 0.24);
   box-shadow:
     0 6px 0 rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(241, 228, 197, 0.08);
+    inset 0 1px 0 rgba(243, 223, 183, 0.08);
 }
 
 .nav-button {
@@ -190,7 +193,7 @@ button:disabled {
 .hero-actions button:hover,
 .actions button:hover {
   color: var(--cream);
-  border-color: rgba(240, 198, 106, 0.55);
+  border-color: rgba(239, 191, 114, 0.58);
   transform: translateY(-1px);
 }
 
@@ -208,9 +211,9 @@ button:disabled {
   padding: 8px 10px;
   color: var(--crt-green);
   background:
-    repeating-linear-gradient(0deg, rgba(159, 245, 182, 0.05) 0 1px, transparent 1px 7px),
-    #06100e;
-  border: 1px solid rgba(159, 245, 182, 0.22);
+    repeating-linear-gradient(0deg, rgba(183, 243, 192, 0.04) 0 1px, transparent 1px 7px),
+    var(--crt-dark);
+  border: 1px solid rgba(183, 243, 192, 0.18);
   border-radius: 6px;
   font-family: "Consolas", "SFMono-Regular", "Courier New", monospace;
 }
@@ -228,7 +231,7 @@ button:disabled {
   background:
     linear-gradient(180deg, rgba(255, 244, 203, 0.18), transparent),
     linear-gradient(180deg, var(--amber-soft), var(--amber));
-  border: 1px solid rgba(240, 198, 106, 0.58);
+  border: 1px solid rgba(239, 191, 114, 0.6);
   box-shadow: 0 6px 0 rgba(78, 49, 23, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
@@ -246,15 +249,15 @@ button:disabled {
   padding: clamp(34px, 6vw, 62px);
   color: var(--crt-green);
   background:
-    linear-gradient(180deg, rgba(241, 228, 197, 0.08), transparent 10%),
-    linear-gradient(145deg, #23342f, #101917 42%, #0a0f0e);
-  border: 16px solid #17211d;
+    linear-gradient(180deg, rgba(243, 223, 183, 0.1), transparent 10%),
+    linear-gradient(145deg, #3b2a1d, #211812 42%, #120d0a);
+  border: 16px solid #2a1a12;
   border-radius: 30px 30px 42px 42px;
-  outline: 2px solid rgba(217, 164, 65, 0.26);
+  outline: 2px solid rgba(216, 154, 66, 0.34);
   box-shadow:
     0 34px 0 -14px var(--wood-dark),
     0 52px 72px rgba(0, 0, 0, 0.58),
-    inset 0 0 0 2px rgba(241, 228, 197, 0.035);
+    inset 0 0 0 2px rgba(243, 223, 183, 0.04);
 }
 
 .hero-copy::before {
@@ -264,14 +267,14 @@ button:disabled {
   z-index: 0;
   border-radius: 22px;
   background:
-    repeating-linear-gradient(0deg, rgba(159, 245, 182, 0.08) 0 1px, transparent 1px 8px),
-    radial-gradient(circle at 50% 42%, rgba(159, 245, 182, 0.18), transparent 38%),
-    linear-gradient(180deg, #08120f, var(--terminal));
-  border: 1px solid rgba(159, 245, 182, 0.28);
+    repeating-linear-gradient(0deg, rgba(183, 243, 192, 0.055) 0 1px, transparent 1px 8px),
+    radial-gradient(circle at 50% 42%, rgba(183, 243, 192, 0.11), transparent 38%),
+    linear-gradient(180deg, #0c1b12, var(--terminal));
+  border: 1px solid rgba(183, 243, 192, 0.2);
   box-shadow:
-    inset 0 0 46px rgba(159, 245, 182, 0.09),
+    inset 0 0 42px rgba(183, 243, 192, 0.06),
     inset 0 0 130px rgba(0, 0, 0, 0.55),
-    0 0 34px rgba(159, 245, 182, 0.12);
+    0 0 26px rgba(183, 243, 192, 0.07);
 }
 
 .hero-copy::after {
@@ -281,7 +284,7 @@ button:disabled {
   bottom: -40px;
   padding: 5px 12px;
   color: rgba(5, 9, 8, 0.82);
-  background: var(--amber);
+  background: linear-gradient(180deg, var(--amber-soft), var(--amber));
   border: 1px solid rgba(29, 18, 12, 0.4);
   border-radius: 999px;
   font-family: "Consolas", "SFMono-Regular", "Courier New", monospace;
@@ -305,9 +308,9 @@ button:disabled {
 }
 
 .hero-copy h2 {
-  color: var(--crt-green);
+  color: var(--cream);
   font-family: "Consolas", "SFMono-Regular", "Courier New", monospace;
-  text-shadow: 0 0 18px rgba(159, 245, 182, 0.42);
+  text-shadow: 0 0 18px rgba(216, 154, 66, 0.28), 0 0 28px rgba(183, 243, 192, 0.08);
 }
 
 .subtitle {
@@ -352,9 +355,9 @@ button:disabled {
   padding: 22px 18px 18px;
   color: var(--text);
   background:
-    linear-gradient(145deg, rgba(111, 69, 40, 0.18), transparent 42%),
-    linear-gradient(180deg, rgba(32, 54, 47, 0.98), rgba(15, 24, 21, 0.98));
-  border: 1px solid rgba(217, 164, 65, 0.3);
+    linear-gradient(145deg, rgba(90, 57, 37, 0.25), transparent 42%),
+    linear-gradient(180deg, rgba(58, 42, 29, 0.98), rgba(28, 20, 14, 0.98));
+  border: 1px solid rgba(216, 154, 66, 0.33);
   border-radius: 4px 14px 14px 4px;
   box-shadow: 0 22px 34px rgba(0, 0, 0, 0.34);
 }
@@ -376,7 +379,7 @@ button:disabled {
   right: 14px;
   width: 36px;
   height: 8px;
-  background: rgba(217, 164, 65, 0.5);
+  background: rgba(185, 107, 95, 0.58);
   border-radius: 999px;
 }
 
@@ -386,7 +389,7 @@ button:disabled {
   width: 30px;
   height: 30px;
   color: #160f08;
-  background: var(--amber);
+  background: linear-gradient(180deg, var(--salmon), var(--amber));
   border-radius: 50%;
   font-size: 0.82rem;
   font-weight: 900;
@@ -419,10 +422,10 @@ button:disabled {
   background:
     repeating-linear-gradient(0deg, var(--terminal-line) 0 1px, transparent 1px 8px),
     var(--terminal);
-  border: 1px solid rgba(159, 245, 182, 0.24);
+  border: 1px solid rgba(183, 243, 192, 0.2);
   border-radius: 10px;
   font-family: "Consolas", "SFMono-Regular", "Courier New", monospace;
-  text-shadow: 0 0 8px rgba(159, 245, 182, 0.22);
+  text-shadow: 0 0 8px rgba(183, 243, 192, 0.18);
 }
 
 .app-shell {
@@ -442,13 +445,13 @@ button:disabled {
 .sidebar {
   padding: 17px;
   background:
-    linear-gradient(90deg, rgba(29, 18, 12, 0.45), transparent 22%),
-    linear-gradient(180deg, #24352e, #14201e 45%, #0b1210);
-  border: 1px solid rgba(217, 164, 65, 0.25);
+    linear-gradient(90deg, rgba(42, 26, 18, 0.55), transparent 22%),
+    linear-gradient(180deg, #3a2a1d, #211812 48%, #130d09);
+  border: 1px solid rgba(216, 154, 66, 0.3);
   border-radius: 8px;
   box-shadow:
     0 24px 46px rgba(0, 0, 0, 0.42),
-    inset 8px 0 0 rgba(111, 69, 40, 0.35);
+    inset 8px 0 0 rgba(90, 57, 37, 0.42);
 }
 
 .sidebar-header,
@@ -463,7 +466,7 @@ button:disabled {
 .sidebar-header {
   margin-bottom: 12px;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(217, 164, 65, 0.18);
+  border-bottom: 1px solid rgba(216, 154, 66, 0.22);
 }
 
 .sidebar h2 {
@@ -494,10 +497,10 @@ button:disabled {
   color: var(--cream-muted);
   text-align: left;
   background:
-    linear-gradient(90deg, rgba(111, 69, 40, 0.2), transparent 30%),
-    rgba(5, 9, 8, 0.32);
-  border: 1px solid rgba(217, 164, 65, 0.15);
-  border-left: 4px solid rgba(111, 69, 40, 0.72);
+    linear-gradient(90deg, rgba(90, 57, 37, 0.28), transparent 30%),
+    rgba(26, 18, 13, 0.54);
+  border: 1px solid rgba(216, 154, 66, 0.17);
+  border-left: 4px solid rgba(90, 57, 37, 0.78);
   border-radius: 4px 9px 9px 4px;
   box-shadow: 0 10px 16px rgba(0, 0, 0, 0.2);
 }
@@ -505,24 +508,24 @@ button:disabled {
 .level-button.active {
   color: var(--cream);
   background:
-    radial-gradient(circle at 0% 50%, rgba(217, 164, 65, 0.22), transparent 38%),
-    rgba(5, 9, 8, 0.42);
-  border-color: rgba(217, 164, 65, 0.46);
+    radial-gradient(circle at 0% 50%, rgba(216, 154, 66, 0.24), transparent 38%),
+    rgba(35, 24, 17, 0.78);
+  border-color: rgba(216, 154, 66, 0.48);
   border-left-color: var(--amber);
-  box-shadow: 0 0 0 1px rgba(217, 164, 65, 0.08), 0 15px 24px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 0 0 1px rgba(216, 154, 66, 0.09), 0 15px 24px rgba(0, 0, 0, 0.26);
 }
 
 .level-button.locked {
   color: #8f8674;
-  background: rgba(5, 9, 8, 0.2);
-  border-color: rgba(159, 245, 182, 0.08);
+  background: rgba(24, 17, 12, 0.38);
+  border-color: rgba(201, 181, 143, 0.1);
   border-left-color: rgba(120, 107, 83, 0.45);
   box-shadow: none;
 }
 
 .level-button.locked .level-number {
-  color: #19211d;
-  background: #82775f;
+  color: #24170f;
+  background: #8a795d;
 }
 
 .level-button.locked .level-check {
@@ -554,7 +557,7 @@ button:disabled {
 .level-check {
   color: var(--crt-green);
   font-weight: 900;
-  text-shadow: 0 0 10px rgba(159, 245, 182, 0.32);
+  text-shadow: 0 0 10px rgba(183, 243, 192, 0.24);
 }
 
 .badge-section {
@@ -569,8 +572,8 @@ button:disabled {
 .badge-card {
   padding: 12px;
   color: #948b77;
-  background: rgba(5, 9, 8, 0.26);
-  border: 1px solid rgba(217, 164, 65, 0.12);
+  background: rgba(28, 20, 14, 0.58);
+  border: 1px solid rgba(216, 154, 66, 0.14);
   border-radius: 8px;
 }
 
@@ -587,9 +590,9 @@ button:disabled {
 .badge-card.earned {
   color: var(--cream);
   background:
-    radial-gradient(circle at 100% 0%, rgba(159, 245, 182, 0.14), transparent 42%),
-    rgba(5, 9, 8, 0.34);
-  border-color: rgba(159, 245, 182, 0.3);
+    radial-gradient(circle at 100% 0%, rgba(183, 243, 192, 0.1), transparent 42%),
+    rgba(36, 27, 19, 0.72);
+  border-color: rgba(121, 201, 139, 0.28);
   box-shadow: inset 4px 0 0 var(--crt-green-soft);
 }
 
@@ -598,13 +601,13 @@ button:disabled {
   padding: clamp(20px, 3vw, 32px);
   color: var(--text);
   background:
-    linear-gradient(90deg, rgba(111, 69, 40, 0.18), transparent 35%),
-    linear-gradient(180deg, rgba(32, 54, 47, 0.98), rgba(11, 18, 16, 0.98));
-  border: 1px solid rgba(217, 164, 65, 0.28);
+    linear-gradient(90deg, rgba(90, 57, 37, 0.24), transparent 35%),
+    linear-gradient(180deg, rgba(43, 33, 24, 0.98), rgba(19, 13, 9, 0.98));
+  border: 1px solid rgba(216, 154, 66, 0.34);
   border-radius: 10px;
   box-shadow:
     0 28px 58px rgba(0, 0, 0, 0.44),
-    inset 0 0 0 1px rgba(241, 228, 197, 0.025);
+    inset 0 0 0 1px rgba(243, 223, 183, 0.03);
 }
 
 .lesson-area::before {
@@ -614,7 +617,7 @@ button:disabled {
   right: 18px;
   padding: 5px 9px;
   color: rgba(5, 9, 8, 0.86);
-  background: var(--amber);
+  background: linear-gradient(180deg, var(--amber-soft), var(--amber));
   border-radius: 999px;
   font-family: "Consolas", "SFMono-Regular", "Courier New", monospace;
   font-size: 0.68rem;
@@ -625,7 +628,7 @@ button:disabled {
 .lesson-header {
   align-items: flex-start;
   padding-bottom: 16px;
-  border-bottom: 1px solid rgba(217, 164, 65, 0.18);
+  border-bottom: 1px solid rgba(216, 154, 66, 0.22);
 }
 
 .lesson-header h2 {
@@ -638,9 +641,9 @@ button:disabled {
   padding: 7px 10px;
   color: var(--crt-green);
   background:
-    repeating-linear-gradient(0deg, rgba(159, 245, 182, 0.06) 0 1px, transparent 1px 7px),
-    rgba(5, 9, 8, 0.44);
-  border: 1px solid rgba(159, 245, 182, 0.26);
+    repeating-linear-gradient(0deg, rgba(183, 243, 192, 0.045) 0 1px, transparent 1px 7px),
+    var(--crt-dark);
+  border: 1px solid rgba(183, 243, 192, 0.2);
   border-radius: 999px;
   font-family: "Consolas", "SFMono-Regular", "Courier New", monospace;
   font-size: 0.82rem;
@@ -658,14 +661,14 @@ button:disabled {
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 22px;
-  border-bottom: 1px solid rgba(217, 164, 65, 0.16);
+  border-bottom: 1px solid rgba(216, 154, 66, 0.2);
 }
 
 .tab-button {
   padding: 10px 12px;
   color: var(--cream-muted);
-  background: rgba(5, 9, 8, 0.3);
-  border: 1px solid rgba(217, 164, 65, 0.13);
+  background: rgba(42, 26, 18, 0.42);
+  border: 1px solid rgba(216, 154, 66, 0.16);
   border-bottom: 0;
   border-radius: 8px 8px 0 0;
 }
@@ -673,8 +676,8 @@ button:disabled {
 .tab-button.active,
 .tab-button.active:hover {
   color: var(--cream);
-  background: rgba(111, 69, 40, 0.35);
-  border-color: rgba(217, 164, 65, 0.34);
+  background: rgba(90, 57, 37, 0.42);
+  border-color: rgba(216, 154, 66, 0.36);
 }
 
 .tab-panel {
@@ -701,8 +704,8 @@ button:disabled {
 .schema-table {
   padding: 13px;
   color: var(--text);
-  background: rgba(5, 9, 8, 0.36);
-  border: 1px solid rgba(159, 245, 182, 0.14);
+  background: rgba(25, 18, 13, 0.52);
+  border: 1px solid rgba(216, 154, 66, 0.18);
   border-radius: 8px;
 }
 
@@ -722,8 +725,8 @@ button:disabled {
   margin: 0 0 10px;
   padding: 13px;
   color: var(--text);
-  background: rgba(111, 69, 40, 0.28);
-  border: 1px solid rgba(217, 164, 65, 0.18);
+  background: rgba(90, 57, 37, 0.34);
+  border: 1px solid rgba(216, 154, 66, 0.2);
   border-left: 4px solid var(--amber);
   border-radius: 8px;
 }
@@ -732,8 +735,8 @@ button:disabled {
   margin-top: 14px;
   padding: 16px;
   color: #e1f5e7;
-  background: rgba(111, 207, 143, 0.1);
-  border: 1px solid rgba(111, 207, 143, 0.24);
+  background: rgba(111, 143, 114, 0.14);
+  border: 1px solid rgba(121, 201, 139, 0.22);
   border-left: 4px solid var(--crt-green-soft);
   border-radius: 8px;
 }
@@ -763,37 +766,37 @@ textarea {
   color: var(--crt-green);
   caret-color: var(--crt-green);
   background:
-    repeating-linear-gradient(0deg, rgba(159, 245, 182, 0.09) 0 1px, transparent 1px 9px),
-    radial-gradient(circle at 50% 35%, rgba(159, 245, 182, 0.15), transparent 38%),
-    linear-gradient(180deg, #07110e, var(--terminal));
-  border: 3px solid #17221e;
+    repeating-linear-gradient(0deg, rgba(183, 243, 192, 0.075) 0 1px, transparent 1px 9px),
+    radial-gradient(circle at 50% 35%, rgba(183, 243, 192, 0.12), transparent 38%),
+    linear-gradient(180deg, var(--crt-dark), var(--terminal));
+  border: 3px solid #241c14;
   border-radius: 20px;
-  outline: 1px solid rgba(159, 245, 182, 0.3);
+  outline: 1px solid rgba(183, 243, 192, 0.24);
   line-height: 1.58;
   resize: vertical;
   font-family: "Consolas", "SFMono-Regular", "Courier New", monospace;
   font-size: 1rem;
-  text-shadow: 0 0 8px rgba(159, 245, 182, 0.28);
+  text-shadow: 0 0 8px rgba(183, 243, 192, 0.22);
   box-shadow:
-    inset 0 0 0 1px rgba(241, 228, 197, 0.025),
-    inset 0 0 42px rgba(159, 245, 182, 0.08),
+    inset 0 0 0 1px rgba(243, 223, 183, 0.03),
+    inset 0 0 42px rgba(183, 243, 192, 0.065),
     inset 0 0 120px rgba(0, 0, 0, 0.5),
     0 18px 32px rgba(0, 0, 0, 0.34),
-    0 0 30px rgba(159, 245, 182, 0.08);
+    0 0 24px rgba(183, 243, 192, 0.065);
 }
 
 textarea:focus {
-  outline: 1px solid rgba(159, 245, 182, 0.58);
-  border-color: #20362f;
+  outline: 1px solid rgba(183, 243, 192, 0.45);
+  border-color: #324331;
   box-shadow:
-    0 0 0 4px rgba(159, 245, 182, 0.08),
-    inset 0 0 48px rgba(159, 245, 182, 0.12),
+    0 0 0 4px rgba(183, 243, 192, 0.07),
+    inset 0 0 48px rgba(183, 243, 192, 0.095),
     inset 0 0 120px rgba(0, 0, 0, 0.48),
-    0 0 32px rgba(159, 245, 182, 0.16);
+    0 0 26px rgba(183, 243, 192, 0.12);
 }
 
 textarea::placeholder {
-  color: rgba(159, 245, 182, 0.5);
+  color: rgba(183, 243, 192, 0.48);
 }
 
 .actions {
@@ -807,9 +810,9 @@ textarea::placeholder {
 #runFreeplayBtn {
   color: var(--crt-green);
   background:
-    linear-gradient(180deg, rgba(159, 245, 182, 0.08), transparent),
-    linear-gradient(180deg, #20362f, #07110e);
-  border-color: rgba(159, 245, 182, 0.28);
+    linear-gradient(180deg, rgba(183, 243, 192, 0.06), transparent),
+    linear-gradient(180deg, #2f3d2e, #140f0b);
+  border-color: rgba(183, 243, 192, 0.22);
 }
 
 #showSolutionBtn {
@@ -825,15 +828,15 @@ textarea::placeholder {
   margin-top: 14px;
   padding: 12px;
   color: var(--text);
-  background: rgba(5, 9, 8, 0.28);
-  border: 1px solid rgba(217, 164, 65, 0.13);
+  background: rgba(30, 21, 15, 0.5);
+  border: 1px solid rgba(216, 154, 66, 0.16);
   border-left: 4px solid var(--amber);
   border-radius: 8px;
 }
 
 .feedback.success {
   color: #e3f6e8;
-  background: rgba(111, 207, 143, 0.1);
+  background: rgba(111, 143, 114, 0.14);
   border-left-color: var(--crt-green-soft);
 }
 
@@ -852,11 +855,11 @@ textarea::placeholder {
   overflow-x: auto;
   margin-top: 10px;
   background:
-    repeating-linear-gradient(0deg, rgba(159, 245, 182, 0.035) 0 1px, transparent 1px 8px),
-    rgba(5, 9, 8, 0.42);
-  border: 1px solid rgba(159, 245, 182, 0.16);
+    repeating-linear-gradient(0deg, rgba(183, 243, 192, 0.025) 0 1px, transparent 1px 8px),
+    rgba(25, 18, 13, 0.58);
+  border: 1px solid rgba(216, 154, 66, 0.16);
   border-radius: 10px;
-  box-shadow: inset 0 0 28px rgba(159, 245, 182, 0.035);
+  box-shadow: inset 0 0 28px rgba(216, 154, 66, 0.035);
 }
 
 table {
@@ -870,20 +873,20 @@ table {
 th,
 td {
   padding: 10px 12px;
-  border-bottom: 1px solid rgba(159, 245, 182, 0.09);
+  border-bottom: 1px solid rgba(216, 154, 66, 0.1);
   text-align: left;
   vertical-align: top;
 }
 
 th {
   color: var(--amber-soft);
-  background: rgba(24, 41, 35, 0.78);
+  background: rgba(58, 42, 29, 0.78);
   font-size: 0.84rem;
   text-transform: uppercase;
 }
 
 tr:nth-child(even) td {
-  background: rgba(159, 245, 182, 0.025);
+  background: rgba(243, 223, 183, 0.025);
 }
 
 tr:last-child td {
@@ -899,9 +902,9 @@ tr:last-child td {
   margin-bottom: 20px;
   padding: clamp(22px, 3vw, 30px);
   background:
-    linear-gradient(90deg, rgba(111, 69, 40, 0.18), transparent 36%),
-    linear-gradient(180deg, rgba(32, 54, 47, 0.96), rgba(10, 18, 16, 0.96));
-  border: 1px solid rgba(217, 164, 65, 0.24);
+    linear-gradient(90deg, rgba(90, 57, 37, 0.25), transparent 36%),
+    linear-gradient(180deg, rgba(43, 33, 24, 0.96), rgba(19, 13, 9, 0.96));
+  border: 1px solid rgba(216, 154, 66, 0.28);
   border-radius: 10px;
   box-shadow: 0 24px 46px rgba(0, 0, 0, 0.38);
 }
@@ -919,9 +922,9 @@ tr:last-child td {
   padding: clamp(16px, 3vw, 24px);
   color: var(--text);
   background:
-    linear-gradient(145deg, rgba(111, 69, 40, 0.16), transparent 42%),
-    linear-gradient(180deg, rgba(32, 54, 47, 0.96), rgba(10, 18, 16, 0.96));
-  border: 1px solid rgba(217, 164, 65, 0.2);
+    linear-gradient(145deg, rgba(90, 57, 37, 0.22), transparent 42%),
+    linear-gradient(180deg, rgba(43, 33, 24, 0.96), rgba(19, 13, 9, 0.96));
+  border: 1px solid rgba(216, 154, 66, 0.24);
   border-radius: 10px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.34);
 }
