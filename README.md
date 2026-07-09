@@ -29,18 +29,23 @@
 ## 📸 Screenshots
 
 ### 🏠 Tela inicial
+
 ![Tela inicial do SQL Quest](./images/sql-quest-home.png)
 
 ### 🧩 Área de investigação
+
 ![Tela de investigação do SQL Quest](./images/sql-quest-investigacao.png)
 
 ### 🧪 Modo treino livre
+
 ![Modo treino livre do SQL Quest](./images/sql-quest-treino-livre.png)
 
 ### 📚 Glossário SQL
+
 ![Glossário SQL do SQL Quest](./images/sql-quest-glossario.png)
 
 ### 🧾 Página sobre o projeto
+
 ![Página sobre o projeto SQL Quest](./images/sql-quest-sobre.png)
 
 ---
@@ -347,7 +352,6 @@ Projeto desenvolvido como parte da transição para a área de **Dados, BI e Aut
 ## 📜 Licença
 
 Este projeto é de caráter educacional e de portfólio.
-
 
 ---
 
