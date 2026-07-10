@@ -82,8 +82,13 @@
 
   function renderExplanation(level) {
     if (window.SQLQuestState.isCompleted(level.id)) {
+      var extraLearning = [
+        level.erroComum ? "<p><strong>Erro comum:</strong> " + escapeHtml(level.erroComum) + "</p>" : "",
+        level.usoReal ? "<p><strong>Uso real:</strong> " + escapeHtml(level.usoReal) + "</p>" : "",
+        level.desafioBonus ? "<p><strong>Desafio bonus:</strong> " + escapeHtml(level.desafioBonus) + "</p>" : ""
+      ].join("");
       elements.explanationBox.hidden = false;
-      elements.explanationBox.innerHTML = "<h3>Depois da solucao</h3><p>" + escapeHtml(level.explanation) + "</p>";
+      elements.explanationBox.innerHTML = "<h3>Depois da solucao</h3><p>" + escapeHtml(level.explanation) + "</p>" + extraLearning;
       return;
     }
 
@@ -101,7 +106,12 @@
     elements.levelTitle.textContent = level.title;
     elements.levelStatus.textContent = completed ? "Concluida" : "Em andamento";
     elements.levelStory.textContent = level.story;
-    elements.guidePanel.innerHTML = "<p>" + escapeHtml(level.guide) + "</p>";
+    elements.guidePanel.innerHTML =
+      "<p><strong>Objetivo de aprendizagem:</strong> " + escapeHtml(level.objetivoAprendizagem) + "</p>" +
+      "<p><strong>Conceito principal:</strong> " + escapeHtml(level.conceitoPrincipal) + "</p>" +
+      "<p><strong>Dificuldade:</strong> " + escapeHtml(level.dificuldade) + "</p>" +
+      (level.mission ? "<p><strong>Missao:</strong> " + escapeHtml(level.mission) + "</p>" : "") +
+      "<p><strong>Guia:</strong> " + escapeHtml(level.guide) + "</p>";
     elements.hintsPanel.innerHTML = level.hints.map(function (hint, index) {
       return '<p class="hint-card"><strong>Dica ' + (index + 1) + ":</strong> " + escapeHtml(hint) + "</p>";
     }).join("");
@@ -184,6 +194,7 @@
       elements.levelCount.textContent = window.SQLQuestData.levels.length + " missoes";
       elements.schemaPanel.innerHTML = schemaHtml();
       elements.freeplaySchemaPanel.innerHTML = schemaHtml();
+      document.getElementById("freeplayQueryInput").value = "SELECT nome, pais, nivel\nFROM jogadores\nORDER BY nome;";
       elements.freeplayResultTable.innerHTML = '<div class="empty-state">Nenhuma consulta executada ainda.</div>';
       renderGlossary();
       renderAbout();
