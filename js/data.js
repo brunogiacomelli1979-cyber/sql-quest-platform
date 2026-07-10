@@ -138,6 +138,31 @@
   }
 
   window.SQLQuestData = {
+    campaign: {
+      title: "NimbusPlay - SQL Investigativo",
+      agency: "Agencia NimbusData",
+      archive: "Arquivo NimbusPlay",
+      certificateName: "CERTIFICADO GAMIFICADO DE CONCLUSAO",
+      defaultInvestigatorName: "Investigador SQL",
+      completionSummary: "Voce encerrou o Arquivo NimbusPlay conectando pistas sobre jogadores, jogos, compras, avaliacoes e funcionarios. O dossie mostra dominio progressivo de consultas SQL aplicadas a uma investigacao de dados.",
+      finalRank: "Investigador SQL Nimbus",
+      concepts: [
+        "SELECT",
+        "selecao de colunas",
+        "WHERE",
+        "IN / AND",
+        "ORDER BY",
+        "LIMIT",
+        "COUNT / AVG / MIN / MAX",
+        "GROUP BY",
+        "HAVING",
+        "JOIN",
+        "LEFT JOIN",
+        "subconsulta",
+        "funcao de janela",
+        "CASE WHEN"
+      ]
+    },
     schema: [
       {
         name: "jogos",
@@ -425,7 +450,7 @@
           "Checklist: a ligacao usa LEFT JOIN e o filtro final procura NULL em uma coluna da tabela de compras."
         ],
         "Usar JOIN comum, que remove justamente os jogadores sem compra que a missao quer encontrar.",
-        "LEFT JOIN e usado para achar clientes sem pedidos, usuarios sem login, produtos sem venda ou cadastros sem atividade.",
+        "LEFT JOIN e usado para achar clientes sem pedidos, usuarios sem acesso recente, produtos sem venda ou cadastros sem atividade.",
         "Procure jogos que ainda nao receberam avaliacoes usando LEFT JOIN com avaliacoes.",
         "A consulta manteve todos os jogadores e conectou compras quando elas existiam. Depois, filtrou os casos em que a compra ficou NULL. Ela funcionou porque LEFT JOIN preserva registros sem correspondencia. Para a NimbusPlay, isso revela contas inativas; em analise real, e uma tecnica central para encontrar lacunas."
       ),
