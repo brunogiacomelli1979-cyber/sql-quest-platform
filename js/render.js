@@ -2,6 +2,7 @@
   "use strict";
 
   var elements = {};
+  var CERTIFICATE_NAME_KEY = "sqlQuest.certificateName.v1";
 
   function escapeHtml(value) {
     return String(value)
@@ -16,6 +17,38 @@
     return window.SQLQuestData.levels.find(function (level) {
       return level.id === levelId;
     });
+  }
+
+  function getCampaign() {
+    return window.SQLQuestData.campaign || {};
+  }
+
+  function isCampaignComplete() {
+    return window.SQLQuestData.levels.every(function (level) {
+      return window.SQLQuestState.isCompleted(level.id);
+    });
+  }
+
+  function getCertificateName() {
+    try {
+      return localStorage.getItem(CERTIFICATE_NAME_KEY) || getCampaign().defaultInvestigatorName || "Investigador SQL";
+    } catch (error) {
+      return getCampaign().defaultInvestigatorName || "Investigador SQL";
+    }
+  }
+
+  function saveCertificateName(name) {
+    try {
+      localStorage.setItem(CERTIFICATE_NAME_KEY, name || getCampaign().defaultInvestigatorName || "Investigador SQL");
+    } catch (error) {
+      return;
+    }
+  }
+
+  function totalCampaignXp() {
+    return window.SQLQuestData.levels.reduce(function (total, level) {
+      return total + level.xp;
+    }, 0);
   }
 
   function schemaHtml() {
@@ -60,6 +93,82 @@
     }).join("");
   }
 
+  function quickSupportHtml(level) {
+    var support = level.apoioRapido;
+    if (!support) {
+      return "";
+    }
+
+    return '<details class="quick-support">' +
+      '<summary>Apoio rapido desta missao</summary>' +
+      '<div class="quick-support-body">' +
+        '<h4>' + escapeHtml(support.titulo) + "</h4>" +
+        '<p><strong>Lembrete:</strong> ' + escapeHtml(support.lembrete) + "</p>" +
+        '<p><strong>Modelo:</strong></p>' +
+        '<pre><code>' + escapeHtml(support.modelo) + "</code></pre>" +
+        '<p><strong>Exemplo parecido:</strong></p>' +
+        '<pre><code>' + escapeHtml(support.exemploParecido) + "</code></pre>" +
+        '<p><strong>Cuidado comum:</strong> ' + escapeHtml(support.cuidadoComum) + "</p>" +
+      "</div>" +
+    "</details>";
+  }
+
+  function renderCompletionScreen() {
+    if (!elements.completionContent) {
+      return;
+    }
+
+    var state = window.SQLQuestState.get();
+    var campaign = getCampaign();
+    var concepts = campaign.concepts || [];
+    var investigatorName = getCertificateName();
+    var finalRank = campaign.finalRank || "Investigador SQL Nimbus";
+    var xp = state.xp || totalCampaignXp();
+
+    elements.completionContent.innerHTML =
+      '<div class="content-header completion-header">' +
+        '<p class="eyebrow">Caso encerrado</p>' +
+        '<h2>Dossie concluido: ' + escapeHtml(campaign.archive || "Arquivo NimbusPlay") + "</h2>" +
+        '<p>' + escapeHtml(campaign.completionSummary || "Campanha concluida com sucesso.") + "</p>" +
+      "</div>" +
+      '<div class="completion-grid">' +
+        '<article class="completion-panel">' +
+          "<h3>Resumo da investigacao</h3>" +
+          '<dl class="completion-stats">' +
+            "<div><dt>Casos concluidos</dt><dd>" + state.completedLevels.length + "/" + window.SQLQuestData.levels.length + "</dd></div>" +
+            "<div><dt>XP acumulado</dt><dd>" + xp + " XP</dd></div>" +
+            "<div><dt>Patente final</dt><dd>" + escapeHtml(finalRank) + "</dd></div>" +
+          "</dl>" +
+          "<h3>Conceitos praticados</h3>" +
+          '<div class="concept-list">' + concepts.map(function (concept) {
+            return "<span>" + escapeHtml(concept) + "</span>";
+          }).join("") + "</div>" +
+          '<div class="actions completion-actions">' +
+            '<button type="button" class="primary-button" data-completion-action="review">Revisar casos</button>' +
+            '<button type="button" class="ghost-button" data-completion-action="reset">Reiniciar campanha</button>' +
+          "</div>" +
+        "</article>" +
+        '<article class="game-certificate" aria-label="Certificado gamificado de conclusao">' +
+          '<p class="certificate-label">' + escapeHtml(campaign.certificateName || "CERTIFICADO GAMIFICADO DE CONCLUSAO") + "</p>" +
+          '<p class="certificate-agency">' + escapeHtml(campaign.agency || "Agencia NimbusData") + " certifica que</p>" +
+          '<label class="certificate-name-label" for="certificateNameInput">Nome no certificado gamificado</label>' +
+          '<input id="certificateNameInput" class="certificate-name-input" type="text" maxlength="48" value="' + escapeHtml(investigatorName) + '" placeholder="Investigador SQL">' +
+          '<h3 id="certificateDisplayName">' + escapeHtml(investigatorName || "Investigador SQL") + "</h3>" +
+          "<p>concluiu a trilha:</p>" +
+          "<h4>" + escapeHtml(campaign.title || "NimbusPlay - SQL Investigativo") + "</h4>" +
+          "<p>Resolvendo 14 casos praticos com consultas SQL aplicadas a jogadores, jogos, compras, avaliacoes e funcionarios.</p>" +
+          '<p><strong>Conceitos praticados:</strong> ' + escapeHtml(concepts.join(", ")) + ".</p>" +
+          '<div class="certificate-footer">' +
+            "<span><strong>Patente final:</strong> " + escapeHtml(finalRank) + "</span>" +
+            "<span><strong>XP acumulado:</strong> " + xp + " XP</span>" +
+          "</div>" +
+          '<p class="certificate-note">SQL Quest - Projeto educacional interativo. Item gamificado interno do jogo, sem emissao externa ou validade fora do SQL Quest.</p>' +
+        "</article>" +
+      "</div>";
+
+    elements.certificateNameInput = document.getElementById("certificateNameInput");
+  }
+
   function renderLevels() {
     var state = window.SQLQuestState.get();
     elements.levelList.innerHTML = window.SQLQuestData.levels.map(function (level) {
@@ -77,18 +186,43 @@
 
     elements.xpLabel.textContent = state.xp + " XP";
     elements.completedLabel.textContent = state.completedLevels.length + "/" + window.SQLQuestData.levels.length + " fases";
+    if (elements.completionNavButton) {
+      elements.completionNavButton.hidden = !isCampaignComplete();
+    }
+    if (!isCampaignComplete() && elements.completionScreen && elements.completionScreen.classList.contains("active-screen")) {
+      showScreen("investigation");
+    }
+    renderCompletionScreen();
     renderBadges();
   }
 
   function renderExplanation(level) {
     if (window.SQLQuestState.isCompleted(level.id)) {
+      var solvedQuery = window.SQLQuestState.getSolvedQuery(level.id);
+      var currentSql = elements.queryInput.value.trim();
+      if (!solvedQuery && currentSql) {
+        window.SQLQuestState.saveSolvedQuery(level.id, currentSql);
+        solvedQuery = currentSql;
+      }
       var extraLearning = [
         level.erroComum ? "<p><strong>Erro comum:</strong> " + escapeHtml(level.erroComum) + "</p>" : "",
         level.usoReal ? "<p><strong>Uso real:</strong> " + escapeHtml(level.usoReal) + "</p>" : "",
         level.desafioBonus ? "<p><strong>Desafio bonus:</strong> " + escapeHtml(level.desafioBonus) + "</p>" : ""
       ].join("");
+      var caseRecord = solvedQuery
+        ? '<div class="case-record"><h3>Registro do caso</h3><p>Consulta registrada quando este caso foi resolvido:</p>' +
+          '<pre><code>' + escapeHtml(solvedQuery) + "</code></pre>" +
+          '<div class="actions">' +
+            '<button type="button" class="ghost-button" data-case-action="copy" data-level-id="' + level.id + '">Copiar consulta</button>' +
+            '<button type="button" class="ghost-button" data-case-action="rerun" data-level-id="' + level.id + '">Reexecutar consulta</button>' +
+          "</div></div>"
+        : "";
       elements.explanationBox.hidden = false;
-      elements.explanationBox.innerHTML = "<h3>Depois da solucao</h3><p>" + escapeHtml(level.explanation) + "</p>" + extraLearning;
+      elements.explanationBox.innerHTML = "<h3>Depois da solucao</h3><p>" + escapeHtml(level.explanation) + "</p>" + extraLearning +
+        caseRecord +
+        (level.id === window.SQLQuestData.levels[window.SQLQuestData.levels.length - 1].id && isCampaignComplete()
+          ? '<div class="actions"><button type="button" class="primary-button" data-completion-action="open">Ver conclusao da campanha</button></div>'
+          : "");
       return;
     }
 
@@ -102,6 +236,7 @@
 
   function renderLevel(level) {
     var completed = window.SQLQuestState.isCompleted(level.id);
+    var savedDraft = window.SQLQuestState.getDraft(level.id);
     elements.levelTag.textContent = "Fase " + level.id + " - " + level.xp + " XP";
     elements.levelTitle.textContent = level.title;
     elements.levelStatus.textContent = completed ? "Concluida" : "Em andamento";
@@ -110,12 +245,14 @@
       "<p><strong>Objetivo de aprendizagem:</strong> " + escapeHtml(level.objetivoAprendizagem) + "</p>" +
       "<p><strong>Conceito principal:</strong> " + escapeHtml(level.conceitoPrincipal) + "</p>" +
       "<p><strong>Dificuldade:</strong> " + escapeHtml(level.dificuldade) + "</p>" +
+      (level.ponteAprendizado ? '<p class="learning-bridge"><strong>Ponte da investigacao:</strong> ' + escapeHtml(level.ponteAprendizado) + "</p>" : "") +
       (level.mission ? "<p><strong>Missao:</strong> " + escapeHtml(level.mission) + "</p>" : "") +
-      "<p><strong>Guia:</strong> " + escapeHtml(level.guide) + "</p>";
+      "<p><strong>Guia:</strong> " + escapeHtml(level.guide) + "</p>" +
+      quickSupportHtml(level);
     elements.hintsPanel.innerHTML = level.hints.map(function (hint, index) {
       return '<p class="hint-card"><strong>Dica ' + (index + 1) + ":</strong> " + escapeHtml(hint) + "</p>";
     }).join("");
-    elements.queryInput.value = "";
+    elements.queryInput.value = savedDraft;
     elements.queryInput.placeholder = "SELECT ...";
     elements.feedback.className = "feedback";
     elements.feedback.textContent = completed ? "Caso resolvido. A explicacao didatica esta disponivel abaixo." : "Execute a consulta para ver o resultado ou verifique quando estiver pronto.";
@@ -156,6 +293,107 @@
     });
   }
 
+  function ensureCompletionScreen() {
+    var nav = document.querySelector(".top-nav");
+    var main = document.querySelector("main");
+
+    if (!document.getElementById("completionNavButton")) {
+      nav.insertAdjacentHTML("beforeend", '<button id="completionNavButton" class="nav-button" type="button" data-screen="completion" hidden>Conclusao</button>');
+    }
+
+    if (!document.getElementById("completionScreen")) {
+      main.insertAdjacentHTML("beforeend", '<section id="completionScreen" class="screen content-screen completion-screen" aria-labelledby="completionTitle"><div id="completionContent"></div></section>');
+    }
+  }
+
+  function bindCompletionActions() {
+    document.addEventListener("click", function (event) {
+      var button = event.target.closest("[data-completion-action]");
+      if (!button) {
+        return;
+      }
+
+      if (button.dataset.completionAction === "reset") {
+        if (confirm("Reiniciar todo o progresso salvo neste navegador?")) {
+          window.SQLQuestState.reset();
+          window.SQLQuestRender.renderLevel(getLevel(window.SQLQuestState.get().currentLevelId));
+          showScreen("investigation");
+        }
+        return;
+      }
+
+      if (button.dataset.completionAction === "review") {
+        showScreen("investigation");
+        return;
+      }
+
+      if (button.dataset.completionAction === "open" && isCampaignComplete()) {
+        renderCompletionScreen();
+        showScreen("completion");
+      }
+    });
+
+    document.addEventListener("input", function (event) {
+      if (event.target.id !== "certificateNameInput") {
+        return;
+      }
+      var name = event.target.value.trim() || getCampaign().defaultInvestigatorName || "Investigador SQL";
+      saveCertificateName(name);
+      var display = document.getElementById("certificateDisplayName");
+      if (display) {
+        display.textContent = name;
+      }
+    });
+  }
+
+  function bindLearningActions() {
+    elements.queryInput.addEventListener("input", function () {
+      var currentLevel = getLevel(window.SQLQuestState.get().currentLevelId);
+      if (currentLevel) {
+        window.SQLQuestState.saveDraft(currentLevel.id, elements.queryInput.value);
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      var button = event.target.closest("[data-case-action]");
+      if (!button) {
+        return;
+      }
+
+      var levelId = Number(button.dataset.levelId);
+      var solvedQuery = window.SQLQuestState.getSolvedQuery(levelId);
+      if (!solvedQuery) {
+        return;
+      }
+
+      if (button.dataset.caseAction === "copy") {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(solvedQuery)
+            .then(function () {
+              setFeedback("Consulta registrada copiada para a area de transferencia.", "success");
+            })
+            .catch(function () {
+              setFeedback("Nao foi possivel copiar automaticamente. A consulta continua visivel no registro do caso.", "error");
+            });
+        } else {
+          setFeedback("Copia automatica indisponivel neste navegador. A consulta continua visivel no registro do caso.", "error");
+        }
+        return;
+      }
+
+      if (button.dataset.caseAction === "rerun") {
+        elements.queryInput.value = solvedQuery;
+        window.SQLQuestState.saveDraft(levelId, solvedQuery);
+        try {
+          renderGenericTable(window.SQLQuestDatabase.execute(solvedQuery), elements.resultTable, elements.rowCount);
+          setFeedback("Consulta registrada reexecutada com sucesso.", "success");
+        } catch (error) {
+          setFeedback(error.message, "error");
+        }
+      }
+    });
+  }
+
   function setFeedback(message, type, target) {
     var feedback = target === "freeplay" ? elements.freeplayFeedback : elements.feedback;
     feedback.className = "feedback" + (type ? " " + type : "");
@@ -164,6 +402,7 @@
 
   window.SQLQuestRender = {
     bind: function () {
+      ensureCompletionScreen();
       elements = {
         xpLabel: document.getElementById("xpLabel"),
         completedLabel: document.getElementById("completedLabel"),
@@ -189,8 +428,13 @@
         freeplayResultTable: document.getElementById("freeplayResultTable"),
         freeplayRowCount: document.getElementById("freeplayRowCount"),
         glossaryList: document.getElementById("glossaryList"),
-        aboutContent: document.getElementById("aboutContent")
+        aboutContent: document.getElementById("aboutContent"),
+        completionNavButton: document.getElementById("completionNavButton"),
+        completionScreen: document.getElementById("completionScreen"),
+        completionContent: document.getElementById("completionContent")
       };
+      bindCompletionActions();
+      bindLearningActions();
       elements.levelCount.textContent = window.SQLQuestData.levels.length + " missoes";
       elements.schemaPanel.innerHTML = schemaHtml();
       elements.freeplaySchemaPanel.innerHTML = schemaHtml();

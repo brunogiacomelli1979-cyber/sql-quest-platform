@@ -15,7 +15,9 @@
     completedLevels: [],
     xp: 0,
     attemptsByLevel: {},
-    earnedBadges: []
+    earnedBadges: [],
+    draftsByLevel: {},
+    solvedQueriesByLevel: {}
   };
 
   function cloneDefault() {
@@ -24,7 +26,9 @@
       completedLevels: [],
       xp: 0,
       attemptsByLevel: {},
-      earnedBadges: []
+      earnedBadges: [],
+      draftsByLevel: {},
+      solvedQueriesByLevel: {}
     };
   }
 
@@ -38,7 +42,9 @@
       completedLevels: saved.completedLevels,
       xp: Number(saved.xp) || 0,
       attemptsByLevel: saved.attemptsByLevel || {},
-      earnedBadges: Array.isArray(saved.earnedBadges) ? saved.earnedBadges : []
+      earnedBadges: Array.isArray(saved.earnedBadges) ? saved.earnedBadges : [],
+      draftsByLevel: saved.draftsByLevel || {},
+      solvedQueriesByLevel: saved.solvedQueriesByLevel || {}
     };
   }
 
@@ -131,7 +137,9 @@
         completedLevels: state.completedLevels.slice(),
         xp: state.xp,
         attemptsByLevel: Object.assign({}, state.attemptsByLevel),
-        earnedBadges: state.earnedBadges.slice()
+        earnedBadges: state.earnedBadges.slice(),
+        draftsByLevel: Object.assign({}, state.draftsByLevel),
+        solvedQueriesByLevel: Object.assign({}, state.solvedQueriesByLevel)
       };
     },
     setCurrentLevel: function (levelId) {
@@ -164,6 +172,23 @@
     },
     canShowSolution: function (levelId) {
       return !this.isCompleted(levelId) && this.getAttempts(levelId) >= 3;
+    },
+    getDraft: function (levelId) {
+      return state.draftsByLevel[levelId] || "";
+    },
+    saveDraft: function (levelId, sql) {
+      state.draftsByLevel[levelId] = sql || "";
+      save(state);
+    },
+    getSolvedQuery: function (levelId) {
+      return state.solvedQueriesByLevel[levelId] || "";
+    },
+    saveSolvedQuery: function (levelId, sql) {
+      if (!sql) {
+        return;
+      }
+      state.solvedQueriesByLevel[levelId] = sql;
+      save(state);
     },
     completeLevel: function (level) {
       var firstCompletion = false;

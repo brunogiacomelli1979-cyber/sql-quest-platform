@@ -114,6 +114,122 @@
   }
 
   var activityRows = buildActivityRows();
+  var LEARNING_BRIDGES = {
+    1: "Primeiro passo do dossie: antes de investigar, voce aprende a abrir uma tabela inteira e reconhecer o arquivo.",
+    2: "Depois de ver tudo com SELECT *, voce aprende a reduzir o ruido escolhendo apenas as colunas que interessam.",
+    3: "Com as colunas certas em maos, o proximo passo e filtrar linhas usando uma condicao simples com WHERE.",
+    4: "Na fase anterior, voce filtrou jogadores com uma unica condicao. Agora, a investigacao exige aceitar listas de valores com IN e combinar dois filtros ao mesmo tempo com AND.",
+    5: "Depois de filtrar suspeitos, voce passa a organizar resultados como ranking usando ORDER BY e recortar o topo com LIMIT.",
+    6: "Apos montar rankings, voce aprende a transformar muitas linhas em indicadores resumidos com funcoes de agregacao.",
+    7: "Depois de calcular indicadores gerais, voce passa a calcular indicadores por categoria usando GROUP BY.",
+    8: "Com grupos criados, o passo seguinte e filtrar apenas grupos relevantes usando HAVING.",
+    9: "Ate aqui voce trabalhou com uma tabela por vez. Agora, vai cruzar registros de tabelas relacionadas usando JOIN.",
+    10: "Depois de encontrar correspondencias com JOIN, voce aprende a investigar ausencias com LEFT JOIN.",
+    11: "Com filtros, grupos e joins dominados, voce passa a usar uma consulta interna para criar uma referencia dinamica.",
+    12: "Depois de comparar com uma media geral, voce aprende a criar rankings dentro de grupos sem perder linhas individuais.",
+    13: "Agora que voce sabe calcular e comparar, vai criar categorias novas usando regras condicionais com CASE WHEN.",
+    14: "O caso final combina as pecas do dossie: JOIN, soma, agrupamento, ordenacao e limite para produzir uma evidencia final."
+  };
+  var QUICK_SUPPORT = {
+    1: {
+      titulo: "Abrindo o primeiro arquivo",
+      lembrete: "Nesta missao, voce ainda esta reconhecendo a base. O objetivo e pedir uma visao ampla do arquivo.",
+      modelo: "SELECT *\nFROM tabela;",
+      exemploParecido: "SELECT *\nFROM jogos;",
+      cuidadoComum: "Use o asterisco apenas quando a missao pedir todas as colunas ou quando voce estiver explorando uma tabela."
+    },
+    2: {
+      titulo: "Selecionando colunas especificas",
+      lembrete: "Depois de ver tudo, voce passa a escolher apenas as pistas que interessam ao relatorio.",
+      modelo: "SELECT coluna_1, coluna_2\nFROM tabela;",
+      exemploParecido: "SELECT titulo, genero\nFROM jogos;",
+      cuidadoComum: "Separe colunas com virgula e evite trazer campos extras quando a missao pede uma lista limpa."
+    },
+    3: {
+      titulo: "WHERE com uma condicao",
+      lembrete: "Agora voce usa WHERE para manter apenas linhas que cumprem uma regra simples.",
+      modelo: "SELECT colunas\nFROM tabela\nWHERE coluna = 'valor';",
+      exemploParecido: "SELECT titulo, preco\nFROM jogos\nWHERE genero = 'RPG';",
+      cuidadoComum: "Valores de texto precisam ficar entre aspas simples."
+    },
+    4: {
+      titulo: "WHERE com listas e multiplas condicoes",
+      lembrete: "Na fase anterior, voce filtrou um unico valor com WHERE. Agora precisa aceitar listas de valores e combinar condicoes.",
+      modelo: "SELECT colunas\nFROM tabela\nWHERE coluna_a IN ('valor1', 'valor2')\n  AND coluna_b IN ('valor3', 'valor4');",
+      exemploParecido: "SELECT titulo, genero, ano_lancamento\nFROM jogos\nWHERE genero IN ('RPG', 'Acao')\n  AND ano_lancamento IN (2022, 2023);",
+      cuidadoComum: "IN aceita uma lista de valores possiveis. AND exige que as duas condicoes sejam verdadeiras ao mesmo tempo."
+    },
+    5: {
+      titulo: "Ranking com ORDER BY e LIMIT",
+      lembrete: "Quando a pista e um topo, ordene pela metrica principal e depois limite a quantidade de linhas.",
+      modelo: "SELECT colunas\nFROM tabela\nORDER BY coluna DESC\nLIMIT quantidade;",
+      exemploParecido: "SELECT nome, salario\nFROM funcionarios\nORDER BY salario DESC\nLIMIT 3;",
+      cuidadoComum: "DESC coloca os maiores valores primeiro. LIMIT deve recortar apenas o tamanho pedido."
+    },
+    6: {
+      titulo: "Indicadores com agregacoes",
+      lembrete: "Aqui voce resume varias linhas em poucos numeros para montar uma visao executiva do dossie.",
+      modelo: "SELECT COUNT(*), AVG(coluna), MIN(coluna), MAX(coluna)\nFROM tabela;",
+      exemploParecido: "SELECT COUNT(*), AVG(salario), MIN(salario), MAX(salario)\nFROM funcionarios;",
+      cuidadoComum: "Agregacoes sem GROUP BY normalmente retornam uma linha de resumo."
+    },
+    7: {
+      titulo: "Contagem por grupo",
+      lembrete: "Depois do resumo geral, voce passa a contar linhas dentro de cada categoria.",
+      modelo: "SELECT coluna_grupo, COUNT(*) AS quantidade\nFROM tabela\nGROUP BY coluna_grupo;",
+      exemploParecido: "SELECT nivel, COUNT(*) AS quantidade\nFROM jogadores\nGROUP BY nivel;",
+      cuidadoComum: "Toda coluna comum exibida junto da contagem deve aparecer no GROUP BY."
+    },
+    8: {
+      titulo: "Filtrando grupos com HAVING",
+      lembrete: "Quando o filtro depende de uma contagem por grupo, use HAVING depois do GROUP BY.",
+      modelo: "SELECT coluna_grupo, COUNT(*) AS quantidade\nFROM tabela\nGROUP BY coluna_grupo\nHAVING COUNT(*) > numero;",
+      exemploParecido: "SELECT nivel, COUNT(*) AS quantidade\nFROM jogadores\nGROUP BY nivel\nHAVING COUNT(*) > 3;",
+      cuidadoComum: "WHERE filtra linhas antes do grupo existir. HAVING filtra grupos ja calculados."
+    },
+    9: {
+      titulo: "Cruzando tabelas com JOIN",
+      lembrete: "Quando as pistas estao em arquivos diferentes, conecte as tabelas por chaves relacionadas.",
+      modelo: "SELECT a.coluna, b.coluna\nFROM tabela_a a\nJOIN tabela_b b ON a.id = b.tabela_a_id;",
+      exemploParecido: "SELECT j.nome, c.valor_total\nFROM jogadores j\nJOIN compras c ON j.id = c.jogador_id;",
+      cuidadoComum: "Todo JOIN precisa de uma condicao ON para evitar combinacoes sem sentido."
+    },
+    10: {
+      titulo: "Encontrando ausencias com LEFT JOIN",
+      lembrete: "LEFT JOIN preserva o arquivo principal e permite procurar linhas sem correspondencia.",
+      modelo: "SELECT a.coluna\nFROM tabela_a a\nLEFT JOIN tabela_b b ON a.id = b.tabela_a_id\nWHERE b.id IS NULL;",
+      exemploParecido: "SELECT g.titulo\nFROM jogos g\nLEFT JOIN avaliacoes a ON g.id = a.jogo_id\nWHERE a.id IS NULL;",
+      cuidadoComum: "Para achar ausencias, o filtro IS NULL deve olhar uma coluna da tabela da direita."
+    },
+    11: {
+      titulo: "Filtro com subconsulta",
+      lembrete: "Quando o limite do filtro precisa ser calculado, use um SELECT interno como referencia.",
+      modelo: "SELECT colunas\nFROM tabela\nWHERE coluna > (\n  SELECT AVG(coluna)\n  FROM tabela\n);",
+      exemploParecido: "SELECT titulo, preco\nFROM jogos\nWHERE preco > (\n  SELECT AVG(preco)\n  FROM jogos\n);",
+      cuidadoComum: "A subconsulta usada em comparacao deve retornar um unico valor."
+    },
+    12: {
+      titulo: "Ranking por grupo com janela",
+      lembrete: "Funcoes de janela criam rankings sem apagar as linhas individuais do resultado.",
+      modelo: "SELECT coluna,\n       RANK() OVER (PARTITION BY grupo ORDER BY valor DESC) AS posicao\nFROM tabela;",
+      exemploParecido: "SELECT titulo, genero, preco,\n       RANK() OVER (PARTITION BY genero ORDER BY preco DESC) AS posicao\nFROM jogos;",
+      cuidadoComum: "PARTITION BY define onde o ranking reinicia. ORDER BY define o criterio da posicao."
+    },
+    13: {
+      titulo: "Criando categorias com CASE WHEN",
+      lembrete: "CASE WHEN transforma uma regra de negocio em uma nova coluna calculada.",
+      modelo: "SELECT coluna,\n       CASE\n         WHEN condicao THEN 'Categoria A'\n         ELSE 'Categoria B'\n       END AS categoria\nFROM tabela;",
+      exemploParecido: "SELECT titulo, preco,\n       CASE\n         WHEN preco >= 150 THEN 'Premium'\n         ELSE 'Regular'\n       END AS faixa\nFROM jogos;",
+      cuidadoComum: "Nao esqueca ELSE para os demais casos e END AS para nomear a coluna."
+    },
+    14: {
+      titulo: "Consulta final em etapas",
+      lembrete: "O caso final combina cruzamento de tabelas, soma, agrupamento, ordenacao e recorte do topo.",
+      modelo: "SELECT entidade, SUM(valor) AS total\nFROM tabela_a a\nJOIN tabela_b b ON a.id = b.tabela_a_id\nGROUP BY entidade\nORDER BY total DESC\nLIMIT quantidade;",
+      exemploParecido: "SELECT g.titulo, SUM(c.valor_total) AS receita\nFROM jogos g\nJOIN compras c ON g.id = c.jogo_id\nGROUP BY g.titulo\nORDER BY receita DESC\nLIMIT 5;",
+      cuidadoComum: "Some valores depois do JOIN, agrupe pela entidade do ranking e ordene pelo total calculado."
+    }
+  };
 
   function lesson(id, title, xp, story, mission, objetivo, conceito, dificuldade, guide, starterSql, expectedSql, orderMatters, hints, erroComum, usoReal, desafioBonus, explanation) {
     return {
@@ -133,11 +249,38 @@
       erroComum: erroComum,
       usoReal: usoReal,
       desafioBonus: desafioBonus,
+      ponteAprendizado: LEARNING_BRIDGES[id] || "",
+      apoioRapido: QUICK_SUPPORT[id] || null,
       explanation: explanation
     };
   }
 
   window.SQLQuestData = {
+    campaign: {
+      title: "NimbusPlay - SQL Investigativo",
+      agency: "Agencia NimbusData",
+      archive: "Arquivo NimbusPlay",
+      certificateName: "CERTIFICADO GAMIFICADO DE CONCLUSAO",
+      defaultInvestigatorName: "Investigador SQL",
+      completionSummary: "Voce encerrou o Arquivo NimbusPlay conectando pistas sobre jogadores, jogos, compras, avaliacoes e funcionarios. O dossie mostra dominio progressivo de consultas SQL aplicadas a uma investigacao de dados.",
+      finalRank: "Investigador SQL Nimbus",
+      concepts: [
+        "SELECT",
+        "selecao de colunas",
+        "WHERE",
+        "IN / AND",
+        "ORDER BY",
+        "LIMIT",
+        "COUNT / AVG / MIN / MAX",
+        "GROUP BY",
+        "HAVING",
+        "JOIN",
+        "LEFT JOIN",
+        "subconsulta",
+        "funcao de janela",
+        "CASE WHEN"
+      ]
+    },
     schema: [
       {
         name: "jogos",
@@ -274,22 +417,22 @@
         80,
         "A pasta ganha uma etiqueta nova: alto valor. Marina percebe que a denuncia se concentra em jogadores de Brasil e Portugal, mas somente nos niveis mais valiosos. O proximo recorte precisa separar clientes premium de regioes-chave.",
         "Encontre jogadores de Brasil ou Portugal que estejam nos niveis Ouro ou Platina, mostrando nome, pais e nivel.",
-        "Combinar listas de valores e multiplas condicoes em uma consulta.",
+        "Combinar listas de valores e multiplas condicoes em uma consulta sem perder o controle do filtro.",
         "AND e IN",
         "basico",
-        "IN verifica se um valor pertence a uma lista. AND exige que duas condicoes sejam verdadeiras ao mesmo tempo.",
+        "IN permite aceitar uma lista de valores possiveis para uma coluna. AND combina condicoes e exige que todas sejam verdadeiras ao mesmo tempo.",
         "SELECT nome, pais, nivel\nFROM jogadores\nWHERE pais IN ('Brasil','Portugal') AND nivel IN ('Ouro','Platina');",
         "SELECT nome, pais, nivel FROM jogadores WHERE pais IN ('Brasil','Portugal') AND nivel IN ('Ouro','Platina');",
         false,
         [
-          "Use IN quando uma mesma coluna pode aceitar mais de um valor valido para a missao.",
-          "Pense em dois filtros de lista: um para pais e outro para nivel, unidos pela exigencia de ambos valerem.",
-          "Checklist: cada lista esta entre parenteses, textos estao entre aspas simples e as duas regras precisam ser verdadeiras."
+          "IN e uma forma compacta de dizer: aceite qualquer valor desta lista.",
+          "Nesta fase, existem dois filtros: uma lista de paises e uma lista de niveis. AND faz o registro passar apenas se cumprir os dois.",
+          "Checklist: cada IN tem parenteses, cada texto tem aspas simples e a consulta nao troca AND por OR."
         ],
         "Usar OR de forma solta e acabar aceitando jogadores que cumprem apenas parte da regra.",
         "Filtros cruzados ajudam a criar segmentos como clientes premium de uma regiao, produtos ativos de certas categorias ou casos de risco com criterios combinados.",
         "Teste uma consulta para jogadores de Argentina ou Chile com nivel Prata ou Ouro.",
-        "A consulta aplicou dois filtros de lista ao mesmo tempo: pais e nivel. Ela funcionou porque IN aceita varios valores possiveis para uma coluna e AND exige que as duas regras sejam atendidas. Na investigacao NimbusPlay, esse recorte reduz o grupo suspeito a perfis de maior impacto comercial."
+        "A consulta aplicou dois filtros de lista ao mesmo tempo: pais e nivel. Ela funcionou porque IN aceitou varios valores possiveis em cada coluna, enquanto AND exigiu que o jogador atendesse as duas condicoes ao mesmo tempo. Na investigacao NimbusPlay, esse recorte reduz o grupo suspeito a perfis de maior impacto comercial."
       ),
       lesson(
         5,
@@ -425,7 +568,7 @@
           "Checklist: a ligacao usa LEFT JOIN e o filtro final procura NULL em uma coluna da tabela de compras."
         ],
         "Usar JOIN comum, que remove justamente os jogadores sem compra que a missao quer encontrar.",
-        "LEFT JOIN e usado para achar clientes sem pedidos, usuarios sem login, produtos sem venda ou cadastros sem atividade.",
+        "LEFT JOIN e usado para achar clientes sem pedidos, usuarios sem acesso recente, produtos sem venda ou cadastros sem atividade.",
         "Procure jogos que ainda nao receberam avaliacoes usando LEFT JOIN com avaliacoes.",
         "A consulta manteve todos os jogadores e conectou compras quando elas existiam. Depois, filtrou os casos em que a compra ficou NULL. Ela funcionou porque LEFT JOIN preserva registros sem correspondencia. Para a NimbusPlay, isso revela contas inativas; em analise real, e uma tecnica central para encontrar lacunas."
       ),
