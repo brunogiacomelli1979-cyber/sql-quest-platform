@@ -731,6 +731,72 @@ button:disabled {
   border-radius: 8px;
 }
 
+.learning-bridge,
+.sql-handbook,
+.case-record {
+  margin: 14px 0;
+  padding: 14px;
+  color: var(--text);
+  background:
+    linear-gradient(90deg, rgba(216, 154, 66, 0.09), transparent 48%),
+    rgba(25, 18, 13, 0.48);
+  border: 1px solid rgba(216, 154, 66, 0.2);
+  border-left: 4px solid var(--amber);
+  border-radius: 8px;
+}
+
+.learning-bridge {
+  color: var(--cream);
+}
+
+.sql-handbook summary {
+  color: var(--amber-soft);
+  cursor: pointer;
+  font-weight: 950;
+}
+
+.handbook-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.handbook-card {
+  padding: 12px;
+  background: rgba(11, 23, 16, 0.46);
+  border: 1px solid rgba(183, 243, 192, 0.14);
+  border-radius: 8px;
+}
+
+.handbook-card h4 {
+  margin: 0 0 8px;
+  color: var(--cream);
+}
+
+.handbook-card pre,
+.case-record pre {
+  overflow-x: auto;
+  margin: 0 0 8px;
+  padding: 12px;
+  color: var(--crt-green);
+  background:
+    repeating-linear-gradient(0deg, rgba(183, 243, 192, 0.045) 0 1px, transparent 1px 8px),
+    var(--terminal);
+  border: 1px solid rgba(183, 243, 192, 0.18);
+  border-radius: 8px;
+  font-family: "Consolas", "SFMono-Regular", "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.handbook-card p,
+.case-record p {
+  margin: 0 0 10px;
+  color: var(--text-muted);
+  line-height: 1.62;
+}
+
 .explanation-box {
   margin-top: 14px;
   padding: 16px;

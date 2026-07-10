@@ -114,6 +114,22 @@
   }
 
   var activityRows = buildActivityRows();
+  var LEARNING_BRIDGES = {
+    1: "Primeiro passo do dossie: antes de investigar, voce aprende a abrir uma tabela inteira e reconhecer o arquivo.",
+    2: "Depois de ver tudo com SELECT *, voce aprende a reduzir o ruido escolhendo apenas as colunas que interessam.",
+    3: "Com as colunas certas em maos, o proximo passo e filtrar linhas usando uma condicao simples com WHERE.",
+    4: "Na fase anterior, voce filtrou jogadores com uma unica condicao. Agora, a investigacao exige aceitar listas de valores com IN e combinar dois filtros ao mesmo tempo com AND.",
+    5: "Depois de filtrar suspeitos, voce passa a organizar resultados como ranking usando ORDER BY e recortar o topo com LIMIT.",
+    6: "Apos montar rankings, voce aprende a transformar muitas linhas em indicadores resumidos com funcoes de agregacao.",
+    7: "Depois de calcular indicadores gerais, voce passa a calcular indicadores por categoria usando GROUP BY.",
+    8: "Com grupos criados, o passo seguinte e filtrar apenas grupos relevantes usando HAVING.",
+    9: "Ate aqui voce trabalhou com uma tabela por vez. Agora, vai cruzar registros de tabelas relacionadas usando JOIN.",
+    10: "Depois de encontrar correspondencias com JOIN, voce aprende a investigar ausencias com LEFT JOIN.",
+    11: "Com filtros, grupos e joins dominados, voce passa a usar uma consulta interna para criar uma referencia dinamica.",
+    12: "Depois de comparar com uma media geral, voce aprende a criar rankings dentro de grupos sem perder linhas individuais.",
+    13: "Agora que voce sabe calcular e comparar, vai criar categorias novas usando regras condicionais com CASE WHEN.",
+    14: "O caso final combina as pecas do dossie: JOIN, soma, agrupamento, ordenacao e limite para produzir uma evidencia final."
+  };
 
   function lesson(id, title, xp, story, mission, objetivo, conceito, dificuldade, guide, starterSql, expectedSql, orderMatters, hints, erroComum, usoReal, desafioBonus, explanation) {
     return {
@@ -133,6 +149,7 @@
       erroComum: erroComum,
       usoReal: usoReal,
       desafioBonus: desafioBonus,
+      ponteAprendizado: LEARNING_BRIDGES[id] || "",
       explanation: explanation
     };
   }
@@ -163,6 +180,68 @@
         "CASE WHEN"
       ]
     },
+    handbook: [
+      {
+        title: "SELECT basico",
+        model: "SELECT coluna_1, coluna_2\nFROM tabela;",
+        note: "Use SELECT para escolher quais pistas aparecem no resultado."
+      },
+      {
+        title: "WHERE",
+        model: "SELECT colunas\nFROM tabela\nWHERE coluna = 'valor';",
+        note: "WHERE filtra o arquivo e mantem apenas linhas que cumprem uma regra."
+      },
+      {
+        title: "IN e AND",
+        model: "SELECT colunas\nFROM tabela\nWHERE coluna_a IN ('valor1', 'valor2')\n  AND coluna_b IN ('valor3', 'valor4');",
+        note: "IN testa varios valores possiveis. AND exige que as duas condicoes sejam verdadeiras."
+      },
+      {
+        title: "ORDER BY e LIMIT",
+        model: "SELECT colunas\nFROM tabela\nORDER BY coluna DESC\nLIMIT quantidade;",
+        note: "ORDER BY organiza o resultado. LIMIT mostra apenas a quantidade que voce precisa analisar."
+      },
+      {
+        title: "Agregacoes",
+        model: "SELECT COUNT(*), AVG(coluna), MIN(coluna), MAX(coluna)\nFROM tabela;",
+        note: "Agregacoes resumem muitas linhas em indicadores de investigacao."
+      },
+      {
+        title: "GROUP BY",
+        model: "SELECT coluna_grupo, COUNT(*) AS quantidade\nFROM tabela\nGROUP BY coluna_grupo;",
+        note: "GROUP BY cria grupos para calcular metricas por categoria."
+      },
+      {
+        title: "HAVING",
+        model: "SELECT coluna_grupo, COUNT(*) AS quantidade\nFROM tabela\nGROUP BY coluna_grupo\nHAVING COUNT(*) > numero;",
+        note: "HAVING filtra grupos depois que uma metrica agregada ja foi calculada."
+      },
+      {
+        title: "JOIN",
+        model: "SELECT a.coluna, b.coluna\nFROM tabela_a a\nJOIN tabela_b b ON a.id = b.tabela_a_id;",
+        note: "JOIN cruza tabelas relacionadas para transformar codigos em contexto."
+      },
+      {
+        title: "LEFT JOIN",
+        model: "SELECT a.coluna\nFROM tabela_a a\nLEFT JOIN tabela_b b ON a.id = b.tabela_a_id\nWHERE b.id IS NULL;",
+        note: "LEFT JOIN ajuda a encontrar registros sem correspondencia em outro arquivo."
+      },
+      {
+        title: "Subconsulta",
+        model: "SELECT colunas\nFROM tabela\nWHERE coluna > (\n  SELECT AVG(coluna)\n  FROM tabela\n);",
+        note: "Subconsultas calculam uma referencia para a consulta principal."
+      },
+      {
+        title: "Funcao de janela",
+        model: "SELECT coluna,\n       RANK() OVER (PARTITION BY grupo ORDER BY valor DESC) AS posicao\nFROM tabela;",
+        note: "Funcoes de janela calculam rankings e comparacoes sem reduzir as linhas."
+      },
+      {
+        title: "CASE WHEN",
+        model: "SELECT coluna,\n       CASE\n         WHEN condicao THEN 'Categoria A'\n         ELSE 'Categoria B'\n       END AS categoria\nFROM tabela;",
+        note: "CASE WHEN cria categorias novas a partir de regras de investigacao."
+      }
+    ],
     schema: [
       {
         name: "jogos",
@@ -299,22 +378,22 @@
         80,
         "A pasta ganha uma etiqueta nova: alto valor. Marina percebe que a denuncia se concentra em jogadores de Brasil e Portugal, mas somente nos niveis mais valiosos. O proximo recorte precisa separar clientes premium de regioes-chave.",
         "Encontre jogadores de Brasil ou Portugal que estejam nos niveis Ouro ou Platina, mostrando nome, pais e nivel.",
-        "Combinar listas de valores e multiplas condicoes em uma consulta.",
+        "Combinar listas de valores e multiplas condicoes em uma consulta sem perder o controle do filtro.",
         "AND e IN",
         "basico",
-        "IN verifica se um valor pertence a uma lista. AND exige que duas condicoes sejam verdadeiras ao mesmo tempo.",
+        "IN permite aceitar uma lista de valores possiveis para uma coluna. AND combina condicoes e exige que todas sejam verdadeiras ao mesmo tempo.",
         "SELECT nome, pais, nivel\nFROM jogadores\nWHERE pais IN ('Brasil','Portugal') AND nivel IN ('Ouro','Platina');",
         "SELECT nome, pais, nivel FROM jogadores WHERE pais IN ('Brasil','Portugal') AND nivel IN ('Ouro','Platina');",
         false,
         [
-          "Use IN quando uma mesma coluna pode aceitar mais de um valor valido para a missao.",
-          "Pense em dois filtros de lista: um para pais e outro para nivel, unidos pela exigencia de ambos valerem.",
-          "Checklist: cada lista esta entre parenteses, textos estao entre aspas simples e as duas regras precisam ser verdadeiras."
+          "IN e uma forma compacta de dizer: aceite qualquer valor desta lista.",
+          "Nesta fase, existem dois filtros: uma lista de paises e uma lista de niveis. AND faz o registro passar apenas se cumprir os dois.",
+          "Checklist: cada IN tem parenteses, cada texto tem aspas simples e a consulta nao troca AND por OR."
         ],
         "Usar OR de forma solta e acabar aceitando jogadores que cumprem apenas parte da regra.",
         "Filtros cruzados ajudam a criar segmentos como clientes premium de uma regiao, produtos ativos de certas categorias ou casos de risco com criterios combinados.",
         "Teste uma consulta para jogadores de Argentina ou Chile com nivel Prata ou Ouro.",
-        "A consulta aplicou dois filtros de lista ao mesmo tempo: pais e nivel. Ela funcionou porque IN aceita varios valores possiveis para uma coluna e AND exige que as duas regras sejam atendidas. Na investigacao NimbusPlay, esse recorte reduz o grupo suspeito a perfis de maior impacto comercial."
+        "A consulta aplicou dois filtros de lista ao mesmo tempo: pais e nivel. Ela funcionou porque IN aceitou varios valores possiveis em cada coluna, enquanto AND exigiu que o jogador atendesse as duas condicoes ao mesmo tempo. Na investigacao NimbusPlay, esse recorte reduz o grupo suspeito a perfis de maior impacto comercial."
       ),
       lesson(
         5,
