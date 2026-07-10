@@ -194,6 +194,7 @@
       elements.levelCount.textContent = window.SQLQuestData.levels.length + " missoes";
       elements.schemaPanel.innerHTML = schemaHtml();
       elements.freeplaySchemaPanel.innerHTML = schemaHtml();
+      document.getElementById("freeplayQueryInput").value = "SELECT nome, pais, nivel\nFROM jogadores\nORDER BY nome;";
       elements.freeplayResultTable.innerHTML = '<div class="empty-state">Nenhuma consulta executada ainda.</div>';
       renderGlossary();
       renderAbout();
