@@ -203,9 +203,9 @@
         1,
         "O Primeiro Arquivo",
         50,
-        "Bem-vinda(o) a Agencia NimbusData. Voce acaba de entrar como detetive de dados junior para investigar uma denuncia anonima sobre a loja de jogos NimbusPlay. Marina Souza deixou um bilhete na sua mesa: antes de qualquer suspeita, abra o arquivo de jogadores e veja tudo o que existe nele.",
-        "Retorne todas as colunas e todas as linhas da tabela jogadores.",
-        "Reconhecer uma tabela inteira usando a estrutura mais basica de consulta.",
+        "Bem-vinda(o) a Agencia NimbusData. A chuva bate no vidro enquanto Marina Souza deixa sobre sua mesa o primeiro dossie da NimbusPlay: uma denuncia anonima fala em perfis suspeitos na loja de jogos. Antes de formular qualquer teoria, voce precisa abrir o arquivo bruto de jogadores e observar o terreno.",
+        "Abra o arquivo de jogadores e retorne todas as colunas e todas as linhas cadastradas.",
+        "Reconhecer uma tabela inteira usando a estrutura mais basica de uma consulta SQL.",
         "SELECT *",
         "iniciante",
         "SELECT escolhe as colunas exibidas. O asterisco representa todas as colunas, e FROM indica a tabela consultada.",
@@ -213,22 +213,22 @@
         "SELECT * FROM jogadores;",
         false,
         [
-          "Quando voce ainda esta reconhecendo uma tabela, pode pedir todas as colunas de uma vez.",
-          "A estrutura mental e escolher tudo e apontar a tabela de origem.",
-          "Confira se a consulta comeca com SELECT, usa o simbolo de todas as colunas e consulta jogadores."
+          "Quando voce ainda esta reconhecendo um arquivo, faz sentido ver todas as colunas antes de filtrar.",
+          "Pense em duas partes: escolher todos os campos e apontar a tabela de origem.",
+          "Checklist: a consulta comeca com SELECT, usa o simbolo de todas as colunas e le o arquivo jogadores."
         ],
         "Esquecer o FROM ou consultar uma tabela diferente do arquivo pedido pela missao.",
-        "Analistas usam esse primeiro reconhecimento para entender colunas, linhas e exemplos reais antes de filtrar ou agregar dados.",
-        "No treino livre, abra a tabela jogos inteira e compare a estrutura dela com jogadores.",
-        "A query retornou todo o arquivo de jogadores da NimbusPlay. Ela funciona porque SELECT * solicita todas as colunas disponiveis e FROM jogadores define a fonte dos dados. Em analise real, esse passo cria familiaridade com a base antes de qualquer investigacao mais refinada."
+        "Analistas usam esse primeiro reconhecimento para entender colunas, linhas e exemplos reais antes de filtrar, cruzar ou agregar dados.",
+        "No treino livre, abra a tabela jogos inteira e anote quais colunas poderiam virar pistas em uma investigacao comercial.",
+        "A consulta abriu todo o arquivo de jogadores da NimbusPlay. Ela funcionou porque SELECT * pediu todas as colunas disponiveis, enquanto FROM jogadores definiu a origem dos dados. Em analise real, esse reconhecimento inicial evita conclusoes apressadas e ajuda a equipe a entender que tipo de evidencia existe no dossie."
       ),
       lesson(
         2,
         "Nomes e Paises",
         60,
-        "Marina volta a sua mesa. O arquivo completo trouxe informacao demais para o primeiro mapa da investigacao. Agora ela quer apenas nome e pais de cada jogador, para enxergar de onde vem a base de usuarios.",
-        "Retorne apenas as colunas nome e pais da tabela jogadores.",
-        "Selecionar somente as colunas necessarias para responder uma pergunta.",
+        "Marina volta com um mapa preso por clipes ao dossie. O arquivo completo ajudou, mas esta pesado demais para a primeira leitura da sala de guerra. Para localizar a base de usuarios da NimbusPlay, ela quer ver apenas quem sao os jogadores e de onde eles acessam.",
+        "Monte uma lista limpa com apenas nome e pais dos jogadores cadastrados.",
+        "Selecionar somente as colunas necessarias para responder a uma pergunta especifica.",
         "SELECT colunas especificas",
         "iniciante",
         "Em vez de usar *, liste as colunas desejadas depois do SELECT, separando cada uma por virgula.",
@@ -236,21 +236,21 @@
         "SELECT nome, pais FROM jogadores;",
         false,
         [
-          "Quando o relatorio pede poucos campos, evite trazer informacoes extras.",
-          "Monte o SELECT com duas colunas e mantenha jogadores como origem.",
-          "Confira se as colunas estao separadas por virgula e aparecem na ordem pedida."
+          "Quando o relatorio pede poucos campos, trazer colunas extras aumenta ruido na investigacao.",
+          "A estrutura mental e escolher duas colunas e manter jogadores como arquivo de origem.",
+          "Checklist: nome vem antes de pais, as colunas estao separadas por virgula e nao ha filtro nesta etapa."
         ],
         "Usar SELECT * e retornar mais colunas do que a missao pediu.",
-        "Selecionar colunas especificas deixa paineis, exportacoes e investigacoes mais limpos e seguros.",
-        "Liste nome, data_cadastro e nivel para montar uma visao simples de perfil dos jogadores.",
-        "A query exibiu apenas nome e pais. Ela funciona porque o SELECT permite escolher campos especificos e o FROM define onde esses campos existem. Em analise de dados real, selecionar colunas evita ruido e ajuda a criar visoes objetivas para stakeholders."
+        "Selecionar colunas especificas deixa paineis, exportacoes e investigacoes mais limpos, seguros e faceis de revisar.",
+        "Liste nome, data_cadastro e nivel para montar uma ficha simples de perfil dos jogadores.",
+        "A consulta exibiu apenas nome e pais, criando uma visao mais limpa do cadastro. Ela funcionou porque o SELECT permite escolher campos especificos e o FROM indica onde esses campos existem. Em dados reais, esse recorte transforma um arquivo grande em uma evidencia objetiva para a equipe de investigacao."
       ),
       lesson(
         3,
         "Suspeitos do Brasil",
         70,
-        "Chegou uma denuncia especifica: um grupo de contas no Brasil pode estar sendo usado para manipular avaliacoes. Marina pede uma lista enxuta antes de aprofundar.",
-        "Retorne nome e nivel de todos os jogadores cujo pais seja Brasil.",
+        "Um alerta vermelho aparece no quadro da Agencia: parte da denuncia cita contas brasileiras com comportamento acima do normal. Marina nao quer conclusoes ainda; ela quer isolar esse grupo e ver o nivel de cada jogador antes de cruzar compras ou avaliacoes.",
+        "Isole os jogadores do Brasil e mostre nome e nivel de cada um.",
         "Filtrar linhas por uma condicao textual usando WHERE.",
         "WHERE",
         "iniciante",
@@ -259,21 +259,21 @@
         "SELECT nome, nivel FROM jogadores WHERE pais = 'Brasil';",
         false,
         [
-          "Filtros reduzem a tabela para registros que cumprem uma regra.",
-          "Use a coluna de pais para manter apenas o valor solicitado.",
-          "Confira se Brasil esta entre aspas simples e se o resultado mostra nome e nivel."
+          "Filtros reduzem o arquivo para as linhas que cumprem uma regra clara.",
+          "Use a coluna de pais como criterio e mantenha somente o valor indicado pela denuncia.",
+          "Checklist: Brasil esta entre aspas simples, a condicao usa igualdade e o resultado mostra apenas nome e nivel."
         ],
         "Esquecer aspas em valores de texto ou filtrar outra coluna por engano.",
-        "Filtros por pais, cidade, segmento ou unidade sao comuns em analises regionais e investigacoes de comportamento.",
-        "Filtre jogadores de Portugal e compare os niveis com o grupo do Brasil.",
-        "A query manteve apenas jogadores cujo pais e Brasil e exibiu nome e nivel. Ela funciona porque WHERE testa a condicao em cada linha antes de retornar o resultado. Em analise real, esse filtro e usado para segmentar bases e investigar grupos especificos."
+        "Filtros por pais, cidade, segmento ou unidade sao comuns em analises regionais, campanhas e investigacoes de comportamento.",
+        "Filtre jogadores de Portugal e compare a distribuicao de niveis com o grupo do Brasil.",
+        "A consulta manteve apenas jogadores cujo pais e Brasil e exibiu nome e nivel. Ela funcionou porque WHERE testa a condicao em cada linha antes de retornar o resultado. Para a NimbusPlay, isso transforma uma suspeita ampla em um grupo investigavel; em analise real, e o primeiro passo para segmentar qualquer base."
       ),
       lesson(
         4,
         "Filtros Cruzados",
         80,
-        "A investigacao afunila: Marina quer ver apenas jogadores de Brasil ou Portugal que estejam nos niveis Ouro ou Platina. Sao perfis de alto valor e merecem atencao redobrada.",
-        "Retorne nome, pais e nivel dos jogadores cujo pais esteja em Brasil ou Portugal e cujo nivel esteja em Ouro ou Platina.",
+        "A pasta ganha uma etiqueta nova: alto valor. Marina percebe que a denuncia se concentra em jogadores de Brasil e Portugal, mas somente nos niveis mais valiosos. O proximo recorte precisa separar clientes premium de regioes-chave.",
+        "Encontre jogadores de Brasil ou Portugal que estejam nos niveis Ouro ou Platina, mostrando nome, pais e nivel.",
         "Combinar listas de valores e multiplas condicoes em uma consulta.",
         "AND e IN",
         "basico",
@@ -282,21 +282,21 @@
         "SELECT nome, pais, nivel FROM jogadores WHERE pais IN ('Brasil','Portugal') AND nivel IN ('Ouro','Platina');",
         false,
         [
-          "Use IN quando uma coluna pode aceitar mais de um valor valido.",
-          "Pense em dois filtros: um para pais e outro para nivel, unidos por AND.",
-          "Confira se cada lista esta entre parenteses e se textos estao entre aspas simples."
+          "Use IN quando uma mesma coluna pode aceitar mais de um valor valido para a missao.",
+          "Pense em dois filtros de lista: um para pais e outro para nivel, unidos pela exigencia de ambos valerem.",
+          "Checklist: cada lista esta entre parenteses, textos estao entre aspas simples e as duas regras precisam ser verdadeiras."
         ],
         "Usar OR de forma solta e acabar aceitando jogadores que cumprem apenas parte da regra.",
-        "Filtros cruzados ajudam a criar segmentos como clientes premium de uma regiao ou produtos ativos de certas categorias.",
+        "Filtros cruzados ajudam a criar segmentos como clientes premium de uma regiao, produtos ativos de certas categorias ou casos de risco com criterios combinados.",
         "Teste uma consulta para jogadores de Argentina ou Chile com nivel Prata ou Ouro.",
-        "A query aplicou dois filtros de lista ao mesmo tempo: pais e nivel. Ela funciona porque IN aceita varios valores possiveis para uma coluna e AND exige que as duas regras passem. Em analise real, esse padrao cria segmentos precisos para campanha, risco ou investigacao."
+        "A consulta aplicou dois filtros de lista ao mesmo tempo: pais e nivel. Ela funcionou porque IN aceita varios valores possiveis para uma coluna e AND exige que as duas regras sejam atendidas. Na investigacao NimbusPlay, esse recorte reduz o grupo suspeito a perfis de maior impacto comercial."
       ),
       lesson(
         5,
         "Ranking de Precos",
         90,
-        "O time comercial quer saber quais jogos puxam a receita da loja. Marina pede o topo do catalogo por preco, sem olhar a lista inteira.",
-        "Retorne titulo e preco dos 5 jogos mais caros, do maior para o menor preco.",
+        "O financeiro envia uma anotacao: alguns titulos caros podem estar distorcendo o comportamento de compra. Marina pede que voce organize o catalogo como um ranking, colocando no topo os jogos que mais pesam no bolso.",
+        "Organize o catalogo e mostre titulo e preco dos 5 jogos mais caros, do maior para o menor preco.",
         "Ordenar resultados e limitar a quantidade de linhas retornadas.",
         "ORDER BY e LIMIT",
         "basico",
@@ -305,21 +305,21 @@
         "SELECT titulo, preco FROM jogos ORDER BY preco DESC LIMIT 5;",
         true,
         [
-          "Ranking depende de ordenar por uma metrica relevante.",
-          "Ordene pelo preco em ordem decrescente e limite o resultado ao topo pedido.",
-          "Confira se LIMIT esta no final e se a ordenacao vem do maior para o menor."
+          "Todo ranking precisa de uma metrica de ordenacao, como preco, valor ou quantidade.",
+          "Ordene pelo preco em ordem decrescente e depois corte o resultado no tamanho pedido.",
+          "Checklist: a ordenacao vem antes do limite, o sentido e do maior para o menor e aparecem apenas 5 linhas."
         ],
         "Esquecer DESC ou LIMIT, retornando uma lista completa ou ordenada do menor para o maior.",
-        "Rankings aparecem em analises de produtos mais caros, maiores vendas, clientes prioritarios e alertas de excecao.",
+        "Rankings aparecem em analises de produtos mais caros, maiores vendas, clientes prioritarios, alertas de excecao e investigacoes financeiras.",
         "Liste os 3 jogos mais baratos para comparar o outro extremo do catalogo.",
-        "A query ordenou os jogos pelo preco em ordem decrescente e retornou apenas os cinco primeiros. Ela funciona porque ORDER BY define o criterio de ordenacao e LIMIT corta o resultado final. Em analise real, isso permite focar rapidamente no topo de uma lista."
+        "A consulta ordenou os jogos pelo preco em ordem decrescente e manteve apenas os cinco primeiros. Ela funcionou porque ORDER BY definiu o criterio do ranking e LIMIT recortou o topo. Para a NimbusPlay, isso revela quais titulos podem influenciar mais a receita; em analise real, rankings ajudam a priorizar atencao."
       ),
       lesson(
         6,
         "Contando Pistas",
         100,
-        "Antes de fechar o relatorio do catalogo, Marina precisa de um resumo numerico rapido para levar a reuniao com a diretoria.",
-        "Retorne, em uma unica linha, total_jogos, preco_medio, preco_minimo e preco_maximo da tabela jogos.",
+        "Antes da reuniao com a diretoria, Marina precisa transformar o catalogo em quatro numeros que caibam em uma unica linha do dossie. Sem esse resumo, a conversa sobre precos vira opiniao em vez de evidencia.",
+        "Produza uma linha de resumo do catalogo com total_jogos, preco_medio, preco_minimo e preco_maximo.",
         "Criar indicadores resumidos com funcoes de agregacao.",
         "COUNT, AVG, MIN e MAX",
         "basico",
@@ -328,21 +328,21 @@
         "SELECT COUNT(*) AS total_jogos, AVG(preco) AS preco_medio, MIN(preco) AS preco_minimo, MAX(preco) AS preco_maximo FROM jogos;",
         false,
         [
-          "Quando a missao pede numeros de resumo, procure funcoes de agregacao.",
-          "Calcule quantidade, media, minimo e maximo sobre a tabela de jogos.",
-          "Confira se cada calculo tem o alias solicitado e se a consulta retorna uma unica linha."
+          "Quando a missao pede numeros de resumo, procure funcoes que condensam varias linhas.",
+          "Calcule quantidade, media, minimo e maximo sobre o mesmo arquivo de jogos.",
+          "Checklist: cada indicador tem o alias solicitado e o resultado final cabe em uma unica linha."
         ],
         "Selecionar colunas comuns junto das agregacoes sem agrupamento, ou esquecer os aliases pedidos.",
         "Agregacoes viram KPIs como quantidade de produtos, preco medio, valor minimo, valor maximo e indicadores executivos.",
-        "Calcule a media, minimo e maximo de salario na tabela funcionarios.",
-        "A query condensou o catalogo em quatro indicadores. Ela funciona porque COUNT, AVG, MIN e MAX agregam muitas linhas em valores resumidos. Em analise real, esse padrao transforma dados operacionais em metricas que ajudam a tomada de decisao."
+        "Calcule a media, minimo e maximo de salario na tabela funcionarios para comparar outro tipo de indicador.",
+        "A consulta condensou o catalogo em quatro indicadores. Ela funcionou porque COUNT, AVG, MIN e MAX transformam muitas linhas em valores resumidos. Na NimbusPlay, esses numeros dao contexto ao preco dos jogos; em analise real, agregacoes traduzem operacao em metricas de decisao."
       ),
       lesson(
         7,
         "Agrupando o Catalogo",
         110,
-        "A reuniao de amanha pede uma visao por genero: quantos jogos de RPG, Acao, Corrida e outros existem no catalogo da NimbusPlay.",
-        "Retorne genero e quantidade de jogos de cada genero, agrupando por genero.",
+        "No quadro da sala, Marina separa os titulos por genero. Ela suspeita que algumas categorias dominam o catalogo e podem explicar parte das compras. O proximo passo e contar quantos jogos existem em cada gaveta do arquivo.",
+        "Agrupe o catalogo por genero e mostre a quantidade de jogos em cada genero.",
         "Agrupar registros por categoria para calcular contagens por grupo.",
         "GROUP BY",
         "intermediario",
@@ -351,21 +351,21 @@
         "SELECT genero, COUNT(*) AS quantidade FROM jogos GROUP BY genero;",
         false,
         [
-          "Quando a pergunta pede um total para cada categoria, use agrupamento.",
-          "Selecione a categoria e uma contagem, agrupando pela mesma categoria.",
-          "Confira se a coluna nao agregada do SELECT tambem esta no GROUP BY."
+          "Quando a pergunta pede um total para cada categoria, o caminho natural e agrupar.",
+          "Selecione a categoria que identifica o grupo e calcule uma contagem dentro de cada grupo.",
+          "Checklist: a coluna de categoria aparece no SELECT e tambem no GROUP BY."
         ],
         "Contar todos os jogos sem agrupar por genero, gerando apenas um total geral.",
         "GROUP BY e usado para resumir vendas por canal, chamados por status, jogos por genero e clientes por segmento.",
-        "Agrupe jogadores por nivel e conte quantos existem em cada nivel.",
-        "A query agrupou jogos pelo genero e contou quantos registros existem em cada grupo. Ela funciona porque GROUP BY forma grupos antes do COUNT calcular a quantidade. Em BI, esse padrao sustenta tabelas de resumo, dashboards e comparacoes por categoria."
+        "Agrupe jogadores por nivel e conte quantos existem em cada categoria de fidelidade.",
+        "A consulta agrupou jogos pelo genero e contou quantos registros existem em cada grupo. Ela funcionou porque GROUP BY cria os grupos antes do COUNT calcular a quantidade. Para a NimbusPlay, isso mostra a composicao do catalogo; em BI, esse padrao sustenta paineis por categoria."
       ),
       lesson(
         8,
         "Generos em Destaque",
         120,
-        "Marina quer filtrar o relatorio de generos: por enquanto so interessam os generos com mais de dois jogos no catalogo.",
-        "Retorne genero e quantidade de jogos para os generos que tenham mais de 2 jogos.",
+        "O relatorio por genero ficou maior do que o necessario. Marina risca as categorias pequenas e pede apenas os grupos com volume suficiente para afetar a leitura do catalogo.",
+        "Mostre genero e quantidade apenas para generos com mais de 2 jogos cadastrados.",
         "Filtrar grupos agregados depois do agrupamento.",
         "HAVING",
         "intermediario",
@@ -374,21 +374,21 @@
         "SELECT genero, COUNT(*) AS quantidade FROM jogos GROUP BY genero HAVING COUNT(*) > 2;",
         false,
         [
-          "Se o filtro depende de uma contagem por grupo, ele acontece depois do GROUP BY.",
-          "Agrupe por genero, conte os jogos e aplique uma regra sobre a contagem do grupo.",
-          "Confira se voce usou HAVING para o criterio agregado e se o limite e maior que 2."
+          "Se o filtro depende de uma contagem por grupo, ele so pode acontecer depois do agrupamento.",
+          "Primeiro forme os grupos por genero, depois aplique a regra sobre a quantidade calculada.",
+          "Checklist: o criterio usa HAVING, compara a contagem do grupo e exige valor maior que 2."
         ],
         "Tentar colocar a condicao da contagem no WHERE, antes de a contagem existir.",
         "HAVING ajuda a destacar grupos relevantes, como categorias com volume minimo, clientes recorrentes ou equipes acima de uma meta.",
         "Mostre apenas niveis de jogadores que tenham mais de 3 jogadores cadastrados.",
-        "A query contou jogos por genero e manteve apenas grupos com mais de dois jogos. Ela funciona porque HAVING avalia a metrica agregada criada pelo GROUP BY. Em analise real, esse recurso separa grupos realmente relevantes de categorias com pouco volume."
+        "A consulta contou jogos por genero e manteve apenas grupos com mais de dois jogos. Ela funcionou porque HAVING avalia a metrica agregada criada pelo GROUP BY. Na investigacao, isso tira o foco de categorias pequenas; em analise real, separa grupos relevantes de ruido estatistico."
       ),
       lesson(
         9,
         "Cruzando Registros",
         130,
-        "E hora de cruzar duas pistas: quem comprou o que? Marina precisa de uma lista unindo o nome de cada jogador ao titulo de cada jogo comprado.",
-        "Retorne o nome do jogador e o titulo do jogo para cada compra registrada.",
+        "As compras chegaram como codigos: jogador_id, jogo_id, numeros sem rosto. Marina prende tres folhas lado a lado e pede que voce ligue as pontas para revelar quem comprou qual jogo.",
+        "Cruze jogadores, compras e jogos para mostrar o nome do jogador e o titulo do jogo em cada compra registrada.",
         "Unir tabelas relacionadas para transformar ids em informacoes legiveis.",
         "JOIN",
         "intermediario",
@@ -397,21 +397,21 @@
         "SELECT j.nome, g.titulo FROM jogadores j JOIN compras c ON j.id = c.jogador_id JOIN jogos g ON c.jogo_id = g.id;",
         false,
         [
-          "Quando a informacao esta espalhada em tabelas diferentes, use JOIN para cruzar os registros.",
-          "Parta de jogadores, passe por compras e conecte cada compra ao jogo correspondente.",
-          "Confira se cada JOIN tem um ON e se os aliases deixam claro de qual tabela vem cada coluna."
+          "Quando a informacao esta espalhada em tabelas diferentes, JOIN transforma codigos em contexto.",
+          "Parta dos jogadores, passe pelas compras e use cada compra para chegar ao jogo correspondente.",
+          "Checklist: cada ligacao tem ON, os ids corretos se encontram e os aliases deixam a leitura mais clara."
         ],
         "Esquecer a condicao ON ou conectar ids errados, criando combinacoes incorretas.",
         "JOINs aparecem em quase toda analise relacional: clientes com pedidos, produtos com vendas, usuarios com eventos e jogos com compras.",
-        "Inclua valor_total no resultado para enxergar o valor associado a cada compra.",
-        "A query uniu jogadores, compras e jogos para mostrar nomes e titulos em vez de apenas ids. Ela funciona porque cada JOIN conecta uma chave relacionada. Em analise real, essa tecnica transforma tabelas normalizadas em uma visao legivel e investigavel."
+        "Inclua valor_total no resultado para enxergar quanto cada compra movimentou.",
+        "A consulta uniu jogadores, compras e jogos para mostrar nomes e titulos em vez de apenas ids. Ela funcionou porque cada JOIN conectou chaves relacionadas. Na NimbusPlay, isso transforma rastros tecnicos em uma linha investigavel; em dados reais, JOIN e a ponte entre tabelas normalizadas e historias compreensiveis."
       ),
       lesson(
         10,
         "Ninguem Fica de Fora",
         140,
-        "O time de marketing quer uma lista de reativacao: jogadores cadastrados que nunca fizeram compra devem receber uma oferta especial.",
-        "Retorne o nome dos jogadores que nao possuem nenhuma compra registrada, usando LEFT JOIN entre jogadores e compras.",
+        "Nem toda pista aparece como presenca; algumas aparecem como ausencia. O marketing quer encontrar jogadores cadastrados que nunca compraram, possiveis alvos de reativacao e tambem sinais de cadastro fantasma.",
+        "Use jogadores como arquivo principal e encontre os nomes que nao possuem nenhuma compra registrada.",
         "Encontrar registros sem correspondencia em outra tabela.",
         "LEFT JOIN",
         "intermediario",
@@ -420,21 +420,21 @@
         "SELECT j.nome FROM jogadores j LEFT JOIN compras c ON j.id = c.jogador_id WHERE c.id IS NULL;",
         false,
         [
-          "Para encontrar ausencias, mantenha a tabela principal completa e procure linhas sem par.",
+          "Para encontrar ausencias, preserve a lista principal completa e procure linhas sem correspondencia.",
           "Use jogadores como tabela da esquerda e compras como tabela relacionada.",
-          "Confira se o filtro final procura NULL em uma coluna da tabela da direita."
+          "Checklist: a ligacao usa LEFT JOIN e o filtro final procura NULL em uma coluna da tabela de compras."
         ],
         "Usar JOIN comum, que remove justamente os jogadores sem compra que a missao quer encontrar.",
         "LEFT JOIN e usado para achar clientes sem pedidos, usuarios sem login, produtos sem venda ou cadastros sem atividade.",
         "Procure jogos que ainda nao receberam avaliacoes usando LEFT JOIN com avaliacoes.",
-        "A query manteve todos os jogadores e conectou compras quando existiam. Depois, filtrou os casos em que a compra ficou NULL. Ela funciona porque LEFT JOIN preserva registros sem correspondencia. Em analise real, isso e essencial para campanhas de reativacao e auditorias de lacunas."
+        "A consulta manteve todos os jogadores e conectou compras quando elas existiam. Depois, filtrou os casos em que a compra ficou NULL. Ela funcionou porque LEFT JOIN preserva registros sem correspondencia. Para a NimbusPlay, isso revela contas inativas; em analise real, e uma tecnica central para encontrar lacunas."
       ),
       lesson(
         11,
         "Acima da Media",
         150,
-        "Um funcionario anonimo denunciou uma possivel distorcao salarial. Marina pede uma lista objetiva: quem ganha acima da media geral da empresa?",
-        "Retorne nome e salario dos funcionarios cujo salario seja maior que a media salarial de todos os funcionarios.",
+        "A investigacao sai do catalogo e entra na estrutura interna. Um envelope sem remetente aponta possivel distorcao salarial na equipe da NimbusPlay. Marina quer uma comparacao justa contra a media geral antes de levantar hipoteses.",
+        "Compare cada salario com a media geral e mostre nome e salario dos funcionarios acima dessa media.",
         "Comparar linhas contra um valor calculado por subconsulta.",
         "Subconsulta",
         "intermediario",
@@ -443,21 +443,21 @@
         "SELECT nome, salario FROM funcionarios WHERE salario > (SELECT AVG(salario) FROM funcionarios);",
         false,
         [
-          "Quando o limite do filtro depende da propria base, calcule esse limite dentro da consulta.",
-          "Compare cada salario com uma media calculada em um SELECT interno.",
-          "Confira se a subconsulta esta entre parenteses e retorna apenas um valor."
+          "Quando o limite do filtro depende da propria base, ele pode ser calculado dentro do SQL.",
+          "Use um SELECT interno para calcular a media e compare cada salario contra esse valor.",
+          "Checklist: a subconsulta esta entre parenteses, retorna um unico numero e o filtro usa maior que."
         ],
         "Calcular a media manualmente fora do SQL ou fazer a subconsulta retornar mais de uma coluna.",
         "Subconsultas sao usadas para comparar registros com medias, limites dinamicos, listas calculadas e referencias historicas.",
         "Liste jogos cujo preco seja maior que o preco medio do catalogo.",
-        "A query comparou cada salario com a media geral calculada pela subconsulta. Ela funciona porque o SELECT interno retorna um unico numero que o WHERE principal usa como referencia. Em analise real, esse padrao permite detectar registros acima ou abaixo de um comportamento medio."
+        "A consulta comparou cada salario com a media geral calculada pela subconsulta. Ela funcionou porque o SELECT interno retornou um unico numero usado como referencia pelo WHERE principal. Na investigacao, isso cria uma linha de corte objetiva; em analise real, ajuda a detectar pontos acima ou abaixo de um comportamento medio."
       ),
       lesson(
         12,
         "O Ranking Interno",
         160,
-        "Marina quer visualizar a posicao salarial de cada funcionario dentro do seu proprio departamento, sem misturar Dados com Marketing, Financeiro ou Suporte.",
-        "Retorne nome, departamento, salario e posicao de cada funcionario no ranking de salario dentro do seu departamento.",
+        "A media geral abriu uma pista, mas Marina sabe que comparar departamentos diferentes pode distorcer a leitura. Agora ela quer ver cada funcionario dentro da sua propria area, como fichas organizadas por gaveta.",
+        "Crie o ranking salarial de cada funcionario dentro do respectivo departamento, mostrando nome, departamento, salario e posicao.",
         "Criar rankings por grupo sem reduzir as linhas do resultado.",
         "Window function",
         "avancado",
@@ -466,21 +466,21 @@
         "SELECT nome, departamento, salario, RANK() OVER (PARTITION BY departamento ORDER BY salario DESC) AS posicao FROM funcionarios;",
         false,
         [
-          "Use funcao de janela quando precisa de ranking sem perder as linhas individuais.",
-          "Particione por departamento e ordene salarios do maior para o menor dentro de cada grupo.",
-          "Confira se a nova coluna se chama posicao e se o ranking reinicia por departamento."
+          "Use funcao de janela quando precisa calcular ranking sem perder as linhas individuais.",
+          "Separe a janela por departamento e ordene os salarios do maior para o menor dentro de cada grupo.",
+          "Checklist: a nova coluna se chama posicao e o ranking reinicia quando o departamento muda."
         ],
         "Usar GROUP BY e acabar reduzindo as linhas, quando a missao precisa manter cada funcionario visivel.",
         "Window functions aparecem em rankings por equipe, posicao por categoria, comparacoes dentro de segmentos e analises avancadas de performance.",
-        "Crie um ranking geral de funcionarios por salario, sem PARTITION BY.",
-        "A query calculou a posicao salarial de cada funcionario dentro do departamento. Ela funciona porque RANK() OVER define uma janela de calculo, PARTITION BY separa os departamentos e ORDER BY define o criterio do ranking. Em analise real, isso permite comparar pessoas ou itens dentro do grupo correto."
+        "Crie um ranking geral de funcionarios por salario, sem PARTITION BY, e compare a diferenca de leitura.",
+        "A consulta calculou a posicao salarial de cada funcionario dentro do departamento. Ela funcionou porque RANK() OVER definiu uma janela de calculo, PARTITION BY separou os departamentos e ORDER BY definiu o criterio do ranking. Para a NimbusPlay, isso evita comparacoes injustas; em analise real, permite avaliar desempenho dentro do contexto correto."
       ),
       lesson(
         13,
         "Classificando Clientes",
         150,
-        "Para a proxima campanha, o marketing pediu uma classificacao simples: jogadores nivel Ouro ou Platina serao VIP; os demais entram como Regular.",
-        "Retorne nome, nivel e uma nova coluna categoria classificando Ouro ou Platina como VIP e os demais como Regular.",
+        "Com o caso quase fechado, o marketing pede uma etiqueta operacional para a proxima acao: jogadores Ouro ou Platina entram no grupo VIP; os demais seguem como Regular. Marina quer que essa classificacao saia direto do SQL, sem planilha manual.",
+        "Crie uma coluna categoria que marque jogadores Ouro ou Platina como VIP e todos os demais como Regular, exibindo nome e nivel.",
         "Criar categorias derivadas com regras condicionais dentro do SELECT.",
         "CASE WHEN",
         "avancado",
@@ -489,21 +489,21 @@
         "SELECT nome, nivel, CASE WHEN nivel IN ('Platina','Ouro') THEN 'VIP' ELSE 'Regular' END AS categoria FROM jogadores;",
         false,
         [
-          "Use CASE WHEN quando a saida precisa transformar valores em categorias.",
-          "A regra deve testar o nivel e gerar uma nova coluna de classificacao.",
-          "Confira se existe THEN para o grupo VIP, ELSE para os demais e END AS para nomear a coluna."
+          "Use CASE WHEN quando a saida precisa transformar valores existentes em novas categorias.",
+          "A regra deve testar o nivel do jogador e produzir uma coluna calculada de classificacao.",
+          "Checklist: ha um resultado para o grupo VIP, um resultado para os demais e a expressao e fechada com nome de coluna."
         ],
         "Esquecer o ELSE ou nao fechar a expressao com END, deixando a coluna calculada incompleta.",
         "CASE WHEN e usado para criar faixas de cliente, classificacoes de risco, categorias de preco e grupos de campanha.",
         "Classifique jogos como Premium quando preco for maior ou igual a 150 e Regular nos demais casos.",
-        "A query criou uma coluna categoria com base no nivel do jogador. Ela funciona porque CASE WHEN avalia uma condicao e retorna um texto diferente para cada caso. Em analise real, esse recurso transforma dados brutos em segmentos acionaveis."
+        "A consulta criou uma coluna categoria com base no nivel do jogador. Ela funcionou porque CASE WHEN avaliou uma regra e retornou um texto diferente para cada caso. Na NimbusPlay, isso prepara segmentos para acao; em analise real, transforma dados brutos em categorias prontas para decisao."
       ),
       lesson(
         14,
         "O Grande Esquema",
         180,
-        "A pasta vermelha revela o motivo da investigacao: alguem dentro da empresa estaria manipulando o programa de fidelidade. Para provar o esquema, Marina precisa do ranking real de quem mais gastou na loja.",
-        "Retorne nome e total_gasto, somando valor_total de todas as compras de cada jogador. Mostre apenas os 3 que mais gastaram, do maior para o menor.",
+        "A pasta vermelha finalmente e aberta. O bilhete anonimo dizia que o programa de fidelidade poderia estar favorecendo contas erradas, mas so o dinheiro conta a historia completa. Marina aponta para a ultima tela: encontre o top 3 real de jogadores por gasto total e feche o caso NimbusPlay.",
+        "Monte o ranking final somando valor_total por jogador, exibindo nome e total_gasto dos 3 maiores compradores em ordem decrescente.",
         "Combinar JOIN, agregacao, agrupamento, ordenacao e limite em uma consulta analitica final.",
         "Caso final",
         "avancado",
@@ -512,14 +512,14 @@
         "SELECT j.nome, SUM(c.valor_total) AS total_gasto FROM jogadores j JOIN compras c ON j.id = c.jogador_id GROUP BY j.nome ORDER BY total_gasto DESC LIMIT 3;",
         true,
         [
-          "O caso final pede uma consulta em etapas: juntar, somar, agrupar, ordenar e limitar.",
-          "Conecte jogadores a compras, some o valor total por jogador e transforme isso em um ranking.",
-          "Confira se o total se chama total_gasto, se o ranking e decrescente e se apenas 3 linhas aparecem."
+          "O caso final combina varias pistas: relacionamento entre tabelas, soma, agrupamento, ranking e recorte do topo.",
+          "Conecte jogadores a compras, some o valor total de cada jogador e transforme o resultado em ranking.",
+          "Checklist: o total se chama total_gasto, a ordem e decrescente e o resultado mostra apenas 3 linhas."
         ],
         "Somar valores sem GROUP BY por jogador, ou esquecer LIMIT e retornar todo o ranking.",
         "Esse desenho aparece em rankings de receita, clientes mais valiosos, produtos com maior faturamento e auditorias de fidelidade.",
         "Monte um ranking dos 5 jogos que mais geraram receita somando compras por titulo.",
-        "A query cruzou jogadores com compras, somou o valor total por jogador, agrupou o resultado por nome, ordenou do maior gasto para o menor e manteve apenas o top 3. Ela funciona porque cada clausula resolve uma parte da investigacao. Em BI, essa combinacao e a base de relatorios executivos e auditorias de receita."
+        "A consulta cruzou jogadores com compras, somou o valor total por jogador, agrupou por nome, ordenou do maior gasto para o menor e manteve apenas o top 3. Ela funcionou porque cada clausula resolveu uma parte do caso final: ligar evidencias, medir valor, consolidar por pessoa e priorizar o topo. Com isso, Marina encerra o dossie NimbusPlay com uma evidencia analitica clara."
       )
     ],
     glossary: [
