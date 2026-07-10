@@ -732,7 +732,7 @@ button:disabled {
 }
 
 .learning-bridge,
-.sql-handbook,
+.quick-support,
 .case-record {
   margin: 14px 0;
   padding: 14px;
@@ -749,32 +749,22 @@ button:disabled {
   color: var(--cream);
 }
 
-.sql-handbook summary {
+.quick-support summary {
   color: var(--amber-soft);
   cursor: pointer;
   font-weight: 950;
 }
 
-.handbook-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
+.quick-support-body {
   margin-top: 14px;
 }
 
-.handbook-card {
-  padding: 12px;
-  background: rgba(11, 23, 16, 0.46);
-  border: 1px solid rgba(183, 243, 192, 0.14);
-  border-radius: 8px;
-}
-
-.handbook-card h4 {
+.quick-support-body h4 {
   margin: 0 0 8px;
   color: var(--cream);
 }
 
-.handbook-card pre,
+.quick-support-body pre,
 .case-record pre {
   overflow-x: auto;
   margin: 0 0 8px;
@@ -790,7 +780,7 @@ button:disabled {
   line-height: 1.55;
 }
 
-.handbook-card p,
+.quick-support-body p,
 .case-record p {
   margin: 0 0 10px;
   color: var(--text-muted);

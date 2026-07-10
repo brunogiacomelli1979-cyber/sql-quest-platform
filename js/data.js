@@ -130,6 +130,106 @@
     13: "Agora que voce sabe calcular e comparar, vai criar categorias novas usando regras condicionais com CASE WHEN.",
     14: "O caso final combina as pecas do dossie: JOIN, soma, agrupamento, ordenacao e limite para produzir uma evidencia final."
   };
+  var QUICK_SUPPORT = {
+    1: {
+      titulo: "Abrindo o primeiro arquivo",
+      lembrete: "Nesta missao, voce ainda esta reconhecendo a base. O objetivo e pedir uma visao ampla do arquivo.",
+      modelo: "SELECT *\nFROM tabela;",
+      exemploParecido: "SELECT *\nFROM jogos;",
+      cuidadoComum: "Use o asterisco apenas quando a missao pedir todas as colunas ou quando voce estiver explorando uma tabela."
+    },
+    2: {
+      titulo: "Selecionando colunas especificas",
+      lembrete: "Depois de ver tudo, voce passa a escolher apenas as pistas que interessam ao relatorio.",
+      modelo: "SELECT coluna_1, coluna_2\nFROM tabela;",
+      exemploParecido: "SELECT titulo, genero\nFROM jogos;",
+      cuidadoComum: "Separe colunas com virgula e evite trazer campos extras quando a missao pede uma lista limpa."
+    },
+    3: {
+      titulo: "WHERE com uma condicao",
+      lembrete: "Agora voce usa WHERE para manter apenas linhas que cumprem uma regra simples.",
+      modelo: "SELECT colunas\nFROM tabela\nWHERE coluna = 'valor';",
+      exemploParecido: "SELECT titulo, preco\nFROM jogos\nWHERE genero = 'RPG';",
+      cuidadoComum: "Valores de texto precisam ficar entre aspas simples."
+    },
+    4: {
+      titulo: "WHERE com listas e multiplas condicoes",
+      lembrete: "Na fase anterior, voce filtrou um unico valor com WHERE. Agora precisa aceitar listas de valores e combinar condicoes.",
+      modelo: "SELECT colunas\nFROM tabela\nWHERE coluna_a IN ('valor1', 'valor2')\n  AND coluna_b IN ('valor3', 'valor4');",
+      exemploParecido: "SELECT titulo, genero, ano_lancamento\nFROM jogos\nWHERE genero IN ('RPG', 'Acao')\n  AND ano_lancamento IN (2022, 2023);",
+      cuidadoComum: "IN aceita uma lista de valores possiveis. AND exige que as duas condicoes sejam verdadeiras ao mesmo tempo."
+    },
+    5: {
+      titulo: "Ranking com ORDER BY e LIMIT",
+      lembrete: "Quando a pista e um topo, ordene pela metrica principal e depois limite a quantidade de linhas.",
+      modelo: "SELECT colunas\nFROM tabela\nORDER BY coluna DESC\nLIMIT quantidade;",
+      exemploParecido: "SELECT nome, salario\nFROM funcionarios\nORDER BY salario DESC\nLIMIT 3;",
+      cuidadoComum: "DESC coloca os maiores valores primeiro. LIMIT deve recortar apenas o tamanho pedido."
+    },
+    6: {
+      titulo: "Indicadores com agregacoes",
+      lembrete: "Aqui voce resume varias linhas em poucos numeros para montar uma visao executiva do dossie.",
+      modelo: "SELECT COUNT(*), AVG(coluna), MIN(coluna), MAX(coluna)\nFROM tabela;",
+      exemploParecido: "SELECT COUNT(*), AVG(salario), MIN(salario), MAX(salario)\nFROM funcionarios;",
+      cuidadoComum: "Agregacoes sem GROUP BY normalmente retornam uma linha de resumo."
+    },
+    7: {
+      titulo: "Contagem por grupo",
+      lembrete: "Depois do resumo geral, voce passa a contar linhas dentro de cada categoria.",
+      modelo: "SELECT coluna_grupo, COUNT(*) AS quantidade\nFROM tabela\nGROUP BY coluna_grupo;",
+      exemploParecido: "SELECT nivel, COUNT(*) AS quantidade\nFROM jogadores\nGROUP BY nivel;",
+      cuidadoComum: "Toda coluna comum exibida junto da contagem deve aparecer no GROUP BY."
+    },
+    8: {
+      titulo: "Filtrando grupos com HAVING",
+      lembrete: "Quando o filtro depende de uma contagem por grupo, use HAVING depois do GROUP BY.",
+      modelo: "SELECT coluna_grupo, COUNT(*) AS quantidade\nFROM tabela\nGROUP BY coluna_grupo\nHAVING COUNT(*) > numero;",
+      exemploParecido: "SELECT nivel, COUNT(*) AS quantidade\nFROM jogadores\nGROUP BY nivel\nHAVING COUNT(*) > 3;",
+      cuidadoComum: "WHERE filtra linhas antes do grupo existir. HAVING filtra grupos ja calculados."
+    },
+    9: {
+      titulo: "Cruzando tabelas com JOIN",
+      lembrete: "Quando as pistas estao em arquivos diferentes, conecte as tabelas por chaves relacionadas.",
+      modelo: "SELECT a.coluna, b.coluna\nFROM tabela_a a\nJOIN tabela_b b ON a.id = b.tabela_a_id;",
+      exemploParecido: "SELECT j.nome, c.valor_total\nFROM jogadores j\nJOIN compras c ON j.id = c.jogador_id;",
+      cuidadoComum: "Todo JOIN precisa de uma condicao ON para evitar combinacoes sem sentido."
+    },
+    10: {
+      titulo: "Encontrando ausencias com LEFT JOIN",
+      lembrete: "LEFT JOIN preserva o arquivo principal e permite procurar linhas sem correspondencia.",
+      modelo: "SELECT a.coluna\nFROM tabela_a a\nLEFT JOIN tabela_b b ON a.id = b.tabela_a_id\nWHERE b.id IS NULL;",
+      exemploParecido: "SELECT g.titulo\nFROM jogos g\nLEFT JOIN avaliacoes a ON g.id = a.jogo_id\nWHERE a.id IS NULL;",
+      cuidadoComum: "Para achar ausencias, o filtro IS NULL deve olhar uma coluna da tabela da direita."
+    },
+    11: {
+      titulo: "Filtro com subconsulta",
+      lembrete: "Quando o limite do filtro precisa ser calculado, use um SELECT interno como referencia.",
+      modelo: "SELECT colunas\nFROM tabela\nWHERE coluna > (\n  SELECT AVG(coluna)\n  FROM tabela\n);",
+      exemploParecido: "SELECT titulo, preco\nFROM jogos\nWHERE preco > (\n  SELECT AVG(preco)\n  FROM jogos\n);",
+      cuidadoComum: "A subconsulta usada em comparacao deve retornar um unico valor."
+    },
+    12: {
+      titulo: "Ranking por grupo com janela",
+      lembrete: "Funcoes de janela criam rankings sem apagar as linhas individuais do resultado.",
+      modelo: "SELECT coluna,\n       RANK() OVER (PARTITION BY grupo ORDER BY valor DESC) AS posicao\nFROM tabela;",
+      exemploParecido: "SELECT titulo, genero, preco,\n       RANK() OVER (PARTITION BY genero ORDER BY preco DESC) AS posicao\nFROM jogos;",
+      cuidadoComum: "PARTITION BY define onde o ranking reinicia. ORDER BY define o criterio da posicao."
+    },
+    13: {
+      titulo: "Criando categorias com CASE WHEN",
+      lembrete: "CASE WHEN transforma uma regra de negocio em uma nova coluna calculada.",
+      modelo: "SELECT coluna,\n       CASE\n         WHEN condicao THEN 'Categoria A'\n         ELSE 'Categoria B'\n       END AS categoria\nFROM tabela;",
+      exemploParecido: "SELECT titulo, preco,\n       CASE\n         WHEN preco >= 150 THEN 'Premium'\n         ELSE 'Regular'\n       END AS faixa\nFROM jogos;",
+      cuidadoComum: "Nao esqueca ELSE para os demais casos e END AS para nomear a coluna."
+    },
+    14: {
+      titulo: "Consulta final em etapas",
+      lembrete: "O caso final combina cruzamento de tabelas, soma, agrupamento, ordenacao e recorte do topo.",
+      modelo: "SELECT entidade, SUM(valor) AS total\nFROM tabela_a a\nJOIN tabela_b b ON a.id = b.tabela_a_id\nGROUP BY entidade\nORDER BY total DESC\nLIMIT quantidade;",
+      exemploParecido: "SELECT g.titulo, SUM(c.valor_total) AS receita\nFROM jogos g\nJOIN compras c ON g.id = c.jogo_id\nGROUP BY g.titulo\nORDER BY receita DESC\nLIMIT 5;",
+      cuidadoComum: "Some valores depois do JOIN, agrupe pela entidade do ranking e ordene pelo total calculado."
+    }
+  };
 
   function lesson(id, title, xp, story, mission, objetivo, conceito, dificuldade, guide, starterSql, expectedSql, orderMatters, hints, erroComum, usoReal, desafioBonus, explanation) {
     return {
@@ -150,6 +250,7 @@
       usoReal: usoReal,
       desafioBonus: desafioBonus,
       ponteAprendizado: LEARNING_BRIDGES[id] || "",
+      apoioRapido: QUICK_SUPPORT[id] || null,
       explanation: explanation
     };
   }
@@ -180,68 +281,6 @@
         "CASE WHEN"
       ]
     },
-    handbook: [
-      {
-        title: "SELECT basico",
-        model: "SELECT coluna_1, coluna_2\nFROM tabela;",
-        note: "Use SELECT para escolher quais pistas aparecem no resultado."
-      },
-      {
-        title: "WHERE",
-        model: "SELECT colunas\nFROM tabela\nWHERE coluna = 'valor';",
-        note: "WHERE filtra o arquivo e mantem apenas linhas que cumprem uma regra."
-      },
-      {
-        title: "IN e AND",
-        model: "SELECT colunas\nFROM tabela\nWHERE coluna_a IN ('valor1', 'valor2')\n  AND coluna_b IN ('valor3', 'valor4');",
-        note: "IN testa varios valores possiveis. AND exige que as duas condicoes sejam verdadeiras."
-      },
-      {
-        title: "ORDER BY e LIMIT",
-        model: "SELECT colunas\nFROM tabela\nORDER BY coluna DESC\nLIMIT quantidade;",
-        note: "ORDER BY organiza o resultado. LIMIT mostra apenas a quantidade que voce precisa analisar."
-      },
-      {
-        title: "Agregacoes",
-        model: "SELECT COUNT(*), AVG(coluna), MIN(coluna), MAX(coluna)\nFROM tabela;",
-        note: "Agregacoes resumem muitas linhas em indicadores de investigacao."
-      },
-      {
-        title: "GROUP BY",
-        model: "SELECT coluna_grupo, COUNT(*) AS quantidade\nFROM tabela\nGROUP BY coluna_grupo;",
-        note: "GROUP BY cria grupos para calcular metricas por categoria."
-      },
-      {
-        title: "HAVING",
-        model: "SELECT coluna_grupo, COUNT(*) AS quantidade\nFROM tabela\nGROUP BY coluna_grupo\nHAVING COUNT(*) > numero;",
-        note: "HAVING filtra grupos depois que uma metrica agregada ja foi calculada."
-      },
-      {
-        title: "JOIN",
-        model: "SELECT a.coluna, b.coluna\nFROM tabela_a a\nJOIN tabela_b b ON a.id = b.tabela_a_id;",
-        note: "JOIN cruza tabelas relacionadas para transformar codigos em contexto."
-      },
-      {
-        title: "LEFT JOIN",
-        model: "SELECT a.coluna\nFROM tabela_a a\nLEFT JOIN tabela_b b ON a.id = b.tabela_a_id\nWHERE b.id IS NULL;",
-        note: "LEFT JOIN ajuda a encontrar registros sem correspondencia em outro arquivo."
-      },
-      {
-        title: "Subconsulta",
-        model: "SELECT colunas\nFROM tabela\nWHERE coluna > (\n  SELECT AVG(coluna)\n  FROM tabela\n);",
-        note: "Subconsultas calculam uma referencia para a consulta principal."
-      },
-      {
-        title: "Funcao de janela",
-        model: "SELECT coluna,\n       RANK() OVER (PARTITION BY grupo ORDER BY valor DESC) AS posicao\nFROM tabela;",
-        note: "Funcoes de janela calculam rankings e comparacoes sem reduzir as linhas."
-      },
-      {
-        title: "CASE WHEN",
-        model: "SELECT coluna,\n       CASE\n         WHEN condicao THEN 'Categoria A'\n         ELSE 'Categoria B'\n       END AS categoria\nFROM tabela;",
-        note: "CASE WHEN cria categorias novas a partir de regras de investigacao."
-      }
-    ],
     schema: [
       {
         name: "jogos",

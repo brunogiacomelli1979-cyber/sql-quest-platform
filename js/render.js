@@ -93,17 +93,23 @@
     }).join("");
   }
 
-  function handbookHtml() {
-    var items = window.SQLQuestData.handbook || [];
-    return '<details class="sql-handbook">' +
-      '<summary>Manual do Investigador SQL</summary>' +
-      '<div class="handbook-grid">' + items.map(function (item) {
-        return '<article class="handbook-card">' +
-          '<h4>' + escapeHtml(item.title) + "</h4>" +
-          '<pre><code>' + escapeHtml(item.model) + "</code></pre>" +
-          '<p>' + escapeHtml(item.note) + "</p>" +
-        "</article>";
-      }).join("") + "</div>" +
+  function quickSupportHtml(level) {
+    var support = level.apoioRapido;
+    if (!support) {
+      return "";
+    }
+
+    return '<details class="quick-support">' +
+      '<summary>Apoio rapido desta missao</summary>' +
+      '<div class="quick-support-body">' +
+        '<h4>' + escapeHtml(support.titulo) + "</h4>" +
+        '<p><strong>Lembrete:</strong> ' + escapeHtml(support.lembrete) + "</p>" +
+        '<p><strong>Modelo:</strong></p>' +
+        '<pre><code>' + escapeHtml(support.modelo) + "</code></pre>" +
+        '<p><strong>Exemplo parecido:</strong></p>' +
+        '<pre><code>' + escapeHtml(support.exemploParecido) + "</code></pre>" +
+        '<p><strong>Cuidado comum:</strong> ' + escapeHtml(support.cuidadoComum) + "</p>" +
+      "</div>" +
     "</details>";
   }
 
@@ -242,7 +248,7 @@
       (level.ponteAprendizado ? '<p class="learning-bridge"><strong>Ponte da investigacao:</strong> ' + escapeHtml(level.ponteAprendizado) + "</p>" : "") +
       (level.mission ? "<p><strong>Missao:</strong> " + escapeHtml(level.mission) + "</p>" : "") +
       "<p><strong>Guia:</strong> " + escapeHtml(level.guide) + "</p>" +
-      handbookHtml();
+      quickSupportHtml(level);
     elements.hintsPanel.innerHTML = level.hints.map(function (hint, index) {
       return '<p class="hint-card"><strong>Dica ' + (index + 1) + ":</strong> " + escapeHtml(hint) + "</p>";
     }).join("");
