@@ -1,76 +1,85 @@
-# SQL Quest
+# 🕵️ SQL Quest
 
-**SQL Quest** é um jogo educacional interativo para praticar SQL resolvendo investigações com dados. O projeto roda inteiramente no navegador, usa SQLite em memória com sql.js e salva o progresso localmente com `localStorage`.
+<p align="center">
+  <strong>Aprenda SQL resolvendo investigações com dados.</strong><br>
+  Um jogo educacional interativo com narrativa, progressão, apoio pedagógico, validação automática e execução real de consultas no navegador.
+</p>
 
-[Jogar no GitHub Pages](https://brunogiacomelli1979-cyber.github.io/sql-quest-platform/)  
-[Repositório no GitHub](https://github.com/brunogiacomelli1979-cyber/sql-quest-platform)
+<p align="center">
+  <a href="https://brunogiacomelli1979-cyber.github.io/sql-quest-platform/">
+    <img src="https://img.shields.io/badge/▶%20Jogar%20agora-GitHub%20Pages-1f6feb?style=for-the-badge" alt="Jogar agora">
+  </a>
+  <img src="https://img.shields.io/badge/Versão-v0.3.5-d4a24c?style=for-the-badge" alt="Versão">
+  <img src="https://img.shields.io/badge/Campanha-NimbusPlay-7c3aed?style=for-the-badge" alt="Campanha">
+  <img src="https://img.shields.io/badge/Status-Campanha%20modelo%20concluída-2ea043?style=for-the-badge" alt="Status">
+  <img src="https://img.shields.io/badge/Stack-HTML%20%7C%20CSS%20%7C%20JS-111827?style=for-the-badge" alt="Stack">
+</p>
 
-## Status
+---
 
-Versão atual: **v0.3.4**
+## 🎮 Demonstração
 
-Estado do projeto:
+🔗 **Jogue online:**  
+**[SQL Quest no GitHub Pages](https://brunogiacomelli1979-cyber.github.io/sql-quest-platform/)**
 
-- campanha NimbusPlay funcional;
-- Edição Arquivo Secreto aplicada;
-- textos revisados;
-- README atualizado;
-- projeto publicado no GitHub Pages.
+🔗 **Repositório:**  
+**[sql-quest-platform](https://github.com/brunogiacomelli1979-cyber/sql-quest-platform)**
 
-## Sobre o Projeto
+---
 
-Na campanha atual, **NimbusPlay — SQL Investigativo**, o jogador atua como analista/investigador da **Agência NimbusData** e analisa o Arquivo NimbusPlay, uma base fictícia de uma loja de jogos.
+## 📸 Screenshots
 
-A experiência combina narrativa investigativa, progressão bloqueada por fases, execução real de SQL e validação automática das respostas. O visual atual é a **SQL Quest: Edição Arquivo Secreto**, com dossiê investigativo, fundo escuro, papel envelhecido, sidebar como arquivo de casos e terminal SQL retrô.
+Capturas atualizadas da **SQL Quest: Edição Arquivo Secreto**.
 
-A tela de investigação foi simplificada para colocar missão e terminal em primeiro plano. Os materiais de apoio, como guia da lição, ponte pedagógica, dicas, esquema do banco e apoio rápido, ficam recolhidos por padrão para reduzir ruído durante a resolução.
-
-O projeto não possui backend, login, autenticação, API externa ou coleta de dados. Tudo acontece no navegador do usuário.
-
-## Capturas de Tela
-
-### Tela inicial
+### 🏠 Tela inicial
 
 ![Tela inicial do SQL Quest](./images/sql-quest-home.png)
 
-### Investigação
+### 🧩 Área de investigação
 
 ![Tela de investigação do SQL Quest](./images/sql-quest-investigacao.png)
 
-### Treino livre
+### 🧪 Modo treino livre
 
 ![Modo treino livre do SQL Quest](./images/sql-quest-treino-livre.png)
 
-### Glossário SQL
+### 📚 Glossário SQL
 
 ![Glossário SQL do SQL Quest](./images/sql-quest-glossario.png)
 
-### Sobre o projeto
+### 🧾 Página sobre o projeto
 
 ![Página sobre o projeto SQL Quest](./images/sql-quest-sobre.png)
 
-## Funcionalidades
+---
 
-- 14 fases progressivas de SQL;
-- campanha NimbusPlay com narrativa investigativa;
-- progressão bloqueada por fase;
-- editor SQL com aparência de terminal retrô;
-- execução real de consultas no navegador;
-- validação automática das respostas;
-- dicas em camadas;
-- guia da lição e materiais de apoio recolhidos por padrão;
-- esquema do banco de dados;
-- glossário SQL;
-- modo treino livre;
-- XP e badges locais;
-- registro dos casos resolvidos;
-- preservação de rascunhos;
-- tela final de conclusão;
-- certificado gamificado interno.
+## 🗂️ Dossiê do Projeto
 
-## Campanha NimbusPlay
+**SQL Quest** é um jogo educacional interativo criado para praticar **SQL** de forma progressiva, combinando investigação, aprendizado guiado e execução real de consultas no navegador.
 
-A base fictícia NimbusPlay usa as seguintes tabelas:
+Na campanha principal, **NimbusPlay — SQL Investigativo**, o jogador atua como investigador da **Agência NimbusData** e analisa os dados de uma loja fictícia de jogos online. Cada fase funciona como um caso do dossiê, exigindo que o jogador escreva consultas SQL para encontrar pistas, validar hipóteses e avançar na investigação.
+
+Na versão visual atual, **SQL Quest: Edição Arquivo Secreto**, a interface reforça o clima de dossiê investigativo: fundo escuro, papel envelhecido, terminal SQL retrô, sidebar como arquivo de casos, badges como selos e uma tela de investigação mais focada na missão e no terminal.
+
+O projeto foi desenvolvido como parte de um portfólio voltado à transição para a área de **Dados, BI e Automação**, demonstrando conhecimentos em:
+
+- SQL aplicado;
+- lógica de programação;
+- JavaScript;
+- modelagem de experiência educacional;
+- experiência do usuário;
+- estruturação de projetos front-end;
+- gamificação aplicada ao aprendizado;
+- versionamento com Git/GitHub;
+- publicação com GitHub Pages.
+
+---
+
+## 🕹️ Campanha atual
+
+### NimbusPlay — SQL Investigativo
+
+Na campanha **NimbusPlay**, o jogador investiga uma base fictícia formada por:
 
 - `jogadores`
 - `jogos`
@@ -78,123 +87,365 @@ A base fictícia NimbusPlay usa as seguintes tabelas:
 - `avaliacoes`
 - `funcionarios`
 
-Os nomes das tabelas estão sem acento porque são identificadores SQL usados no jogo.
+A trilha possui **14 casos progressivos**, começando por consultas simples com `SELECT` e avançando até combinações mais analíticas com `JOIN`, agregações, subconsultas, função de janela e `CASE WHEN`.
 
-## Conteúdos SQL Praticados
+---
 
-Ao longo da trilha, o jogador pratica:
+## 🎯 Missão do Jogo
+
+Transformar o estudo de SQL em uma experiência mais prática, visual e envolvente.
+
+Em vez de apenas ler teoria, o jogador:
+
+1. recebe uma missão investigativa;
+2. lê o contexto do caso;
+3. consulta o esquema do banco;
+4. usa o apoio rápido da missão;
+5. escreve uma query SQL;
+6. executa a consulta;
+7. valida a solução;
+8. registra o caso resolvido;
+9. avança para a próxima fase.
+
+---
+
+## 🧠 O que o jogador aprende
+
+Ao longo da campanha, o jogador pratica:
 
 - `SELECT`
 - seleção de colunas
 - `WHERE`
-- operadores lógicos
+- filtros com texto e números
+- `IN`
+- `AND`
 - `ORDER BY`
 - `LIMIT`
-- funções agregadas
+- `COUNT`
+- `AVG`
+- `MIN`
+- `MAX`
 - `GROUP BY`
 - `HAVING`
 - `JOIN`
 - `LEFT JOIN`
 - subconsultas
-- funções de janela
-- `CASE WHEN`
-- desafio final combinando conceitos
+- função de janela com `RANK() OVER`
+- classificação com `CASE WHEN`
+- composição de consultas analíticas
 
-## Certificado Gamificado
+---
 
-Ao concluir a campanha NimbusPlay, o jogador recebe um certificado gamificado dentro do próprio SQL Quest.
+## 🕹️ Funcionalidades atuais
 
-Esse certificado é uma recompensa interna do jogo, criada para marcar a conclusão da trilha e reforçar a experiência educacional. Ele **não é uma certificação profissional oficial**, não possui validade institucional e não representa credencial reconhecida por terceiros.
+### ✅ Núcleo do jogo
 
-## Tecnologias
+- [x] Campanha investigativa NimbusPlay
+- [x] 14 casos de aprendizagem
+- [x] Progressão bloqueada por fase
+- [x] Editor SQL interativo
+- [x] Execução de consultas no navegador
+- [x] Validação automática da solução
+- [x] Dicas em camadas
+- [x] Apoio rápido por missão
+- [x] Ponte pedagógica entre fases
+- [x] Esquema do banco
+- [x] Explicação pós-resolução
+- [x] Registro da consulta resolvida em cada caso
+- [x] Preservação de rascunho por fase
 
-- HTML
-- CSS
-- JavaScript
-- sql.js
-- SQLite em memória
-- localStorage
-- GitHub Pages
+### ✅ Gamificação
 
-## Como Executar Localmente
+- [x] XP por progresso
+- [x] Badges/conquistas locais
+- [x] Desbloqueio progressivo das fases
+- [x] Fluxo de aprendizagem guiado
+- [x] Tela final de conclusão
+- [x] Certificado gamificado de conclusão
 
-Clone o repositório:
+### ✅ Plataforma
 
-```bash
-git clone https://github.com/brunogiacomelli1979-cyber/sql-quest-platform.git
-cd sql-quest-platform
+- [x] Tela inicial
+- [x] Navegação entre seções
+- [x] Glossário SQL completo
+- [x] Modo treino livre
+- [x] Página “Sobre o projeto”
+- [x] Salvamento local com `localStorage`
+- [x] Publicação no GitHub Pages
+
+---
+
+## 🧭 Jornada do jogador
+
+```text
+Receber a missão
+↓
+Ler o contexto investigativo
+↓
+Consultar o esquema do banco
+↓
+Usar o apoio rápido da missão
+↓
+Escrever ou revisar a query SQL
+↓
+Executar a consulta
+↓
+Validar a solução
+↓
+Salvar o registro do caso
+↓
+Desbloquear a próxima fase
+↓
+Concluir o dossiê e receber certificado gamificado
 ```
 
-Inicie um servidor local simples:
+---
+
+## 📚 Diferenciais pedagógicos
+
+O SQL Quest não é apenas uma lista de exercícios.
+
+A experiência foi desenhada para apoiar o estudante durante a construção da consulta:
+
+- cada fase tem contexto narrativo;
+- cada missão explica por que a consulta é necessária;
+- o **apoio rápido da missão** mostra um modelo pontual para o desafio atual;
+- o **glossário** fica separado como referência ampla;
+- o aluno pode salvar rascunhos por fase;
+- a consulta correta usada pelo jogador fica registrada no caso resolvido;
+- as dicas ajudam sem entregar imediatamente a resposta;
+- o certificado final é gamificado e faz parte da experiência do jogo.
+
+---
+
+## 🏅 Certificado gamificado
+
+Ao concluir a campanha **NimbusPlay — SQL Investigativo**, o jogador recebe um **certificado gamificado de conclusão** dentro da própria página.
+
+O certificado apresenta:
+
+- conclusão do dossiê NimbusPlay;
+- patente final;
+- XP acumulado;
+- conceitos SQL praticados;
+- identificação opcional do investigador.
+
+> Este certificado é parte da experiência educacional e gamificada do SQL Quest.  
+> Ele **não representa uma certificação profissional oficial**.
+
+---
+
+## 🧪 Como funciona por trás
+
+O SQL Quest utiliza **SQLite no navegador** por meio de **sql.js**.
+
+Isso significa que o jogador executa consultas reais sem precisar instalar banco de dados, servidor ou ambiente local complexo.
+
+### Fluxo técnico
+
+```text
+Banco SQLite em memória
+↓
+Carregamento no navegador
+↓
+Usuário escreve SQL
+↓
+Consulta é executada com sql.js
+↓
+Resultado é exibido
+↓
+Resposta é comparada ao esperado
+↓
+Progresso, rascunhos e registros são salvos no localStorage
+```
+
+---
+
+## 🏗️ Estrutura do projeto
+
+```text
+sql-quest-platform/
+│
+├── index.html
+├── README.md
+│
+├── css/
+│   └── style.css
+│
+├── js/
+│   ├── app.js
+│   ├── data.js
+│   ├── database.js
+│   ├── render.js
+│   ├── state.js
+│   └── validator.js
+│
+└── images/
+    ├── sql-quest-home.png
+    ├── sql-quest-investigacao.png
+    ├── sql-quest-treino-livre.png
+    ├── sql-quest-glossario.png
+    └── sql-quest-sobre.png
+```
+
+---
+
+## ⚙️ Tecnologias utilizadas
+
+| Tecnologia | Função no projeto |
+|---|---|
+| **HTML5** | Estrutura da aplicação |
+| **CSS3** | Layout, responsividade e identidade visual |
+| **JavaScript** | Lógica do jogo, renderização e navegação |
+| **sql.js** | Execução de SQLite no navegador |
+| **SQLite** | Banco de dados usado nas missões |
+| **localStorage** | Persistência local do progresso, rascunhos e registros |
+| **Git** | Versionamento |
+| **GitHub** | Hospedagem do repositório |
+| **GitHub Pages** | Publicação do projeto |
+
+---
+
+## 🚀 Como executar localmente
+
+Este projeto não exige instalação de dependências.
+
+### Opção 1 — Abrir direto no navegador
+
+Abra o arquivo:
+
+```text
+index.html
+```
+
+### Opção 2 — Servidor local simples
+
+Rode um servidor local:
 
 ```bash
 python -m http.server 8000
 ```
 
-Acesse:
+Depois acesse:
 
 ```text
 http://localhost:8000
 ```
 
-É recomendado executar o projeto por servidor local, em vez de abrir o `index.html` diretamente, para manter o carregamento dos arquivos estáticos de forma mais próxima ao GitHub Pages.
+---
 
-## Estrutura
+## 🏆 Destaques de portfólio
 
-```text
-sql-quest-platform/
-├── index.html
-├── README.md
-├── css/
-│   └── style.css
-├── docs/
-│   └── pedagogical-audit.md
-├── images/
-│   ├── sql-quest-home.png
-│   ├── sql-quest-investigacao.png
-│   ├── sql-quest-treino-livre.png
-│   ├── sql-quest-glossario.png
-│   └── sql-quest-sobre.png
-└── js/
-    ├── app.js
-    ├── data.js
-    ├── database.js
-    ├── render.js
-    ├── state.js
-    └── validator.js
-```
+Este projeto demonstra na prática:
 
-## Histórico de Versões
+- desenvolvimento front-end com HTML, CSS e JavaScript;
+- organização modular de código;
+- criação de produto educacional interativo;
+- uso de SQL aplicado em contexto gamificado;
+- execução real de SQL no navegador;
+- persistência local de progresso e estado;
+- construção de narrativa aplicada ao aprendizado;
+- design instrucional com apoio progressivo;
+- publicação web estática profissional;
+- evolução incremental com branches, merges, tags e versionamento.
+
+---
+
+## 📦 Histórico de versões
 
 | Versão | Descrição |
 |---|---|
 | `v0.1.0` | Estrutura inicial organizada do projeto |
-| `v0.2.0` | Modo portfólio, glossário, treino livre, badges e fluxo de aprendizagem |
-| `v0.2.1` | Refinamento visual com tema escuro e identidade investigativa |
-| `v0.3.0` | NimbusPlay restaurada como campanha principal |
-| `v0.3.1` | Revisão narrativa da campanha NimbusPlay |
-| `v0.3.2` | Tela final, certificado gamificado, apoio rápido, registro de casos e rascunhos |
-| `v0.3.3` | SQL Quest: Edição Arquivo Secreto |
+| `v0.2.0` | Inclusão de modo portfólio, glossário, treino livre, badges e fluxo de aprendizagem |
+| `v0.2.1` | Atualização visual com tema escuro retrô e foco em experiência de portfólio |
+| `v0.3.0` | Restauração da campanha NimbusPlay como trilha principal |
+| `v0.3.1` | Revisão narrativa e pedagógica da campanha NimbusPlay |
+| `v0.3.2` | Tela final, certificado gamificado, apoio rápido por missão, registro dos casos e rascunhos por fase |
+| `v0.3.3` | SQL Quest: Edição Arquivo Secreto, com visual de dossiê investigativo e terminal retrô |
 | `v0.3.4` | Revisão ortográfica e de acentuação dos textos em português |
+| `v0.3.5` | README e capturas de tela atualizados para a Edição Arquivo Secreto |
 
-## Roadmap
+---
 
-- Melhorar responsividade mobile;
-- planejar novas campanhas educacionais;
-- evoluir materiais de apoio pedagógico;
-- revisar acessibilidade;
-- preparar a versão v1.0.0.
+## 🗺️ Roadmap
 
-## Autor
+### Próximas missões
 
-**Bruno Giacomelli**
+- [x] Consolidar a campanha NimbusPlay como campanha modelo
+- [x] Criar tela final de conclusão
+- [x] Adicionar certificado gamificado
+- [x] Adicionar apoio rápido por missão
+- [x] Registrar consultas resolvidas
+- [x] Preservar rascunhos por fase
+- [x] Atualizar screenshots para refletir a Edição Arquivo Secreto
+- [ ] Melhorar responsividade mobile
+- [ ] Criar SQL Style Coach com dicas não bloqueantes
+- [ ] Planejar a campanha AeroCargo
+- [ ] Evoluir para uma versão `v1.0.0`
 
-Profissional em transição para Análise de Dados, Business Intelligence e Automação, com experiência em logística aeroportuária, operações, indicadores e melhoria de processos.
+### Campanhas futuras
+
+- [x] **NimbusPlay** — loja de games e investigação de dados
+- [ ] **AeroCargo** — logística aeroportuária
+- [ ] **DataCorp** — desafios de negócio para analistas
+- [ ] **SQL Crimes** — investigação e cruzamento de dados
+- [ ] **City Data** — gestão pública e indicadores urbanos
+
+---
+
+## 🧩 Campanhas futuras: visão de plataforma
+
+O SQL Quest pode evoluir para uma plataforma educacional com múltiplos cenários temáticos:
+
+| Campanha | Tema | Aplicação |
+|---|---|---|
+| **NimbusPlay** | Loja de games | Aprendizado de SQL com narrativa investigativa |
+| **AeroCargo** | Logística aeroportuária | Consultas focadas em operações, SLA e gargalos |
+| **DataCorp** | Ambiente corporativo | SQL para análise de negócio |
+| **SQL Crimes** | Investigação | Cruzamento de pistas e resolução de casos |
+| **City Data** | Gestão pública | Análise de dados urbanos |
+
+---
+
+## 📈 Status do projeto
+
+```text
+Status atual: funcional, publicado e em evolução
+Versão atual: v0.3.5
+Campanha atual: NimbusPlay
+Foco atual: Edição Arquivo Secreto publicada com README e capturas atualizadas
+Próximo passo: refinamentos de responsividade, acessibilidade e planejamento de novas campanhas
+```
+
+---
+
+## 👨‍💻 Autor
+
+**Bruno Giacomelli**  
+Projeto desenvolvido como parte da transição para a área de **Dados, BI e Automação**.
 
 - GitHub: [brunogiacomelli1979-cyber](https://github.com/brunogiacomelli1979-cyber)
 - Projeto: [sql-quest-platform](https://github.com/brunogiacomelli1979-cyber/sql-quest-platform)
 
-## Licença
+---
+
+## 📜 Licença
 
 Este projeto é de caráter educacional e de portfólio.
 
+---
+
+## ⭐ Se este projeto te interessou...
+
+Se você gostou da proposta, considere:
+
+- dar uma ⭐ no repositório;
+- testar o jogo no GitHub Pages;
+- acompanhar as próximas versões.
+
+---
+
+<p align="center">
+  <strong>SQL Quest</strong><br>
+  <em>Aprender SQL também pode ser uma investigação.</em>
+</p>
