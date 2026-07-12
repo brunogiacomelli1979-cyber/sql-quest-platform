@@ -1345,7 +1345,7 @@ input {
 }
 
 .app-header > div:first-child::after {
-  content: "Agencia NimbusData";
+  content: "Agência NimbusData";
   display: block;
   margin-top: 1px;
   color: var(--secret-cream-dim);
