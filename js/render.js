@@ -100,7 +100,7 @@
       return "";
     }
 
-    return '<details class="quick-support" open>' +
+    return '<details class="quick-support">' +
       '<summary>Apoio rapido da missao</summary>' +
       '<div class="quick-support-body">' +
         '<h4>' + escapeHtml(support.titulo) + "</h4>" +
@@ -112,6 +112,27 @@
         '<p><strong>Cuidado comum:</strong> ' + escapeHtml(support.cuidadoComum) + "</p>" +
       "</div>" +
     "</details>";
+  }
+
+  function supportMaterialsHtml(level) {
+    return '<section class="investigation-support" aria-label="Materiais de apoio da investigacao">' +
+      '<p class="support-kicker">Materiais de apoio da investigacao</p>' +
+      '<details>' +
+        '<summary>Guia da licao</summary>' +
+        '<div class="lesson-meta-grid">' +
+          "<p><strong>Objetivo de aprendizagem</strong> " + escapeHtml(level.objetivoAprendizagem) + "</p>" +
+          "<p><strong>Conceito principal</strong> " + escapeHtml(level.conceitoPrincipal) + "</p>" +
+          "<p><strong>Dificuldade</strong> " + escapeHtml(level.dificuldade) + "</p>" +
+        "</div>" +
+        '<article class="guide-card"><strong>Relatorio da licao</strong><p>' + escapeHtml(level.guide) + "</p></article>" +
+      "</details>" +
+      (level.ponteAprendizado ? '<details><summary>Ponte da investigacao</summary><article class="learning-bridge"><strong>Ponte da investigacao</strong><p>' + escapeHtml(level.ponteAprendizado) + "</p></article></details>" : "") +
+      '<details><summary>Esquema do banco</summary>' + schemaHtml() + "</details>" +
+      '<details><summary>Dicas</summary>' + level.hints.map(function (hint, index) {
+        return '<p class="hint-card"><strong>Dica ' + (index + 1) + ":</strong> " + escapeHtml(hint) + "</p>";
+      }).join("") + "</details>" +
+      quickSupportHtml(level) +
+    "</section>";
   }
 
   function renderCompletionScreen() {
@@ -220,11 +241,15 @@
           "</div></div>"
         : "";
       elements.explanationBox.hidden = false;
-      elements.explanationBox.innerHTML = "<h3>Encerramento do caso</h3><p>" + escapeHtml(level.explanation) + "</p>" + extraLearning +
+      elements.explanationBox.innerHTML = '<details class="case-closure-details">' +
+        "<summary>Encerramento do caso e registro</summary>" +
+        '<div class="case-closure-body">' +
+        "<h3>Encerramento do caso</h3><p>" + escapeHtml(level.explanation) + "</p>" + extraLearning +
         caseRecord +
         (level.id === window.SQLQuestData.levels[window.SQLQuestData.levels.length - 1].id && isCampaignComplete()
           ? '<div class="actions"><button type="button" class="primary-button" data-completion-action="open">Ver conclusao da campanha</button></div>'
-          : "");
+          : "") +
+        "</div></details>";
       return;
     }
 
@@ -244,18 +269,19 @@
     elements.levelStatus.textContent = completed ? "Concluida" : "Em andamento";
     elements.levelStory.textContent = level.story;
     elements.guidePanel.innerHTML =
-      '<div class="lesson-meta-grid">' +
-        "<p><strong>Objetivo de aprendizagem</strong> " + escapeHtml(level.objetivoAprendizagem) + "</p>" +
-        "<p><strong>Conceito principal</strong> " + escapeHtml(level.conceitoPrincipal) + "</p>" +
-        "<p><strong>Dificuldade</strong> " + escapeHtml(level.dificuldade) + "</p>" +
-      "</div>" +
-      (level.mission ? '<article class="mission-card"><strong>Missao operacional</strong><p>' + escapeHtml(level.mission) + "</p></article>" : "") +
-      (level.ponteAprendizado ? '<article class="learning-bridge"><strong>Ponte da investigacao</strong><p>' + escapeHtml(level.ponteAprendizado) + "</p></article>" : "") +
-      '<article class="guide-card"><strong>Relatorio da licao</strong><p>' + escapeHtml(level.guide) + "</p></article>" +
-      quickSupportHtml(level);
+      (level.mission ? '<article class="mission-card"><strong>Missao operacional</strong><p>' + escapeHtml(level.mission) + "</p></article>" : "");
+    if (elements.supportMaterialsPanel) {
+      elements.supportMaterialsPanel.innerHTML = supportMaterialsHtml(level);
+    }
     elements.hintsPanel.innerHTML = level.hints.map(function (hint, index) {
       return '<p class="hint-card"><strong>Dica ' + (index + 1) + ":</strong> " + escapeHtml(hint) + "</p>";
     }).join("");
+    document.querySelectorAll(".tab-button").forEach(function (button) {
+      button.classList.toggle("active", button.dataset.tab === "guide");
+    });
+    document.querySelectorAll(".tab-panel").forEach(function (panel) {
+      panel.classList.toggle("active", panel.id === "guidePanel");
+    });
     elements.queryInput.value = savedDraft;
     elements.queryInput.placeholder = "SELECT ...";
     elements.feedback.className = "feedback";
@@ -437,6 +463,10 @@
         completionScreen: document.getElementById("completionScreen"),
         completionContent: document.getElementById("completionContent")
       };
+      if (!document.getElementById("supportMaterialsPanel")) {
+        elements.resultTable.closest(".results-section").insertAdjacentHTML("afterend", '<div id="supportMaterialsPanel"></div>');
+      }
+      elements.supportMaterialsPanel = document.getElementById("supportMaterialsPanel");
       bindCompletionActions();
       bindLearningActions();
       elements.levelCount.textContent = window.SQLQuestData.levels.length + " missoes";

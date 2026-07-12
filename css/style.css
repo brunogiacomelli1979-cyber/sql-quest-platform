@@ -2315,3 +2315,200 @@ tr:nth-child(even) td {
     width: calc(100% - 32px);
   }
 }
+
+/* v0.3.4 - Investigation focus polish */
+.lesson-area {
+  overflow: hidden;
+}
+
+.lesson-header {
+  padding: 18px 24px 15px;
+}
+
+.lesson-header h2 {
+  font-size: clamp(1.8rem, 3vw, 2.65rem);
+}
+
+.status-pill {
+  padding: 6px 12px;
+  font-size: 0.76rem;
+}
+
+.story {
+  margin: 16px 24px 14px;
+  font-size: 0.96rem;
+  line-height: 1.58;
+}
+
+.tabs {
+  display: none;
+}
+
+.tab-panel {
+  padding: 0 24px 6px;
+}
+
+.mission-card {
+  margin: 0 0 12px;
+  padding: 14px 16px;
+  background:
+    linear-gradient(90deg, rgba(200, 134, 10, 0.12), transparent 36%),
+    var(--secret-paper-aged);
+  border: 1px dashed var(--secret-amber-dim);
+}
+
+.mission-card strong {
+  color: var(--secret-red);
+  font-size: 0.68rem;
+}
+
+.mission-card p {
+  margin: 0;
+  color: var(--secret-ink);
+  font-size: 0.98rem;
+  line-height: 1.62;
+}
+
+.investigation-support {
+  margin: 0 0 12px;
+  padding: 10px;
+  background: rgba(232, 216, 170, 0.36);
+  border: 1px solid var(--secret-border-paper);
+  border-radius: 2px;
+}
+
+#supportMaterialsPanel {
+  margin: 0 24px 24px;
+}
+
+#supportMaterialsPanel .investigation-support {
+  margin: 0;
+}
+
+.support-kicker {
+  margin: 0 0 8px;
+  color: var(--secret-amber-dim);
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.investigation-support details,
+.case-closure-details {
+  margin: 7px 0;
+  color: var(--secret-ink);
+  background: var(--secret-paper);
+  border: 1px solid var(--secret-border-paper);
+  border-radius: 2px;
+}
+
+.investigation-support details[open],
+.case-closure-details[open] {
+  box-shadow: inset 3px 0 0 var(--secret-amber);
+}
+
+.investigation-support summary,
+.case-closure-details > summary {
+  cursor: pointer;
+  padding: 9px 12px;
+  color: var(--secret-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.investigation-support summary::marker,
+.case-closure-details > summary::marker {
+  color: var(--secret-red);
+}
+
+.investigation-support details > *:not(summary),
+.case-closure-body {
+  margin: 0;
+  padding: 0 12px 12px;
+}
+
+.investigation-support .lesson-meta-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 10px;
+}
+
+.investigation-support .lesson-meta-grid p,
+.investigation-support .guide-card,
+.investigation-support .learning-bridge,
+.investigation-support .hint-card,
+.investigation-support .schema-table {
+  background: var(--secret-paper-aged);
+}
+
+.investigation-support .quick-support {
+  padding: 0;
+  border-left: 0;
+}
+
+.investigation-support .quick-support summary {
+  margin: 0;
+}
+
+.investigation-support .quick-support-body {
+  margin-top: 0;
+  padding: 0 12px 12px;
+}
+
+.editor-label {
+  margin-top: 14px;
+}
+
+textarea {
+  min-height: 218px;
+}
+
+.actions {
+  gap: 10px;
+  padding-block: 11px;
+}
+
+.feedback {
+  min-height: auto;
+  margin-top: 12px;
+  padding: 10px 12px;
+}
+
+.explanation-box {
+  margin-top: 12px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.case-closure-details {
+  background: rgba(42, 107, 60, 0.08);
+  border-color: rgba(42, 107, 60, 0.3);
+}
+
+.case-closure-details > summary {
+  color: var(--secret-green);
+}
+
+.case-closure-body h3 {
+  margin: 8px 0;
+  font-size: 1.15rem;
+}
+
+.case-record {
+  margin-top: 12px;
+}
+
+.results-section {
+  margin-top: 16px;
+  padding-bottom: 14px;
+}
+
+@media (max-width: 860px) {
+  .investigation-support .lesson-meta-grid {
+    grid-template-columns: 1fr;
+  }
+}
