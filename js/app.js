@@ -45,7 +45,7 @@
       window.SQLQuestRender.renderExplanation(level);
       window.SQLQuestRender.updateSolutionButton(level);
       window.SQLQuestRender.setFeedback(
-        firstCompletion ? validation.message + " +" + level.xp + " XP" : "Solucao correta. Esta fase ja estava concluida.",
+        firstCompletion ? validation.message + " +" + level.xp + " XP" : "Solução correta. Esta fase já estava concluída.",
         "success"
       );
     } catch (error) {
@@ -59,14 +59,14 @@
     var level = currentLevel();
     document.getElementById("queryInput").value = level.expectedSql;
     lastResult = null;
-    window.SQLQuestRender.setFeedback("Solucao carregada no editor. Execute e verifique para concluir o caso.", "success");
+    window.SQLQuestRender.setFeedback("Solução carregada no editor. Execute e verifique para concluir o caso.", "success");
   }
 
   function handleFreeplayRun() {
     try {
       var result = window.SQLQuestDatabase.execute(document.getElementById("freeplayQueryInput").value);
       window.SQLQuestRender.renderFreeplayTable(result);
-      window.SQLQuestRender.setFeedback("Consulta de treino executada. O progresso das missoes nao foi alterado.", "success", "freeplay");
+      window.SQLQuestRender.setFeedback("Consulta de treino executada. O progresso das missões não foi alterado.", "success", "freeplay");
     } catch (error) {
       window.SQLQuestRender.setFeedback(error.message, "error", "freeplay");
     }
@@ -117,7 +117,7 @@
       }
       var levelId = Number(button.dataset.levelId);
       if (!window.SQLQuestState.isLevelUnlocked(levelId)) {
-        window.SQLQuestRender.setFeedback("Esta fase ainda esta bloqueada. Conclua a fase anterior para liberar o proximo caso.", "error");
+        window.SQLQuestRender.setFeedback("Esta fase ainda está bloqueada. Conclua a fase anterior para liberar o próximo caso.", "error");
         return;
       }
       window.SQLQuestState.setCurrentLevel(levelId);
@@ -142,8 +142,8 @@
         window.SQLQuestRender.renderLevel(currentLevel());
       })
       .catch(function (error) {
-        window.SQLQuestRender.setFeedback("Nao foi possivel iniciar o sql.js: " + error.message, "error");
-        window.SQLQuestRender.setFeedback("Nao foi possivel iniciar o sql.js: " + error.message, "error", "freeplay");
+        window.SQLQuestRender.setFeedback("Não foi possível iniciar o sql.js: " + error.message, "error");
+        window.SQLQuestRender.setFeedback("Não foi possível iniciar o sql.js: " + error.message, "error", "freeplay");
       });
   }
 
