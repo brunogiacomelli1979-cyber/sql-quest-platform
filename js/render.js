@@ -87,6 +87,7 @@
     elements.badgeList.innerHTML = window.SQLQuestState.badges.map(function (badge) {
       var active = earned.indexOf(badge.id) !== -1;
       return '<article class="badge-card' + (active ? " earned" : "") + '">' +
+        '<span class="badge-seal">' + (active ? "OK" : "--") + "</span>" +
         '<strong>' + escapeHtml(badge.name) + "</strong>" +
         '<span>' + escapeHtml(badge.description) + "</span>" +
         "</article>";
@@ -99,8 +100,8 @@
       return "";
     }
 
-    return '<details class="quick-support">' +
-      '<summary>Apoio rapido desta missao</summary>' +
+    return '<details class="quick-support" open>' +
+      '<summary>Apoio rapido da missao</summary>' +
       '<div class="quick-support-body">' +
         '<h4>' + escapeHtml(support.titulo) + "</h4>" +
         '<p><strong>Lembrete:</strong> ' + escapeHtml(support.lembrete) + "</p>" +
@@ -176,11 +177,12 @@
       var completed = window.SQLQuestState.isCompleted(level.id);
       var unlocked = window.SQLQuestState.isLevelUnlocked(level.id);
       var locked = unlocked ? "" : " locked";
+      var done = completed ? " completed" : "";
       var disabled = unlocked ? "" : " disabled aria-disabled=\"true\"";
-      return '<button class="level-button' + active + locked + '" type="button" data-level-id="' + level.id + '"' + disabled + ">" +
-        '<span class="level-number">' + level.id + "</span>" +
+      return '<button class="level-button' + active + locked + done + '" type="button" data-level-id="' + level.id + '"' + disabled + ">" +
+        '<span class="level-number">#' + String(level.id).padStart(2, "0") + "</span>" +
         '<span class="level-name">' + escapeHtml(level.title) + "</span>" +
-        '<span class="level-check">' + (completed ? "OK" : (unlocked ? "" : "Bloqueada")) + "</span>" +
+        '<span class="level-check">' + (completed ? "Encerrado" : (unlocked ? "Em analise" : "Bloqueado")) + "</span>" +
         "</button>";
     }).join("");
 
@@ -218,7 +220,7 @@
           "</div></div>"
         : "";
       elements.explanationBox.hidden = false;
-      elements.explanationBox.innerHTML = "<h3>Depois da solucao</h3><p>" + escapeHtml(level.explanation) + "</p>" + extraLearning +
+      elements.explanationBox.innerHTML = "<h3>Encerramento do caso</h3><p>" + escapeHtml(level.explanation) + "</p>" + extraLearning +
         caseRecord +
         (level.id === window.SQLQuestData.levels[window.SQLQuestData.levels.length - 1].id && isCampaignComplete()
           ? '<div class="actions"><button type="button" class="primary-button" data-completion-action="open">Ver conclusao da campanha</button></div>'
@@ -242,12 +244,14 @@
     elements.levelStatus.textContent = completed ? "Concluida" : "Em andamento";
     elements.levelStory.textContent = level.story;
     elements.guidePanel.innerHTML =
-      "<p><strong>Objetivo de aprendizagem:</strong> " + escapeHtml(level.objetivoAprendizagem) + "</p>" +
-      "<p><strong>Conceito principal:</strong> " + escapeHtml(level.conceitoPrincipal) + "</p>" +
-      "<p><strong>Dificuldade:</strong> " + escapeHtml(level.dificuldade) + "</p>" +
-      (level.ponteAprendizado ? '<p class="learning-bridge"><strong>Ponte da investigacao:</strong> ' + escapeHtml(level.ponteAprendizado) + "</p>" : "") +
-      (level.mission ? "<p><strong>Missao:</strong> " + escapeHtml(level.mission) + "</p>" : "") +
-      "<p><strong>Guia:</strong> " + escapeHtml(level.guide) + "</p>" +
+      '<div class="lesson-meta-grid">' +
+        "<p><strong>Objetivo de aprendizagem</strong> " + escapeHtml(level.objetivoAprendizagem) + "</p>" +
+        "<p><strong>Conceito principal</strong> " + escapeHtml(level.conceitoPrincipal) + "</p>" +
+        "<p><strong>Dificuldade</strong> " + escapeHtml(level.dificuldade) + "</p>" +
+      "</div>" +
+      (level.mission ? '<article class="mission-card"><strong>Missao operacional</strong><p>' + escapeHtml(level.mission) + "</p></article>" : "") +
+      (level.ponteAprendizado ? '<article class="learning-bridge"><strong>Ponte da investigacao</strong><p>' + escapeHtml(level.ponteAprendizado) + "</p></article>" : "") +
+      '<article class="guide-card"><strong>Relatorio da licao</strong><p>' + escapeHtml(level.guide) + "</p></article>" +
       quickSupportHtml(level);
     elements.hintsPanel.innerHTML = level.hints.map(function (hint, index) {
       return '<p class="hint-card"><strong>Dica ' + (index + 1) + ":</strong> " + escapeHtml(hint) + "</p>";
