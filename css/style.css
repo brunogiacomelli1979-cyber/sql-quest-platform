@@ -2478,6 +2478,56 @@ textarea {
   padding-block: 11px;
 }
 
+.completion-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 22px 0 0;
+  padding: 14px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(61, 155, 85, 0.14), transparent 36%),
+    var(--secret-terminal);
+  border: 1px solid rgba(42, 107, 60, 0.36);
+  border-radius: 2px;
+}
+
+.completion-actions::before {
+  content: "ACOES DO DOSSIE";
+  grid-column: 1 / -1;
+  color: var(--secret-green-bright);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  opacity: 0.84;
+}
+
+.completion-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  text-align: center;
+}
+
+.completion-actions [data-completion-action="reset"] {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(100%, 280px);
+  min-height: 38px;
+  color: rgba(232, 213, 176, 0.78);
+  background: rgba(139, 26, 26, 0.08);
+  border-color: rgba(139, 26, 26, 0.34);
+  box-shadow: none;
+}
+
+.completion-actions [data-completion-action="reset"]:hover {
+  color: var(--secret-red-light);
+  background: rgba(139, 26, 26, 0.14);
+  border-color: rgba(139, 26, 26, 0.5);
+}
+
 .feedback {
   min-height: auto;
   margin-top: 12px;
@@ -2517,6 +2567,14 @@ textarea {
 @media (max-width: 860px) {
   .investigation-support .lesson-meta-grid {
     grid-template-columns: 1fr;
+  }
+
+  .completion-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .completion-actions [data-completion-action="reset"] {
+    width: 100%;
   }
 }
 
