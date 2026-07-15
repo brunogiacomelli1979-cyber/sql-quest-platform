@@ -51,6 +51,10 @@ Capturas atualizadas da **SQL Quest: Edição Arquivo Secreto**.
 
 ![Página sobre o projeto SQL Quest](./images/sql-quest-sobre.png)
 
+### 🏁 Tela de conclusão e certificado
+
+![Tela de conclusão e certificado gamificado do SQL Quest](./images/sql-quest-conclusao.png)
+
 ---
 
 ## 🗂️ Dossiê do Projeto
@@ -288,7 +292,8 @@ sql-quest-platform/
     ├── sql-quest-investigacao.png
     ├── sql-quest-treino-livre.png
     ├── sql-quest-glossario.png
-    └── sql-quest-sobre.png
+    ├── sql-quest-sobre.png
+    └── sql-quest-conclusao.png
 ```
 
 ---
