@@ -2512,3 +2512,102 @@ textarea {
     grid-template-columns: 1fr;
   }
 }
+
+@page {
+  size: A4;
+  margin: 14mm;
+}
+
+@media print {
+  html,
+  body {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0;
+    color: #24170f;
+    background: #f6ead0 !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  .game-certificate,
+  .game-certificate * {
+    visibility: visible !important;
+  }
+
+  .game-certificate {
+    position: absolute !important;
+    inset: 0 auto auto 0;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    padding: 22mm 18mm !important;
+    overflow: hidden !important;
+    color: #24170f !important;
+    background:
+      linear-gradient(90deg, rgba(200, 134, 10, 0.08), transparent 38%),
+      #f3dfb7 !important;
+    border: 2px solid #9d6a24 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .game-certificate::before,
+  .game-certificate::after {
+    visibility: visible !important;
+  }
+
+  .certificate-name-label,
+  .certificate-name-input,
+  .completion-actions,
+  button {
+    display: none !important;
+  }
+
+  .certificate-label {
+    color: #8f3d32 !important;
+    font-size: 11pt !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .certificate-agency,
+  .game-certificate p {
+    color: #3a2a1d !important;
+    font-size: 11pt !important;
+    line-height: 1.55 !important;
+  }
+
+  .game-certificate h3 {
+    margin: 10mm 0 5mm !important;
+    color: #1f140d !important;
+    font-size: 30pt !important;
+    line-height: 1.05 !important;
+    text-shadow: none !important;
+  }
+
+  .game-certificate h4 {
+    color: #8f3d32 !important;
+    font-size: 19pt !important;
+  }
+
+  .certificate-footer {
+    border-top: 1px solid #9d6a24 !important;
+  }
+
+  .certificate-footer span {
+    color: #2a6b3c !important;
+    font-size: 11pt !important;
+  }
+
+  .certificate-note {
+    color: #5c4730 !important;
+    font-size: 9pt !important;
+  }
+}

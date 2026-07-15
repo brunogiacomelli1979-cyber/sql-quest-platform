@@ -167,6 +167,7 @@
           }).join("") + "</div>" +
           '<div class="actions completion-actions">' +
             '<button type="button" class="primary-button" data-completion-action="review">Revisar casos</button>' +
+            '<button type="button" class="primary-button print-certificate-button" data-completion-action="print">Emitir PDF</button>' +
             '<button type="button" class="ghost-button" data-completion-action="reset">Reiniciar campanha</button>' +
           "</div>" +
         "</article>" +
@@ -184,7 +185,7 @@
             "<span><strong>Patente final:</strong> " + escapeHtml(finalRank) + "</span>" +
             "<span><strong>XP acumulado:</strong> " + xp + " XP</span>" +
           "</div>" +
-          '<p class="certificate-note">SQL Quest - Projeto educacional interativo. Item gamificado interno do jogo, sem emissão externa ou validade fora do SQL Quest.</p>' +
+          '<p class="certificate-note">Este certificado é uma recompensa gamificada interna do SQL Quest, sem emissão externa ou validade oficial.</p>' +
         "</article>" +
       "</div>";
 
@@ -354,6 +355,13 @@
 
       if (button.dataset.completionAction === "review") {
         showScreen("investigation");
+        return;
+      }
+
+      if (button.dataset.completionAction === "print" && isCampaignComplete()) {
+        renderCompletionScreen();
+        showScreen("completion");
+        window.print();
         return;
       }
 
