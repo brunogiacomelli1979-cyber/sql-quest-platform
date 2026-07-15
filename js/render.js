@@ -170,6 +170,7 @@
             '<button type="button" class="primary-button print-certificate-button" data-completion-action="print">Emitir PDF</button>' +
             '<button type="button" class="ghost-button" data-completion-action="reset">Reiniciar campanha</button>' +
           "</div>" +
+          '<p class="print-certificate-hint">Dica: ao salvar como PDF, desmarque "Cabeçalhos e rodapés" nas opções de impressão do navegador.</p>' +
         "</article>" +
         '<article class="game-certificate" aria-label="Certificado gamificado de conclusão">' +
           '<p class="certificate-label">' + escapeHtml(campaign.certificateName || "CERTIFICADO GAMIFICADO DE CONCLUSÃO") + "</p>" +
@@ -179,7 +180,7 @@
           '<h3 id="certificateDisplayName">' + escapeHtml(investigatorName || "Investigador SQL") + "</h3>" +
           "<p>concluiu a trilha:</p>" +
           "<h4>" + escapeHtml(campaign.title || "NimbusPlay - SQL Investigativo") + "</h4>" +
-          "<p>Restãolvendo 14 casos práticos com consultas SQL aplicadas a jogadores, jogos, compras, avaliações e funcionários.</p>" +
+          "<p>Resolvendo 14 casos práticos com consultas SQL aplicadas a jogadores, jogos, compras, avaliações e funcionários.</p>" +
           '<p><strong>Conceitos praticados:</strong> ' + escapeHtml(concepts.join(", ")) + ".</p>" +
           '<div class="certificate-footer">' +
             "<span><strong>Patente final:</strong> " + escapeHtml(finalRank) + "</span>" +

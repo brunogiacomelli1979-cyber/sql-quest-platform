@@ -1080,6 +1080,13 @@ tr:last-child td {
   margin-top: 22px;
 }
 
+.print-certificate-hint {
+  margin: 10px 0 0;
+  color: var(--secret-ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
 .game-certificate {
   position: relative;
   overflow: hidden;
@@ -2515,7 +2522,7 @@ textarea {
 
 @page {
   size: A4;
-  margin: 14mm;
+  margin: 10mm;
 }
 
 @media print {
@@ -2538,13 +2545,14 @@ textarea {
   }
 
   .game-certificate {
-    position: absolute !important;
-    inset: 0 auto auto 0;
-    width: 100% !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 180mm !important;
     max-width: none !important;
-    min-height: auto !important;
+    min-height: 255mm !important;
     margin: 0 !important;
-    padding: 22mm 18mm !important;
+    padding: 24mm 20mm !important;
     overflow: hidden !important;
     color: #24170f !important;
     background:
@@ -2553,6 +2561,8 @@ textarea {
     border: 2px solid #9d6a24 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
+    box-sizing: border-box !important;
+    transform: translate(-50%, -50%) !important;
     break-inside: avoid;
     page-break-inside: avoid;
     print-color-adjust: exact;
@@ -2566,6 +2576,7 @@ textarea {
 
   .certificate-name-label,
   .certificate-name-input,
+  .print-certificate-hint,
   .completion-actions,
   button {
     display: none !important;
@@ -2580,14 +2591,14 @@ textarea {
   .certificate-agency,
   .game-certificate p {
     color: #3a2a1d !important;
-    font-size: 11pt !important;
-    line-height: 1.55 !important;
+    font-size: 12pt !important;
+    line-height: 1.6 !important;
   }
 
   .game-certificate h3 {
-    margin: 10mm 0 5mm !important;
+    margin: 12mm 0 6mm !important;
     color: #1f140d !important;
-    font-size: 30pt !important;
+    font-size: 34pt !important;
     line-height: 1.05 !important;
     text-shadow: none !important;
   }
