@@ -1080,6 +1080,13 @@ tr:last-child td {
   margin-top: 22px;
 }
 
+.print-certificate-hint {
+  margin: 10px 0 0;
+  color: var(--secret-ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
 .game-certificate {
   position: relative;
   overflow: hidden;
@@ -2510,5 +2517,108 @@ textarea {
 @media (max-width: 860px) {
   .investigation-support .lesson-meta-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 10mm;
+}
+
+@media print {
+  html,
+  body {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0;
+    color: #24170f;
+    background: #f6ead0 !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  .game-certificate,
+  .game-certificate * {
+    visibility: visible !important;
+  }
+
+  .game-certificate {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 180mm !important;
+    max-width: none !important;
+    min-height: 255mm !important;
+    margin: 0 !important;
+    padding: 24mm 20mm !important;
+    overflow: hidden !important;
+    color: #24170f !important;
+    background:
+      linear-gradient(90deg, rgba(200, 134, 10, 0.08), transparent 38%),
+      #f3dfb7 !important;
+    border: 2px solid #9d6a24 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
+    transform: translate(-50%, -50%) !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .game-certificate::before,
+  .game-certificate::after {
+    visibility: visible !important;
+  }
+
+  .certificate-name-label,
+  .certificate-name-input,
+  .print-certificate-hint,
+  .completion-actions,
+  button {
+    display: none !important;
+  }
+
+  .certificate-label {
+    color: #8f3d32 !important;
+    font-size: 11pt !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .certificate-agency,
+  .game-certificate p {
+    color: #3a2a1d !important;
+    font-size: 12pt !important;
+    line-height: 1.6 !important;
+  }
+
+  .game-certificate h3 {
+    margin: 12mm 0 6mm !important;
+    color: #1f140d !important;
+    font-size: 34pt !important;
+    line-height: 1.05 !important;
+    text-shadow: none !important;
+  }
+
+  .game-certificate h4 {
+    color: #8f3d32 !important;
+    font-size: 19pt !important;
+  }
+
+  .certificate-footer {
+    border-top: 1px solid #9d6a24 !important;
+  }
+
+  .certificate-footer span {
+    color: #2a6b3c !important;
+    font-size: 11pt !important;
+  }
+
+  .certificate-note {
+    color: #5c4730 !important;
+    font-size: 9pt !important;
   }
 }
