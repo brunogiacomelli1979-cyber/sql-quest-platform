@@ -9,9 +9,9 @@
   <a href="https://brunogiacomelli1979-cyber.github.io/sql-quest-platform/">
     <img src="https://img.shields.io/badge/▶%20Jogar%20agora-GitHub%20Pages-1f6feb?style=for-the-badge" alt="Jogar agora">
   </a>
-  <img src="https://img.shields.io/badge/Versão-v0.3.5-d4a24c?style=for-the-badge" alt="Versão">
+  <img src="https://img.shields.io/badge/Versão-v0.3.8-d4a24c?style=for-the-badge" alt="Versão">
   <img src="https://img.shields.io/badge/Campanha-NimbusPlay-7c3aed?style=for-the-badge" alt="Campanha">
-  <img src="https://img.shields.io/badge/Status-Campanha%20modelo%20concluída-2ea043?style=for-the-badge" alt="Status">
+  <img src="https://img.shields.io/badge/Status-Arquivo%20Secreto%20%2B%20PDF-2ea043?style=for-the-badge" alt="Status">
   <img src="https://img.shields.io/badge/Stack-HTML%20%7C%20CSS%20%7C%20JS-111827?style=for-the-badge" alt="Stack">
 </p>
 
@@ -59,7 +59,7 @@ Capturas atualizadas da **SQL Quest: Edição Arquivo Secreto**.
 
 Na campanha principal, **NimbusPlay — SQL Investigativo**, o jogador atua como investigador da **Agência NimbusData** e analisa os dados de uma loja fictícia de jogos online. Cada fase funciona como um caso do dossiê, exigindo que o jogador escreva consultas SQL para encontrar pistas, validar hipóteses e avançar na investigação.
 
-Na versão visual atual, **SQL Quest: Edição Arquivo Secreto**, a interface reforça o clima de dossiê investigativo: fundo escuro, papel envelhecido, terminal SQL retrô, sidebar como arquivo de casos, badges como selos e uma tela de investigação mais focada na missão e no terminal.
+Na versão visual atual, **SQL Quest: Edição Arquivo Secreto**, a interface reforça o clima de dossiê investigativo: fundo escuro, papel envelhecido, terminal SQL retrô, sidebar como arquivo de casos, badges como selos e uma tela de investigação mais focada na missão e no terminal. A trilha também conta com certificado gamificado emitido em PDF pela impressão do navegador, com botões finais polidos para revisar o dossiê, emitir o certificado ou reiniciar a campanha.
 
 O projeto foi desenvolvido como parte de um portfólio voltado à transição para a área de **Dados, BI e Automação**, demonstrando conhecimentos em:
 
@@ -162,6 +162,7 @@ Ao longo da campanha, o jogador pratica:
 - [x] Fluxo de aprendizagem guiado
 - [x] Tela final de conclusão
 - [x] Certificado gamificado de conclusão
+- [x] Emissão do certificado gamificado em PDF via impressão do navegador
 
 ### ✅ Plataforma
 
@@ -229,9 +230,11 @@ O certificado apresenta:
 - XP acumulado;
 - conceitos SQL praticados;
 - identificação opcional do investigador.
+- campo para o jogador preencher o nome que aparece no certificado;
+- emissão/salvamento em PDF pela impressão do navegador.
 
 > Este certificado é parte da experiência educacional e gamificada do SQL Quest.  
-> Ele **não representa uma certificação profissional oficial**.
+> Ele pode ser salvo como PDF, mas continua sendo uma recompensa gamificada interna, **sem validade oficial** e sem representar uma certificação profissional.
 
 ---
 
@@ -364,6 +367,8 @@ Este projeto demonstra na prática:
 | `v0.3.3` | SQL Quest: Edição Arquivo Secreto, com visual de dossiê investigativo e terminal retrô |
 | `v0.3.4` | Revisão ortográfica e de acentuação dos textos em português |
 | `v0.3.5` | README e capturas de tela atualizados para a Edição Arquivo Secreto |
+| `v0.3.7` | Certificado gamificado com emissão em PDF via impressão do navegador |
+| `v0.3.8` | Polimento visual dos botões da tela final/certificado |
 
 ---
 
@@ -378,6 +383,8 @@ Este projeto demonstra na prática:
 - [x] Registrar consultas resolvidas
 - [x] Preservar rascunhos por fase
 - [x] Atualizar screenshots para refletir a Edição Arquivo Secreto
+- [x] Emitir certificado gamificado em PDF
+- [x] Polir a tela final/certificado
 - [ ] Melhorar responsividade mobile
 - [ ] Criar SQL Style Coach com dicas não bloqueantes
 - [ ] Planejar a campanha AeroCargo
@@ -411,9 +418,9 @@ O SQL Quest pode evoluir para uma plataforma educacional com múltiplos cenário
 
 ```text
 Status atual: funcional, publicado e em evolução
-Versão atual: v0.3.5
+Versão atual: v0.3.8
 Campanha atual: NimbusPlay
-Foco atual: Edição Arquivo Secreto publicada com README e capturas atualizadas
+Foco atual: Edição Arquivo Secreto publicada, certificado gamificado com emissão em PDF e botões finais polidos
 Próximo passo: refinamentos de responsividade, acessibilidade e planejamento de novas campanhas
 ```
 
